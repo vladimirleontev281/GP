@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 // import { compose } from 'redux';
+import { initialize as initializeReduxForm } from 'redux-form';
 
 import {
   actionCreators as globalActionCreators,
@@ -23,15 +24,24 @@ const thunkCreators = {
     dispatch(articlesActionCreators.setCurrentArticle(newsID));
     dispatch(globalActionCreators.changeMode(TO_READ));
   },
-  deactivateModalToRead: () => (dispatch) => {
+  deactivateModal: () => (dispatch) => {
     dispatch(globalActionCreators.changeMode(NEWSFEED));
     dispatch(articlesActionCreators.setCurrentArticle(null));
   },
-  activateModalToChange: (newsID) => (dispatch) => {
+  activateFormToChange: (newsID) => (dispatch) => {
     dispatch(articlesActionCreators.setCurrentArticle(newsID));
     dispatch(globalActionCreators.changeMode(TO_CHANGE));
   },
-  deactivateModalToChange: () => (dispatch) => {
+  initFormToChange: (data) => (dispatch) => {
+    dispatch(initializeReduxForm('FormToChange', data));
+  },
+  setNewNewsItem: (formData) => (dispatch) => {
+    let data = {
+      ...formData,
+      id: formData.id ? formData.id : getNewID(),
+      new: !formData.id
+    };
+
     // dispatch(articlesActionCreators.setCurrentArticle(null));
     // dispatch(globalActionCreators.changeMode(NEWSFEED));
   },

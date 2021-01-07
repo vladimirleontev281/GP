@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import animate from '../../animation/styles.module.css';
 
 const ModalToRead = ({newsItem, handlerToClose, ...props}) => {
-  const {name, content, original} = newsItem;
+  const {name, newsLayout, original} = newsItem;
   const classes = [
     styles.ModalToRead, animate.animate__animated, animate.animate__zoomIn
   ].join(' ');
@@ -26,7 +26,7 @@ const ModalToRead = ({newsItem, handlerToClose, ...props}) => {
       </div>
       <div className={styles.bottomDecor}>horizontal decorative element</div>
     </div>
-    <div className={styles.content}>{ ReactHtmlParser(content) }</div>
+    <div className={styles.content}>{ ReactHtmlParser(newsLayout) }</div>
 
     <a  className={styles.linkToOriginal} href={original} target={'_blank'}>go to original</a>
     <Button className={styles.closeButton} clickHandler={handlerToClose}>close</Button>

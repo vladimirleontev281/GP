@@ -4,12 +4,12 @@ import styles from './styles.module.css';
 const NewsItem = (
   {
     className, imagePath, prewiev, id, 
-    toReadMoreClickHandle, toChangeNewsClickHandle,
+    toReadMoreClickHandler, toChangeNewsClickHandler,
     ...props
   }
 ) => {
   return <li  className={`${className} ${styles.NewsItem}`} 
-              onDoubleClick={() => toChangeNewsClickHandle(id)}
+              onDoubleClick={() => toChangeNewsClickHandler(id)}
   >
     <div className={styles.imageBlock}>
       <img className={styles.image} src={imagePath} />
@@ -19,7 +19,7 @@ const NewsItem = (
       <div>
         <p className={styles.prewiev}>{prewiev}</p>
         <div className={styles.buttonBlock}>
-          <button className={styles.toReadMoreButton} onClick={() => toReadMoreClickHandle(id)}>
+          <button className={styles.toReadMoreButton} onClick={() => toReadMoreClickHandler(id)}>
             ... click her to read more
           </button>
         </div>

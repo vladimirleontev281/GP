@@ -1,7 +1,7 @@
 .Button{
   outline: none;
-  width: 80px;
   height: 40px;
+  padding: 5px;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;

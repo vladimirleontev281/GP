@@ -1,0 +1,65 @@
+.FormToChange{
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  padding: 25px 25px 60px 25px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid black;
+  border-radius: 5px;
+  z-index: 1;
+}
+.ModalToRead.ModalToRead{
+  animation-duration: 0.4s;
+}
+.fieldDescrip{
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.imageBlock, .detailsBlock, .layoutBlock{
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.imageBlock>div, .detailsBlock>div{
+  margin-bottom: 15px;
+}
+.detailsBlock>div:last-of-type{
+  margin-bottom: 0;
+}
+.input{
+  outline: none;
+  width: 100%;
+  height: 40px;
+  padding: 4px;
+  border-radius: 5px;
+}
+.infoInput{
+  display: none;
+}
+.textarea{
+  width: 100%;
+  height: 200px;
+  min-height: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  resize: vertical;
+}
+.buttonsBlock{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.closeButton, .submitButton{
+  width: 150px;
+  background-color: #ffffff;
+}
+.submitButton{
+  margin-left: 15px;
+}
