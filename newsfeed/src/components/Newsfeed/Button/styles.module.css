@@ -1,0 +1,15 @@
+.Button{
+  outline: none;
+  width: 80px;
+  height: 40px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  text-transform: capitalize;;
+  /* color: #ffffff; */
+  color: #000000;
+  cursor: pointer;
+}

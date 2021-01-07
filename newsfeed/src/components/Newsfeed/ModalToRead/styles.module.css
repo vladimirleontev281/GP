@@ -1,0 +1,63 @@
+.ModalToRead{
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  padding: 25px 25px 60px 25px;
+  background-color: #ffffff;
+  border: 2px solid black;
+  border-radius: 5px;
+  z-index: 1;
+}
+.ModalToRead.ModalToRead{
+  animation-duration: 0.4s;
+}
+.newsName{
+  text-align: center;
+}
+.imageBlock{
+  margin-bottom: 30px;
+}
+.topDecor, .bottomDecor{
+  height: 30px;
+  text-align: center;
+}
+.topDecor{
+  margin-bottom: 20px;
+}
+.bottomDecor{
+  margin-top: 30px;
+}
+.centerDecorBox{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.leftDecor, .rightDecor{
+  width: 20%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.linkToOriginal{
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 40px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  text-transform: capitalize;;
+}
+.closeButton{
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+}

@@ -1,0 +1,14 @@
+.ModalToChange{
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  padding: 25px 25px 60px 25px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 2px solid black;
+  border-radius: 5px;
+  z-index: 1;
+}
+.ModalToRead.ModalToRead{
+  animation-duration: 0.4s;
+}

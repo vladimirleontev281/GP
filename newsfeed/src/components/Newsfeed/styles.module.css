@@ -1,0 +1,65 @@
+.Newsfeed{
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.Newsfeed *{
+  box-sizing: border-box;
+}
+.header{
+  width: 100%;
+  height: 80px;
+  padding: 0 50px;
+  background: linear-gradient(165deg, black 20%, #453030 40%, #702f2f 60%, rgba(255, 0, 0, 0.8) 100%);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo{
+  text-transform: uppercase;
+  font-size: 40px;
+  color: #ffffff;
+}
+.addNewsButton{
+  outline: none;
+  width: 80px;
+  height: 40px;
+  /* border: none; */
+  border-radius: 5px;
+  background-color: #ffffff;
+  text-transform: capitalize;
+  font-size: 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.main{
+  list-style-type: none;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  margin: 0;
+  padding: 20px 50px;
+  /* background-color: aquamarine; */
+}
+.NewsItem{
+  margin-bottom: 20px;
+}
+.NewsItem:last-of-type{
+  margin-bottom: 0;
+}
+
+@media(max-width: 1280px) {
+  .Newsfeed{
+    border-left: none;
+    border-right: none;
+  }
+}
+
