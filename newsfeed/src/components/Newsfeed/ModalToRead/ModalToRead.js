@@ -27,8 +27,12 @@ const ModalToRead = ({className, newsItem, handlerToClose, ...props}) => {
       <div className={styles.bottomDecor}>horizontal decorative element</div>
     </div>
     <div className={styles.content}>{ ReactHtmlParser(newsLayout) }</div>
-
-    <a  className={styles.linkToOriginal} href={original} target={'_blank'}>go to original</a>
+    
+    { original ? 
+      <a  className={styles.linkToOriginal} href={original} target={'_blank'}>go to original</a>
+    : null
+    }
+    
     <Button className={styles.closeButton} clickHandler={handlerToClose}>close</Button>
   </div>);
 };

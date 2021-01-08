@@ -16,6 +16,7 @@ const backendEmulation = (url, options) => {
     case SERVER + urlObj.setArticle:
       let articles = baseAPI.get(baseKeys.articles);
       let newItem = options.body;
+      if (!newItem.id) newItem.id = getLastID(articles) + 1;
       response.body = options.method === 'PUT' ?
         articles.map(item => (item.id === newItem.id) ? newItem : item)
       : articles.concat(newItem);
@@ -32,6 +33,12 @@ const backendEmulation = (url, options) => {
 }
 export default backendEmulation;
 
+function getLastID(articles) {
+  if (!articles.length) return 0;
+  let sortArray = [...articles].sort((a, b) => {return a.id - b.id});
+  return sortArray[sortArray.length - 1].id;
+}
+
 // const emulations = {
 //   requestToSetArticle: (anyURL, data) => {
 //     return makeRequest('/source/source.json').then(response => {
@@ -43,9 +50,9 @@ export default backendEmulation;
 //       return response;
 //     })
 
-//     function getLastID(articles) {
-//       let sortArray = [...articles].sort((a, b) => {return a.id - b.id});
-//       return sortArray[sortArray.length - 1].id;
-//     }
+//    function getLastID(articles) {
+//      let sortArray = [...articles].sort((a, b) => {return a.id - b.id});
+//      return sortArray[sortArray.length - 1].id;
+//    }
 //   },
 // };
