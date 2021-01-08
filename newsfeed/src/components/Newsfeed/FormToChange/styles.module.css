@@ -56,10 +56,10 @@
   align-items: center;
 }
 
-.closeButton, .submitButton{
+.closeButton, .deleteButton, .submitButton{
   width: 150px;
   background-color: #ffffff;
 }
-.submitButton{
+.submitButton, .deleteButton{
   margin-left: 15px;
 }

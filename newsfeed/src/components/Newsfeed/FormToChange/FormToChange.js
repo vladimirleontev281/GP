@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import animate from '../../animation/styles.module.css';
 
 const FormToChange = (
-  {className, newsItem, initForm, handlerToClose, handleSubmit, isLoading, ...props}
+  {className, newsItem, initForm, handlerToClose, handlerToDelete, handleSubmit, isLoading, ...props}
 ) => {
   const {
     id = null, original = null, name = null, preview = null, newsLayout = null
@@ -62,6 +62,12 @@ const FormToChange = (
       <Button className={styles.closeButton} clickHandler={handlerToClose}>
         Close without saving
       </Button>
+      { 
+        id ?  <Button className={styles.deleteButton} clickHandler={() => handlerToDelete(id)}>
+                Delete this news
+              </Button>
+        : null
+      }
       <Button className={styles.submitButton} isSubmit>
         {newsItem ? 'change' : 'create'}
       </Button>

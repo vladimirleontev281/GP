@@ -12,7 +12,7 @@ const Newsfeed = (props) => {
   const {
     isLoading, mode, articles, currentArticle, search, 
     activateModalToRead, deactivateModal, activateFormToChange, 
-    initFormToChange, setNewNewsItem
+    initFormToChange, setNewNewsItem, deleteNewsItem,
   } = props;
   const newsArray = search.length ? search : articles;
   return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
@@ -51,7 +51,8 @@ const Newsfeed = (props) => {
       mode === TO_CHANGE ? 
         <FormToChange newsItem={currentArticle} handlerToClose={deactivateModal}
                       onSubmit={setNewNewsItem} initForm={initFormToChange}
-                      className={styles.FormToChange} isLoading={isLoading}
+                      className={styles.FormToChange} isLoading={isLoading} 
+                      handlerToDelete={deleteNewsItem}
         /> 
       : null
     }
