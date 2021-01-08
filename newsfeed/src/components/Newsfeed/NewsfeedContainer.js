@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
 // import { compose } from 'redux';
 import { initialize as initializeReduxForm } from 'redux-form';
 
-import {
-  actionCreators as globalActionCreators,
-  NEWSFEED, TO_READ, TO_CHANGE
+import {getNewItem} from '../../utils';
+import api from '../../api/api';
+import { 
+  actionCreators as globalActionCreators, NEWSFEED, TO_READ, TO_CHANGE
 } from '../../store/reducers/globalReducer';
 import {actionCreators as articlesActionCreators} from '../../store/reducers/articlesReducer';
 import Newsfeed from './Newsfeed';
@@ -20,6 +21,10 @@ const mapStateToProps = state => {return {
 }};
 
 const thunkCreators = {
+  setBaseItems: data => dispatch => {
+    dispatch(articlesActionCreators.setArticles(data));
+    dispatch(globalActionCreators.toggleLoading());
+  },
   activateModalToRead: (newsID) => (dispatch) => {
     dispatch(articlesActionCreators.setCurrentArticle(newsID));
     dispatch(globalActionCreators.changeMode(TO_READ));
@@ -36,26 +41,24 @@ const thunkCreators = {
     dispatch(initializeReduxForm('FormToChange', data));
   },
   setNewNewsItem: (formData) => (dispatch) => {
-    let data = {
-      ...formData,
-      id: formData.id ? formData.id : getNewID(),
-      new: !formData.id
-    };
-
-    // dispatch(articlesActionCreators.setCurrentArticle(null));
-    // dispatch(globalActionCreators.changeMode(NEWSFEED));
+    dispatch(globalActionCreators.toggleLoading());
+    api.setArticle(getNewItem(formData)).then(response => {
+      dispatch(articlesActionCreators.setArticles(response.body));
+      dispatch(globalActionCreators.changeMode(NEWSFEED));
+      dispatch(globalActionCreators.toggleLoading());
+    })
   },
 };
 
 const NewsfeedContainer = (props) => {
+  useEffect(() => {
+    api.getArticles().then(response => {
+      if (response.ok && response.body) props.setBaseItems(response.body);
+    })
+  }, []);
   return <Newsfeed {...props}/>
 }
-export default connect(mapStateToProps, {
-    // ...globalActionCreators, 
-    // ...articlesActionCreators, 
-    ...thunkCreators
-  }
-)(NewsfeedContainer);
+export default connect(mapStateToProps, {...thunkCreators})(NewsfeedContainer);
 
 
 // export default compose(

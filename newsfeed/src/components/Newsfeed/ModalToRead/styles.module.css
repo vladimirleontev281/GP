@@ -1,5 +1,6 @@
 .ModalToRead{
   position: absolute;
+  top: 0;
   width: 100%;
   min-height: 100vh;
   height: auto;
@@ -7,7 +8,6 @@
   background-color: #ffffff;
   border: 2px solid black;
   border-radius: 5px;
-  z-index: 1;
 }
 .ModalToRead.ModalToRead{
   animation-duration: 0.4s;

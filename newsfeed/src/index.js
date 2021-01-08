@@ -10,3 +10,8 @@ ReactDOM.render(
   <React.StrictMode><Provider store={store}><App/></Provider></React.StrictMode>,
   rootElement
 );
+
+// for emulation
+window.getMyState = () => {
+  return store.getState();
+}

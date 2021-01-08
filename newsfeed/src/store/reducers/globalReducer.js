@@ -5,8 +5,7 @@ export {NEWSFEED, TO_READ, TO_CHANGE};
 
 const init = {
   mode: NEWSFEED,
-  // isLoading: true,
-  isLoading: false,
+  isLoading: true,
 };
 
 const actionTypes = {
@@ -16,7 +15,7 @@ const actionTypes = {
 
 export const actionCreators = {
   changeMode: (mode) => {return {type: actionTypes.changeMode, mode}},
-  toggleLoading: (value) => {return {type: actionTypes.changeMode, data: value}},
+  toggleLoading: (value) => {return {type: actionTypes.toggleLoading, data: value}},
 };
 
 const globalReducer = (state = init, action) => {
@@ -29,7 +28,7 @@ const globalReducer = (state = init, action) => {
     case actionTypes.toggleLoading:
       return {
         ...state,
-        isLoading: (action.data === undefined) ? !state : action.data
+        isLoading: (action.data === undefined) ? !state.isLoading : action.data
       };
     default:
       return state;

@@ -2,7 +2,9 @@
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  height: auto;
   max-width: 1280px;
+  min-height: 100vh;
   margin: 0 auto;
   border-left: 1px solid black;
   border-right: 1px solid black;
@@ -10,6 +12,9 @@
 }
 .Newsfeed *{
   box-sizing: border-box;
+}
+.Newsfeed.modalMode{
+  min-height: 0;
 }
 .header{
   width: 100%;
@@ -33,7 +38,6 @@
 .main{
   list-style-type: none;
   width: 100%;
-  min-height: calc(100vh - 80px);
   margin: 0;
   padding: 20px 50px;
   /* background-color: aquamarine; */
@@ -52,3 +56,12 @@
   }
 }
 
+.Preloader{
+  z-index: 150;
+}
+.ModalToRead{
+  z-index: 1;
+}
+.FormToChange{
+  z-index: 1;
+}

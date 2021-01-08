@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import { Field, reduxForm, initialize as initializeReduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 import Button from '../Button/Button';
+import Preloader from '../../Preloader/Preloader';
 
 import styles from './styles.module.css';
 import animate from '../../animation/styles.module.css';
 
-const FormToChange = ({newsItem, initForm, handlerToClose, handleSubmit, ...props}) => {
+const FormToChange = (
+  {className, newsItem, initForm, handlerToClose, handleSubmit, isLoading, ...props}
+) => {
   const {
     id = null, original = null, name = null, preview = null, newsLayout = null
   } = newsItem ? newsItem : {};
@@ -18,12 +21,14 @@ const FormToChange = ({newsItem, initForm, handlerToClose, handleSubmit, ...prop
   };
 
   const classes = [
-    styles.FormToChange, animate.animate__animated, animate.animate__fadeIn
+    styles.FormToChange, className, animate.animate__animated, animate.animate__fadeIn
   ].join(' ');
 
   useEffect(() => {initForm(initFormData);}, []);
 
-  return <form className={classes} onSubmit={handleSubmit} >
+  return <form className={classes} onSubmit={handleSubmit} >//Preloader
+    {isLoading ? <Preloader absolute /> : null}
+
     <div className={styles.imageBlock} >
       <Field className={styles.infoInput} component={'input'} name={'id'} disabled/>
       <div>

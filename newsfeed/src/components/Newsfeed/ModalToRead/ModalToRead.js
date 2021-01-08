@@ -7,10 +7,10 @@ import Button from '../Button/Button';
 import styles from './styles.module.css';
 import animate from '../../animation/styles.module.css';
 
-const ModalToRead = ({newsItem, handlerToClose, ...props}) => {
+const ModalToRead = ({className, newsItem, handlerToClose, ...props}) => {
   const {name, newsLayout, original} = newsItem;
   const classes = [
-    styles.ModalToRead, animate.animate__animated, animate.animate__zoomIn
+    styles.ModalToRead, className, animate.animate__animated, animate.animate__zoomIn
   ].join(' ');
 
   return (<div className={classes}>

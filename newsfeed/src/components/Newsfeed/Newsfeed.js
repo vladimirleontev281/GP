@@ -15,23 +15,7 @@ const Newsfeed = (props) => {
     initFormToChange, setNewNewsItem
   } = props;
   const newsArray = search.length ? search : articles;
-
-  return <div className={styles.Newsfeed}>
-    {isLoading ? <Preloader absolute /> : null}
-
-    {
-      mode === TO_READ ? 
-        <ModalToRead newsItem={currentArticle} handlerToClose={deactivateModal}/> 
-        :  null
-    }
-
-    {
-      mode === TO_CHANGE ? 
-        <FormToChange newsItem={currentArticle} handlerToClose={deactivateModal}
-                      onSubmit={setNewNewsItem} initForm={initFormToChange}
-        /> 
-      : null
-    }
+  return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
 
     <div className={styles.header} >
       <span className={styles.logo} >newsfeed</span>
@@ -40,7 +24,7 @@ const Newsfeed = (props) => {
       </Button>
     </div>
 
-    { !isLoading && mode === NEWSFEED ? 
+    { mode === NEWSFEED ? 
       <ul className={styles.main} >
       {
         newsArray.map(item => {
@@ -54,6 +38,25 @@ const Newsfeed = (props) => {
       </ul>
       : null
     }
+    
+    {
+      mode === TO_READ ? 
+        <ModalToRead  className={styles.ModalToRead} newsItem={currentArticle} 
+                      handlerToClose={deactivateModal}
+        /> 
+        :  null
+    }
+
+    {
+      mode === TO_CHANGE ? 
+        <FormToChange newsItem={currentArticle} handlerToClose={deactivateModal}
+                      onSubmit={setNewNewsItem} initForm={initFormToChange}
+                      className={styles.FormToChange} isLoading={isLoading}
+        /> 
+      : null
+    }
+
+    {isLoading && mode === NEWSFEED ? <Preloader className={styles.Preloader} absolute /> : null}
   </div>;
 };
 export default Newsfeed;
