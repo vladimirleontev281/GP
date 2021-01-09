@@ -6,7 +6,7 @@ const REQUEST_DELAY = 2000;
 export default {
   initBase: () => {
     return !baseAPI.isInit() ? 
-      fetch('/source/source.json')
+      fetch('./source/source.json')
       .then(response => response.json())
       .then(articles => {
         baseAPI.create({articles});
