@@ -8,19 +8,21 @@ const NewsItem = (
     ...props
   }
 ) => {
-  return <li  className={`${className} ${styles.NewsItem}`} 
-              onDoubleClick={() => toChangeNewsClickHandler(id)}
-  >
+  return <li  className={`${className} ${styles.NewsItem}`}>
     <div className={styles.imageBlock}>
       <img className={styles.image} src={imagePath} />
     </div>
     <div>
-      <p className={styles.info}>To edit a news item double click on it.</p>
+      <div>
+        <button className={styles.changeButton} onClick={() => toChangeNewsClickHandler(id)}>
+          To edit a news item click here.
+        </button>
+      </div>
       <div>
         <p className={styles.prewiev}>{prewiev}</p>
         <div className={styles.buttonBlock}>
           <button className={styles.toReadMoreButton} onClick={() => toReadMoreClickHandler(id)}>
-            ... click her to read more
+            ... Click here to read more
           </button>
         </div>
       </div>

@@ -19,11 +19,13 @@
   height: auto;
   border: 1px solid black;
 }
-.info{
-  margin: 0 0 10px 0;
+.changeButton{
+  display: inline-block;
+  margin: 0;
   text-align: center;
   font-size: 10px;
   font-style: italic;
+  cursor: pointer;
 }
 .buttonBlock{
   display: flex;

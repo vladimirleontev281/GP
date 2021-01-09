@@ -12,22 +12,22 @@ const thunkCreators = {
     dispatch(articlesActionCreators.setArticles(data));
     dispatch(globalActionCreators.toggleLoading());
   },
-  activateModalToRead: (newsID) => (dispatch) => {
+  activateModalToRead: newsID => dispatch => {
     dispatch(articlesActionCreators.setCurrentArticle(newsID));
     dispatch(globalActionCreators.changeMode(TO_READ));
   },
-  activateFormToChange: (newsID) => (dispatch) => {
+  activateFormToChange: newsID => dispatch => {
     dispatch(articlesActionCreators.setCurrentArticle(newsID));
     dispatch(globalActionCreators.changeMode(TO_CHANGE));
   },
-  deactivateModal: () => (dispatch) => {
+  deactivateModal: () => dispatch => {
     dispatch(globalActionCreators.changeMode(NEWSFEED));
     dispatch(articlesActionCreators.setCurrentArticle(null));
   },
-  initFormToChange: (data) => (dispatch) => {
+  initFormToChange: data => dispatch => {
     dispatch(initializeReduxForm('FormToChange', data));
   },
-  setNewNewsItem: (formData) => (dispatch) => {
+  setNewNewsItem: formData => dispatch => {
     dispatch(globalActionCreators.toggleLoading());
     api.setArticle(getNewItem(formData)).then(response => {
       dispatch(articlesActionCreators.setArticles(response.body));
@@ -42,6 +42,20 @@ const thunkCreators = {
       dispatch(globalActionCreators.changeMode(NEWSFEED));
       dispatch(globalActionCreators.toggleLoading());
     })
+  },
+  setSearch: ({searchString, articles}) => dispatch => {
+    dispatch(globalActionCreators.toggleLoading());
+    const serchArray = (searchString) ? 
+      articles.filter(item => item.newsLayout.indexOf(searchString) !== -1)
+    : null;
+    dispatch(articlesActionCreators.setSearchArticles(serchArray));
+    dispatch(globalActionCreators.toggleLoading());
+  },
+  clearSearch: () => dispatch => {
+    dispatch(globalActionCreators.toggleLoading());
+    dispatch(initializeReduxForm('Search', {inputField: ''}));
+    dispatch(articlesActionCreators.setSearchArticles(null));
+    dispatch(globalActionCreators.toggleLoading());
   },
 };
 export default thunkCreators;

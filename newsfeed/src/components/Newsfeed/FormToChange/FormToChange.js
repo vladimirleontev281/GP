@@ -26,7 +26,7 @@ const FormToChange = (
 
   useEffect(() => {initForm(initFormData);}, []);
 
-  return <form className={classes} onSubmit={handleSubmit} >//Preloader
+  return <form className={classes} onSubmit={handleSubmit} >
     {isLoading ? <Preloader absolute /> : null}
 
     <div className={styles.imageBlock} >

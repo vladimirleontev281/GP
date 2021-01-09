@@ -38,21 +38,3 @@ function getLastID(articles) {
   let sortArray = [...articles].sort((a, b) => {return a.id - b.id});
   return sortArray[sortArray.length - 1].id;
 }
-
-// const emulations = {
-//   requestToSetArticle: (anyURL, data) => {
-//     return makeRequest('/source/source.json').then(response => {
-//       if (data.method === 'POST') newItem.id = getLastID(articles) + 1;
-
-//       response.body = data.method === 'PUT' ? 
-//         articles.map(item => (item.id === newItem.id) ? newItem : item)
-//       : articles.concat(newItem);
-//       return response;
-//     })
-
-//    function getLastID(articles) {
-//      let sortArray = [...articles].sort((a, b) => {return a.id - b.id});
-//      return sortArray[sortArray.length - 1].id;
-//    }
-//   },
-// };

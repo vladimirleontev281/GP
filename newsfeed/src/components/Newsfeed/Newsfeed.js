@@ -3,6 +3,7 @@ import styles from './styles.module.css';
 import {NEWSFEED, TO_READ, TO_CHANGE} from '../../store/reducers/globalReducer';
 import {getNewsImagePath} from '../../utils'
 import Preloader from '../Preloader/Preloader';
+import Search from './Search/Search';
 import Button from './Button/Button';
 import NewsItem from './NewsItem/NewsItem';
 import ModalToRead from './ModalToRead/ModalToRead';
@@ -12,13 +13,15 @@ const Newsfeed = (props) => {
   const {
     isLoading, mode, articles, currentArticle, search, 
     activateModalToRead, deactivateModal, activateFormToChange, 
-    initFormToChange, setNewNewsItem, deleteNewsItem,
+    initFormToChange, setNewNewsItem, deleteNewsItem, setSearch, clearSearch
   } = props;
-  const newsArray = search.length ? search : articles;
+  const newsArray = search ? search : articles;
   return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
-
     <div className={styles.header} >
       <span className={styles.logo} >newsfeed</span>
+      <Search className={styles.Search} articles={articles} 
+              setSearch={setSearch} clearSearch={clearSearch}
+      />
       <Button className={styles.addNewsButton} clickHandler={() => activateFormToChange(null)}>
         add news
       </Button>

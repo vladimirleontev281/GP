@@ -1,7 +1,7 @@
 const init = {
   articles: [],
   currentArticle: null,
-  search: [],
+  search: null,
 };
 
 const actionTypes = {
@@ -13,6 +13,7 @@ const actionTypes = {
 export const actionCreators = {
   setArticles: data => {return {type: actionTypes.setArticles, data}},
   setCurrentArticle: id => {return {type: actionTypes.setCurrentArticle, id}},
+  setSearchArticles: data => {return {type: actionTypes.setSearchArticles, data}}
 };
 
 const articlesReducer = (state = init, action) => {
@@ -31,7 +32,7 @@ const articlesReducer = (state = init, action) => {
     case actionTypes.setSearchArticles:
       return {
         ...state,
-        search: (action.data === null) ? [] : action.data
+        search: action.data,
       };
     default:
       return state;

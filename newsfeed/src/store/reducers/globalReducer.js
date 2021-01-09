@@ -1,7 +1,6 @@
 // "mode" is a switch between the main content and two possible modal windows
 // 0 - main content, 1 - modal windows to read, 2 - modal window to change/create
-const [NEWSFEED, TO_READ, TO_CHANGE] = [0, 1 , 2];
-export {NEWSFEED, TO_READ, TO_CHANGE};
+export const [NEWSFEED, TO_READ, TO_CHANGE] = [0, 1 , 2];
 
 const init = {
   mode: NEWSFEED,
