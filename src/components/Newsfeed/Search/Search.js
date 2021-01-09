@@ -15,7 +15,7 @@ const Search = ({className, handleSubmit, articles, setSearch, clearSearch, ...p
     </div>
     <div>
       <Button className={styles.cleanButton} clickHandler={clearSearch}>
-        to clean
+        <span>to clean</span><span>x</span>
       </Button>
     </div>
   </form>

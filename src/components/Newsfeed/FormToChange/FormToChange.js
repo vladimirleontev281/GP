@@ -60,11 +60,11 @@ const FormToChange = (
     </div>
     <div className={styles.buttonsBlock} >
       <Button className={styles.closeButton} clickHandler={handlerToClose}>
-        Close without saving
+        <span>Close without saving</span><span>Close</span>
       </Button>
       { 
         id ?  <Button className={styles.deleteButton} clickHandler={() => handlerToDelete(id)}>
-                Delete this news
+                <span>Delete this news</span><span>Delete</span>
               </Button>
         : null
       }

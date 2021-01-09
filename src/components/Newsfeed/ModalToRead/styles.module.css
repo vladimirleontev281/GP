@@ -1,0 +1,134 @@
+.ModalToRead{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  padding: 25px 25px 60px 25px;
+  background-color: #ffffff;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+.ModalToRead.ModalToRead{
+  animation-duration: 0.4s;
+}
+.newsName{
+  text-align: center;
+}
+.imageBlock{
+  margin-bottom: 30px;
+}
+.topDecor, .bottomDecor{
+  height: 30px;
+  text-align: center;
+}
+.topDecor{
+  margin-bottom: 20px;
+}
+.bottomDecor{
+  margin-top: 30px;
+}
+.leftDecor, .rightDecor{
+  text-align: center;
+}
+.centerDecorBox{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.image{
+  max-width: 450px;
+  height: auto;
+}
+.leftDecor, .rightDecor{
+  width: 20%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.content{
+  text-align: justify;
+}
+.buttonsBlock{
+  position: sticky;
+  top: 25px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.linkToOriginal{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 40px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 5px;
+  text-transform: capitalize;;
+}
+.ModalToRead .closeButton{
+  width: 80px;
+}
+
+@media(max-width: 768px) {
+  .ModalToRead .closeButton{
+    width: auto;
+    height: 25px;
+    padding: 3px 10px;
+    font-size: 12px;
+  }
+  .linkToOriginal{
+    height: 25px;
+    font-size: 15px;
+  }
+  .newsName{
+    font-size: 25px;
+  }
+  .centerDecorBox{
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .leftDecor, .rightDecor{
+    display: none;
+  }
+  .image{
+    max-width: 350px;
+  }
+  .content{
+    font-size: 14px;
+  }
+}
+@media(max-width: 480px){
+  .ModalToRead{
+    padding: 0 15px 30px 15px;
+    border: none;
+    border-radius: 0;
+  }
+  .ModalToRead .closeButton{
+    height: 20px;
+    font-size: 10px;
+  }
+  .linkToOriginal{
+    height: 20px;
+    font-size: 12px;
+  }
+  .newsName{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    font-size: 18px;
+  }
+  .topDecor, .bottomDecor{
+    display: none;
+  }
+  .image{
+    max-width: 250px;
+  }
+  .content{
+    font-size: 12px;
+  }
+}

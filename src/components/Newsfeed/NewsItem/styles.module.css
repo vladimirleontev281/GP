@@ -1,0 +1,142 @@
+.NewsItem{
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.mainBlock{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.mainBlock:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.imageBlock{
+  width: auto;
+  height: auto;
+  margin-right: 20px;
+}
+.image{
+  width: 200px;
+  height: auto;
+  border: 1px solid black;
+}
+.contentBlock{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.changeButton{
+  display: inline-block;
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  font-style: italic;
+  cursor: pointer;
+}
+.changeButton.mobile{
+  display: none;
+}
+.prewiev{
+  font-size: 18px;
+}
+.buttonBlock{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.toReadMoreButton{
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+@media(max-width: 1280px) {
+  .changeButton{
+    font-size: 12px;
+  }
+  .prewiev{
+    font-size: 16px;
+  }
+  .toReadMoreButton{
+    font-size: 14px;
+  }
+}
+@media(max-width: 768px) {
+  .changeButton{
+    font-size: 10px;
+  }
+  .prewiev{
+    font-size: 14px;
+  }
+  .toReadMoreButton{
+    font-size: 12px;
+  }
+}
+@media(max-width: 480px) {
+  .NewsItem{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  .mainBlock{
+    display: block;
+  }
+  .imageBlock{
+    width: 40%;
+    height: auto;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    float: left;
+  }
+  .image{
+    width: 100%;
+    height: auto;
+  }
+  .contentBlock{
+    display: block;
+    position: relative;
+    top: -10px;
+  }
+  .changeButton{
+    display: none;
+  }
+  .changeButton.mobile{
+    display: inline-block;
+    width: 80px;
+    margin: 0;
+    text-align: center;
+    font-size: 10px;
+    font-style: italic;
+    cursor: pointer;
+  }
+  .prewiev{
+    font-size: 12px;
+  }
+  .buttonBlock{
+    justify-content: space-between;
+    align-items: center;
+  }
+  .toReadMoreButton{
+    font-size: 10px;
+  }
+}
