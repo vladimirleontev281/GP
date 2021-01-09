@@ -21,7 +21,14 @@ const articlesReducer = (state = init, action) => {
     case actionTypes.setArticles:
       return {
         ...state,
-        articles: action.data
+        articles: action.data,
+        search: state.search ? 
+          state.search.reduce((accumulator, currentItem) => {
+            let articlesItem = action.data.filter(item => item.id === currentItem.id);
+            if (articlesItem.length) accumulator.push(articlesItem[0]);
+            return accumulator;
+          }, [])
+        : state.search,
       };
     case actionTypes.setCurrentArticle:
       return {
