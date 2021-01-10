@@ -57,7 +57,7 @@
   position: sticky;
   top: 25px;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row-reverse nowrap;
   justify-content: space-between;
   align-items: center;
 }

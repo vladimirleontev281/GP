@@ -16,12 +16,11 @@ const ModalToRead = ({className, newsItem, handlerToClose}) => {
 
   return (<div className={classes}>
     <div className={styles.buttonsBlock}>
+      <Button className={styles.closeButton} clickHandler={handlerToClose}>close</Button>
       { original ? 
         <a  className={styles.linkToOriginal} href={original} target={'_blank'}>go to original</a>
       : null
       }
-      
-      <Button className={styles.closeButton} clickHandler={handlerToClose}>close</Button>
     </div>
     <h1 className={styles.newsName}>{name}</h1>
     <div className={styles.imageBlock}>
@@ -35,7 +34,17 @@ const ModalToRead = ({className, newsItem, handlerToClose}) => {
       </div>
       <div className={styles.bottomDecor}>horizontal decorative element</div>
     </div>
-    <div className={styles.content}>{ ReactHtmlParser(newsLayout) }</div>
+    <div className={styles.content}>
+      {
+        ReactHtmlParser(newsLayout, {
+          transform: (node) => {
+            if (node.type === 'text' && !node.parent) {
+              return ReactHtmlParser(`<p>${node.data.replace(/\n/g, '<br>')}</p>`);
+            }
+          }
+        })
+      }
+    </div>
   </div>);
 };
 
