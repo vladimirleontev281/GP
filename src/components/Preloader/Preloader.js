@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 
 function Preloader({className, absolute}) {
@@ -17,4 +18,8 @@ function Preloader({className, absolute}) {
   );
 }
 
+Preloader.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  absolute: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf([undefined]).isRequired]),
+};
 export default Preloader;

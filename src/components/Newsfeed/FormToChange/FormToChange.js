@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import PropTypes from 'prop-types';
 
 import Button from '../Button/Button';
 import Preloader from '../../Preloader/Preloader';
@@ -7,9 +8,12 @@ import Preloader from '../../Preloader/Preloader';
 import styles from './styles.module.css';
 import animate from '../../animation/styles.module.css';
 
-const FormToChange = (
-  {className, newsItem, initForm, handlerToClose, handlerToDelete, handleSubmit, isLoading, ...props}
-) => {
+const FormToChange = (props) => {
+  const {
+    className, newsItem, isLoading, 
+    initForm, handlerToClose, handlerToDelete, handleSubmit,
+  } = props;
+
   const {
     id = null, original = null, name = null, preview = null, newsLayout = null
   } = newsItem ? newsItem : {};
@@ -75,5 +79,25 @@ const FormToChange = (
   </form>;
 };
 
+
+FormToChange.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
+  newsItem: PropTypes.oneOfType([PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null]).isRequired]),
+    original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+    name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+    preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+    newsLayout: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+    images:PropTypes.shape({
+      small: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+      large: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+    }),
+  }), PropTypes.oneOf([null]).isRequired]),
+  isLoading: PropTypes.bool,
+  initForm: PropTypes.func, 
+  handlerToClose: PropTypes.func,
+  handlerToDelete: PropTypes.func,
+  handleSubmit: PropTypes.func,
+};
 const ReduxFormToChange = reduxForm({form: 'FormToChange'})(FormToChange);
 export default ReduxFormToChange;

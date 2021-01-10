@@ -14,6 +14,7 @@
 }
 .newsName{
   text-align: center;
+  word-wrap: break-word;
 }
 .imageBlock{
   margin-bottom: 30px;
@@ -50,6 +51,7 @@
 }
 .content{
   text-align: justify;
+  word-wrap: break-word;
 }
 .buttonsBlock{
   position: sticky;

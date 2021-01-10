@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 // import { compose } from 'redux';
 
 import api from '../../api/api';
@@ -24,16 +25,3 @@ const NewsfeedContainer = (props) => {
   return <Newsfeed {...props}/>
 }
 export default connect(mapStateToProps, {...thunkCreators})(NewsfeedContainer);
-
-
-// export default compose(
-//   connect(
-//     mapStateToProps, 
-//     {
-//       ...globalActionCreators, 
-//       ...globalThunkCreators, 
-//       ...articlesActionCreators, 
-//       ...articlesThunkCreators
-//     }
-//   ),
-// )(NewsfeedContainer);

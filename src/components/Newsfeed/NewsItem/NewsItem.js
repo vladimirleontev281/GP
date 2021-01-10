@@ -1,13 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 
-const NewsItem = (
-  {
+const NewsItem = (props) => {
+  const {
     className, imagePath, prewiev, id, 
     toReadMoreClickHandler, toChangeNewsClickHandler,
-    ...props
-  }
-) => {
+  } = props;
   return <li  className={`${className} ${styles.NewsItem}`}>
     <div className={styles.mainBlock}>
       <div className={styles.imageBlock}>
@@ -32,5 +31,14 @@ const NewsItem = (
       </button>
     </div>
   </li>
+};
+
+NewsItem.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  imagePath: PropTypes.string, 
+  prewiev: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]), 
+  id: PropTypes.number, 
+  toReadMoreClickHandler: PropTypes.func,
+  toChangeNewsClickHandler: PropTypes.func,
 };
 export default NewsItem;
