@@ -10,15 +10,11 @@ import api from '../api/api';
 const thunkCreators = {
   setBaseItems: data => dispatch => {
     dispatch(articlesActionCreators.setArticles(data));
-    dispatch(globalActionCreators.toggleLoading());
+    dispatch(globalActionCreators.toggleLoading(false));
   },
-  activateModalToRead: newsID => dispatch => {
+  activateModal: (newsID, mode) => dispatch => {
     dispatch(articlesActionCreators.setCurrentArticle(newsID));
-    dispatch(globalActionCreators.changeMode(TO_READ));
-  },
-  activateFormToChange: newsID => dispatch => {
-    dispatch(articlesActionCreators.setCurrentArticle(newsID));
-    dispatch(globalActionCreators.changeMode(TO_CHANGE));
+    dispatch(globalActionCreators.changeMode(mode));
   },
   deactivateModal: () => dispatch => {
     dispatch(globalActionCreators.changeMode(NEWSFEED));
@@ -28,20 +24,14 @@ const thunkCreators = {
     dispatch(initializeReduxForm('FormToChange', data));
   },
   setNewNewsItem: formData => dispatch => {
-    dispatch(globalActionCreators.toggleLoading());
-    api.setArticle(getNewItem(formData)).then(response => {
-      dispatch(articlesActionCreators.setArticles(response.body));
-      dispatch(globalActionCreators.changeMode(NEWSFEED));
-      dispatch(globalActionCreators.toggleLoading());
-    })
+    dispatch(globalActionCreators.toggleLoading(true));
+    api.setArticle(getNewItem(formData))
+    .then(response => setChangesAndToggleToMain(response.body, dispatch));
   },
   deleteNewsItem: id => dispatch => {
-    dispatch(globalActionCreators.toggleLoading());
-    api.deleteArticle(id).then(response => {
-      dispatch(articlesActionCreators.setArticles(response.body));
-      dispatch(globalActionCreators.changeMode(NEWSFEED));
-      dispatch(globalActionCreators.toggleLoading());
-    })
+    dispatch(globalActionCreators.toggleLoading(true));
+    api.deleteArticle(id)
+    .then(response => setChangesAndToggleToMain(response.body, dispatch));
   },
   setSearch: ({searchString, articles}) => dispatch => {
     dispatch(globalActionCreators.toggleLoading());
@@ -59,3 +49,9 @@ const thunkCreators = {
   },
 };
 export default thunkCreators;
+
+function setChangesAndToggleToMain(articles, dispatch) {
+  dispatch(articlesActionCreators.setArticles(articles));
+  dispatch(globalActionCreators.changeMode(NEWSFEED));
+  dispatch(globalActionCreators.toggleLoading(false));
+}

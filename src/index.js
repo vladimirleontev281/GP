@@ -15,7 +15,7 @@ api.initBase().then(() => {
   );
 })
 
-// for emulation
+// for tests
 window.getMyState = () => {
   return store.getState();
 }

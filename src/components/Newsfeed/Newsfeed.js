@@ -13,8 +13,8 @@ import FormToChange from './FormToChange/FormToChange';
 const Newsfeed = (props) => {
   const {
     isLoading, mode, articles, currentArticle, search, 
-    activateModalToRead, deactivateModal, activateFormToChange, 
-    initFormToChange, setNewNewsItem, deleteNewsItem, setSearch, clearSearch
+    activateModal, deactivateModal, initFormToChange, 
+    setNewNewsItem, deleteNewsItem, setSearch, clearSearch
   } = props;
 
   const newsArray = search ? search : articles;
@@ -25,9 +25,9 @@ const Newsfeed = (props) => {
       <Search className={styles.Search} articles={articles} 
               setSearch={setSearch} clearSearch={clearSearch}
       />
-      <Button className={styles.addNewsButton} clickHandler={() => activateFormToChange(null)}>
-        add news
-      </Button>
+      <Button className={styles.addNewsButton} 
+              clickHandler={() => activateModal(null, TO_CHANGE)}
+      >add news</Button>
     </div>
 
     { mode === NEWSFEED ? 
@@ -36,8 +36,7 @@ const Newsfeed = (props) => {
         newsArray.map(item => {
           return <NewsItem  key={item.id} className={styles.NewsItem} prewiev={item.preview}
                             imagePath={getNewsImagePath(item)} id={item.id} 
-                            toReadMoreClickHandler={activateModalToRead} 
-                            toChangeNewsClickHandler={activateFormToChange}
+                            activateModal={activateModal}
           />
         })
       }
@@ -91,9 +90,8 @@ Newsfeed.propTypes = {
     PropTypes.arrayOf(itemPropTypes).isRequired,
     PropTypes.oneOf([null]).isRequired,
   ]), 
-  activateModalToRead: PropTypes.func,  
+  activateModal: PropTypes.func,  
   deactivateModal: PropTypes.func,  
-  activateFormToChange: PropTypes.func,  
   initFormToChange: PropTypes.func,  
   setNewNewsItem: PropTypes.func,  
   deleteNewsItem: PropTypes.func,  

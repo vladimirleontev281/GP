@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {TO_READ, TO_CHANGE} from '../../../store/reducers/globalReducer';
 import styles from './styles.module.css';
 
 const NewsItem = (props) => {
-  const {
-    className, imagePath, prewiev, id, 
-    toReadMoreClickHandler, toChangeNewsClickHandler,
-  } = props;
+  const {className, imagePath, prewiev, id, activateModal} = props;
   return <li  className={`${className} ${styles.NewsItem}`}>
     <div className={styles.mainBlock}>
       <div className={styles.imageBlock}>
         <img className={styles.image} src={imagePath} />
       </div>
       <div className={styles.contentBlock}>
-        <button className={styles.changeButton} onClick={() => toChangeNewsClickHandler(id)}>
+        <button className={styles.changeButton} onClick={() => activateModal(id, TO_CHANGE)}>
           To edit a news item click here.
         </button>
         <p className={styles.prewiev}>{prewiev}</p>
@@ -22,11 +20,11 @@ const NewsItem = (props) => {
 
     <div className={styles.buttonBlock}>
       <button className={`${styles.changeButton} ${styles.mobile}`} 
-              onClick={() => toChangeNewsClickHandler(id)}
+              onClick={() => activateModal(id, TO_CHANGE)}
       >
         Edit
       </button>
-      <button className={styles.toReadMoreButton} onClick={() => toReadMoreClickHandler(id)}>
+      <button className={styles.toReadMoreButton} onClick={() => activateModal(id, TO_READ)}>
         ... Click here to read more
       </button>
     </div>
@@ -38,7 +36,6 @@ NewsItem.propTypes = {
   imagePath: PropTypes.string, 
   prewiev: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]), 
   id: PropTypes.number, 
-  toReadMoreClickHandler: PropTypes.func,
-  toChangeNewsClickHandler: PropTypes.func,
+  activateModal: PropTypes.func,
 };
 export default NewsItem;
