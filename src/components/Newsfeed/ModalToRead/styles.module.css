@@ -52,6 +52,7 @@
 .content{
   text-align: justify;
   word-wrap: break-word;
+  text-indent: 20px;
 }
 .buttonsBlock{
   position: sticky;

@@ -1,8 +1,6 @@
 import { initialize as initializeReduxForm } from 'redux-form';
 import {getItemToSend} from '../utils';
-import { 
-  actionCreators as globalActionCreators, NEWSFEED, TO_READ, TO_CHANGE
-} from './reducers/globalReducer';
+import {actionCreators as globalActionCreators, NEWSFEED} from './reducers/globalReducer';
 import {actionCreators as articlesActionCreators} from './reducers/articlesReducer';
 import api from '../api/api';
 
