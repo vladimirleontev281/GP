@@ -1,6 +1,8 @@
 import { initialize as initializeReduxForm } from 'redux-form';
 import {getItemToSend} from '../utils';
-import {actionCreators as globalActionCreators, NEWSFEED} from './reducers/globalReducer';
+import {
+  actionCreators as globalActionCreators, NEWSFEED, referenceObjForSort
+} from './reducers/globalReducer';
 import {actionCreators as articlesActionCreators} from './reducers/articlesReducer';
 import api from '../api/api';
 
@@ -44,6 +46,9 @@ const thunkCreators = {
     dispatch(initializeReduxForm('Search', {inputField: ''}));
     dispatch(articlesActionCreators.setSearchArticles(null));
     dispatch(globalActionCreators.toggleLoading());
+  },
+  setSort: value => dispatch => {
+    dispatch(globalActionCreators.setSort(referenceObjForSort[value]));
   },
 };
 export default thunkCreators;

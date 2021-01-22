@@ -4,7 +4,9 @@ import {connect} from 'react-redux';
 // import { compose } from 'redux';
 
 import api from '../../api/api';
-import {sortKeys} from '../../store/reducers/globalReducer';
+import {
+  sortKeys, referenceObjForSort, DEFAULT_SORT_DESCRIP
+} from '../../store/reducers/globalReducer';
 import thunkCreators from '../../store/thunkCreators';
 import Newsfeed from './Newsfeed';
 
@@ -24,14 +26,18 @@ const NewsfeedContainer = (props) => {
     })
   }, []);
 
-  const propsToSend = {...props, articles: sortArticles(props.articles, props.sortVariant)};
-
+  const propsToSend = {...props, 
+    articles: sortArticles(props.articles, props.sortVariant),
+    sortArray: Object.keys(referenceObjForSort),
+    defaultSort: DEFAULT_SORT_DESCRIP,
+  };
   return <Newsfeed {...propsToSend}/>
 
   function sortArticles(articles, sortVariant) {
     switch (sortVariant) {
       case sortKeys.dateUp: return [...articles].sort((a, b) => a.date - b.date);
-      default: return [...articles].sort((a, b) => b.date - a.date);
+      case sortKeys.dateDown: return [...articles].sort((a, b) => b.date - a.date);
+      default: return [];
     }
   }
 }

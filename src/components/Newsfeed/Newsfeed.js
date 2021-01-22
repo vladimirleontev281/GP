@@ -9,14 +9,14 @@ import Button from './Button/Button';
 import NewsItem from './NewsItem/NewsItem';
 import ModalToRead from './ModalToRead/ModalToRead';
 import FormToChange from './FormToChange/FormToChange';
+import Switcher from '../Switcher/Switcher';
 
 const Newsfeed = (props) => {
   const {
-    isLoading, mode, articles, currentArticle, search, 
+    isLoading, mode, articles, currentArticle, search, sortArray, defaultSort,
     activateModal, deactivateModal, initFormToChange, 
-    setNewsItem, deleteNewsItem, setSearch, clearSearch
+    setNewsItem, deleteNewsItem, setSearch, clearSearch, setSort,
   } = props;
-
   const newsArray = search ? search : articles;
   
   return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
@@ -31,6 +31,17 @@ const Newsfeed = (props) => {
     </div>
 
     { mode === NEWSFEED ? 
+    <>
+      {/* // temporarily */}
+      <div className={styles.sortBlock}>
+          <Switcher className={styles.Switcher} itemClassName={styles.SwitcherItem}
+                    descripClassName={styles.SwitcherDescrip}
+                    name={'Sort'} clickHandler={value => {setSort(value)}}
+                    items={sortArray} active={defaultSort}
+          />
+      </div>
+      {/* //*********** */}
+
       <ul className={styles.main} >
       {
         newsArray.map(item => {
@@ -41,6 +52,7 @@ const Newsfeed = (props) => {
         })
       }
       </ul>
+    </>
       : null
     }
     

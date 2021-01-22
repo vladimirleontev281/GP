@@ -1,0 +1,55 @@
+.Switcher{
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.descrip{
+  width: auto;
+  margin: 0 20px 0 0;
+  padding: 0;
+  font-size: 100%;
+}
+.list{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: transparent;
+  font-size: inherit;
+}
+.item{
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  font-size: inherit;
+}
+.item:last-of-type{
+  margin-right: 0;
+}
+.item>button{
+  outline: none;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: transparent;
+  padding: 2px;
+  font-size: 75%;
+  line-height: 100%;
+  cursor: pointer;
+}
+.item>button:hover{
+  transform: scale(1.15, 1.15);
+}
+
+.active>button{
+  transform: scale(1.15, 1.15);
+  pointer-events: none;
+}

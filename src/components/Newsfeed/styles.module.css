@@ -57,6 +57,21 @@
   z-index: 1;
 }
 
+/* temporarily */
+.sortBlock{
+  width: calc(100% - 100px);
+  height: auto;
+  margin: 20px 50px;
+  background-color: #ffffff;
+}
+.sortBlock .Switcher{
+  padding: 10px;
+  font-size: 12px;
+}
+.sortBlock .SwitcherItem{
+
+}
+
 @media(max-width: 1280px) {
   .Newsfeed{
     border-left: none;

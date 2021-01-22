@@ -5,12 +5,16 @@ export const sortKeys = {
   dateUp: 'DATE-UP',
   dateDown: 'DATE-DOWN',
 };
-
+export const referenceObjForSort = {
+  'date up': sortKeys.dateUp,
+  'date down': sortKeys.dateDown,
+};
 const init = {
   mode: NEWSFEED,
   isLoading: true,
   sortVariant: sortKeys.dateDown,
 };
+export const DEFAULT_SORT_DESCRIP = 'date down';
 
 const actionTypes = {
   changeMode: 'CHANGE-MODE',
