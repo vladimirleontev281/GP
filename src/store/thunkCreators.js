@@ -1,5 +1,5 @@
 import { initialize as initializeReduxForm } from 'redux-form';
-import {getNewItem} from '../utils';
+import {getItemToSend} from '../utils';
 import { 
   actionCreators as globalActionCreators, NEWSFEED, TO_READ, TO_CHANGE
 } from './reducers/globalReducer';
@@ -23,9 +23,9 @@ const thunkCreators = {
   initFormToChange: data => dispatch => {
     dispatch(initializeReduxForm('FormToChange', data));
   },
-  setNewNewsItem: formData => dispatch => {
+  setNewsItem: formData => dispatch => {
     dispatch(globalActionCreators.toggleLoading(true));
-    api.setArticle(getNewItem(formData))
+    api.setArticle(getItemToSend(formData))
     .then(response => setChangesAndToggleToMain(response.body, dispatch));
   },
   deleteNewsItem: id => dispatch => {
@@ -36,7 +36,7 @@ const thunkCreators = {
   setSearch: ({searchString, articles}) => dispatch => {
     dispatch(globalActionCreators.toggleLoading());
     const serchArray = (searchString) ? 
-      articles.filter(item => item.newsLayout.indexOf(searchString) !== -1)
+      articles.filter(item => item.newsLayout && item.newsLayout.indexOf(searchString) !== -1)
     : null;
     dispatch(articlesActionCreators.setSearchArticles(serchArray));
     dispatch(globalActionCreators.toggleLoading());

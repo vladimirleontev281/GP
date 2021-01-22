@@ -84,6 +84,7 @@ FormToChange.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
   newsItem: PropTypes.oneOfType([PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null]).isRequired]),
+    date: PropTypes.number,
     original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
     name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
     preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),

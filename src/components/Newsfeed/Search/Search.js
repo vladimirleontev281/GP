@@ -26,6 +26,7 @@ Search.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
   articles: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
+    date: PropTypes.number,
     original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
     name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
     preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),

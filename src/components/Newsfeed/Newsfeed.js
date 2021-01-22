@@ -14,7 +14,7 @@ const Newsfeed = (props) => {
   const {
     isLoading, mode, articles, currentArticle, search, 
     activateModal, deactivateModal, initFormToChange, 
-    setNewNewsItem, deleteNewsItem, setSearch, clearSearch
+    setNewsItem, deleteNewsItem, setSearch, clearSearch
   } = props;
 
   const newsArray = search ? search : articles;
@@ -35,7 +35,7 @@ const Newsfeed = (props) => {
       {
         newsArray.map(item => {
           return <NewsItem  key={item.id} className={styles.NewsItem} prewiev={item.preview}
-                            imagePath={getNewsImagePath(item)} id={item.id} 
+                            imagePath={getNewsImagePath(item)} id={item.id} date={item.date}
                             activateModal={activateModal}
           />
         })
@@ -55,7 +55,7 @@ const Newsfeed = (props) => {
     {
       mode === TO_CHANGE ? 
         <FormToChange newsItem={currentArticle} handlerToClose={deactivateModal}
-                      onSubmit={setNewNewsItem} initForm={initFormToChange}
+                      onSubmit={setNewsItem} initForm={initFormToChange}
                       className={styles.FormToChange} isLoading={isLoading} 
                       handlerToDelete={deleteNewsItem}
         /> 
@@ -66,8 +66,11 @@ const Newsfeed = (props) => {
   </div>;
 };
 
+
+
 const itemPropTypes = PropTypes.shape({
   id: PropTypes.number,
+  date: PropTypes.number,
   original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
   name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
   preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
@@ -93,7 +96,7 @@ Newsfeed.propTypes = {
   activateModal: PropTypes.func,  
   deactivateModal: PropTypes.func,  
   initFormToChange: PropTypes.func,  
-  setNewNewsItem: PropTypes.func,  
+  setNewsItem: PropTypes.func,  
   deleteNewsItem: PropTypes.func,  
   setSearch: PropTypes.func,  
   clearSearch: PropTypes.func, 

@@ -52,6 +52,7 @@ ModalToRead.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
   newsItem: PropTypes.shape({
     id: PropTypes.number,
+    date: PropTypes.number,
     original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
     name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
     preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),

@@ -11,11 +11,18 @@
 }
 .mainBlock{
   display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.contentWraper{
+  width: 100%;
+  display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
   align-items: stretch;
 }
-.mainBlock:after {
+.contentWraper:after {
   content: "";
   display: table;
   clear: both;
@@ -31,11 +38,24 @@
   border: 1px solid black;
 }
 .contentBlock{
+  width: 100%;
   overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
+}
+.details{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.date{
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
 }
 .changeButton{
   display: inline-block;
@@ -66,6 +86,12 @@
   background-color: transparent;
   font-size: 16px;
 }
+.dateMobile{
+  text-align: left;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.7);
+  display: none;
+}
 
 @media(max-width: 1280px) {
   .changeButton{
@@ -82,11 +108,17 @@
   .changeButton{
     font-size: 10px;
   }
+  .date{
+    display: none;
+  }
   .prewiev{
     font-size: 14px;
   }
   .toReadMoreButton{
     font-size: 12px;
+  }
+  .dateMobile{
+    display: block;
   }
 }
 @media(max-width: 480px) {
@@ -101,7 +133,7 @@
     justify-content: flex-start;
     align-items: stretch;
   }
-  .mainBlock{
+  .contentWraper{
     display: block;
   }
   .imageBlock{
@@ -116,11 +148,11 @@
     height: auto;
   }
   .contentBlock{
-    display: block;
+    display: inline;
     position: relative;
     top: -10px;
   }
-  .changeButton{
+  .details{
     display: none;
   }
   .changeButton.mobile{
@@ -141,5 +173,10 @@
   }
   .toReadMoreButton{
     font-size: 10px;
+  }
+  .dateMobile{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 8px;
   }
 }
