@@ -10,14 +10,27 @@ import NewsItem from './NewsItem/NewsItem';
 import ModalToRead from './ModalToRead/ModalToRead';
 import FormToChange from './FormToChange/FormToChange';
 import Switcher from '../Switcher/Switcher';
+import Menu from './Menu/Menu';
 
 const Newsfeed = (props) => {
   const {
-    isLoading, mode, articles, currentArticle, search, sortArray, defaultSort,
-    activateModal, deactivateModal, initFormToChange, 
+    isLoading, mode, articles, currentArticle, search, sortArray, defaultSort, isMenuOpen,
+    activateModal, deactivateModal, initFormToChange, setMenu,
     setNewsItem, deleteNewsItem, setSearch, clearSearch, setSort,
   } = props;
   const newsArray = search ? search : articles;
+
+  const addButton = <Button 
+    className={styles.addNewsButton} 
+    clickHandler={() => activateModal(null, TO_CHANGE)}
+  >add news</Button>;
+
+  const sortInterface = <Switcher 
+    className={styles.Switcher} itemClassName={styles.SwitcherItem}
+    descripClassName={styles.SwitcherDescrip}
+    name={'Sort'} clickHandler={value => {setSort(value)}}
+    items={sortArray} active={defaultSort}
+  />
   
   return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
     <div className={styles.header} >
@@ -25,23 +38,14 @@ const Newsfeed = (props) => {
       <Search className={styles.Search} articles={articles} 
               setSearch={setSearch} clearSearch={clearSearch}
       />
-      <Button className={styles.addNewsButton} 
-              clickHandler={() => activateModal(null, TO_CHANGE)}
-      >add news</Button>
+      <Menu className={styles.Menu} memuBody={styles.memuBody} listClassName={styles.MenuList} 
+            bgOfCloseButton={'./img/close.png'} isOpen={isMenuOpen}
+            items={[addButton, sortInterface]}
+            clickHandler={setMenu}
+      />
     </div>
 
     { mode === NEWSFEED ? 
-    <>
-      {/* // temporarily */}
-      <div className={styles.sortBlock}>
-          <Switcher className={styles.Switcher} itemClassName={styles.SwitcherItem}
-                    descripClassName={styles.SwitcherDescrip}
-                    name={'Sort'} clickHandler={value => {setSort(value)}}
-                    items={sortArray} active={defaultSort}
-          />
-      </div>
-      {/* //*********** */}
-
       <ul className={styles.main} >
       {
         newsArray.map(item => {
@@ -52,8 +56,7 @@ const Newsfeed = (props) => {
         })
       }
       </ul>
-    </>
-      : null
+    : null
     }
     
     {

@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
-// import PropTypes from 'prop-types';
-// import { compose } from 'redux';
 
 import api from '../../api/api';
 import {
@@ -17,6 +15,7 @@ const mapStateToProps = state => {return {
   currentArticle: state.articles.currentArticle,
   search: state.articles.search,
   sortVariant: state.global.sortVariant,
+  isMenuOpen: state.global.isMenuOpen,
 }};
 
 const NewsfeedContainer = (props) => {
