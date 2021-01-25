@@ -36,9 +36,7 @@ const thunkCreators = {
       .then(responses => {
         let allURLsIsGood = true;
         responses.forEach(item => {if(!item.ok) allURLsIsGood = false});
-        if (allURLsIsGood) {
-          setArticle(getItemToSend(formData))
-        } else {
+        if (!allURLsIsGood) {
           const ERROR_TEXT = 'The resource you specified is not responding!';
           const errors = {_error: 'Data loading error'};
           checkingURLs.forEach((item, index) => {
@@ -48,9 +46,8 @@ const thunkCreators = {
           throw new SubmissionError(errors);
         }
       });
-    } else {
-      setArticle(getItemToSend(formData))
     }
+    setArticle(getItemToSend(formData))
 
     function setArticle(item) {
       api.setArticle(item)
@@ -67,7 +64,10 @@ const thunkCreators = {
   setSearch: ({searchString, articles}) => dispatch => {
     dispatch(globalActionCreators.toggleLoading());
     const serchArray = (searchString) ? 
-      articles.filter(item => item.newsLayout && item.newsLayout.indexOf(searchString) !== -1)
+      articles.filter(item => item.name && item.name.indexOf(searchString) !== -1 ||
+                              item.preview && item.preview.indexOf(searchString) !== -1 ||
+                              item.newsLayout && item.newsLayout.indexOf(searchString) !== -1
+      )
     : null;
     dispatch(articlesActionCreators.setSearchArticles(serchArray));
     dispatch(globalActionCreators.toggleLoading());

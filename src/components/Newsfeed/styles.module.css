@@ -42,9 +42,8 @@
   border-bottom: 1px solid #000000;
 }
 .Newsfeed .addNewsButton{
-  border: none;
+  margin-bottom: 8px;
   font-size: inherit;
-  border-radius: 0;
 }
 .main{
   list-style-type: none;
