@@ -32,7 +32,12 @@ const thunkCreators = {
     if (formData.largeImage) checkingURLs.push({key: 'original', data: formData.original});
 
     if (checkingURLs.length) {
-      return Promise.all(checkingURLs.map(item => fetch(item.data, {method: 'HEAD'})))
+      return Promise.all(checkingURLs.map(item => fetch(item.data, {
+        method: 'HEAD', 
+        mode: 'no-cors',
+        cache: 'no-cache',
+        credentials: "same-origin",
+      })))
       .then(responses => {
         let allURLsIsGood = true;
         responses.forEach(item => {if(!item.ok) allURLsIsGood = false});
