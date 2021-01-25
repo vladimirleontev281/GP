@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 
-const Menu = ({className, memuBody, listClassName, bgOfCloseButton, items, isOpen, clickHandler}) =>{
+const Menu = (props) =>{
+  const {
+    className, bodyClassName, listClassName, bgOfCloseButton, items, isOpen, clickHandler
+  } = props;
   const commonClasses = `${styles.Menu} ${className} `;
   const activationClass = `${isOpen ? styles.open : ''}`;
-  const classes = `${commonClasses} ${activationClass}`;
 
-  return <div className={`${classes}`} >
+  return <div className={`${commonClasses} ${activationClass}`} >
     <button className={styles.openButton} 
             onClick={e => {if (isOpen) {e.preventDefault()} else {clickHandler(true)}}}
     >
@@ -16,7 +18,7 @@ const Menu = ({className, memuBody, listClassName, bgOfCloseButton, items, isOpe
       <div className={styles.decorLine} />
     </button>
 
-    <div className={`${styles.memuBody} ${memuBody} `}>
+    <div className={`${styles.memuBody} ${bodyClassName} `}>
         <button className={styles.closeButton} onClick={() => {clickHandler(false)}}>
           <img className={styles.background} src={bgOfCloseButton}/>
         </button>
@@ -28,6 +30,12 @@ const Menu = ({className, memuBody, listClassName, bgOfCloseButton, items, isOpe
 };
 
 Menu.propTypes = {
-
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  bodyClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  listClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  bgOfCloseButton: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
+  items:PropTypes.array, 
+  isOpen: PropTypes.bool, 
+  clickHandler: PropTypes.func,
 };
 export default Menu;

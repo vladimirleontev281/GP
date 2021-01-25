@@ -38,7 +38,7 @@ const Newsfeed = (props) => {
       <Search className={styles.Search} articles={articles} 
               setSearch={setSearch} clearSearch={clearSearch}
       />
-      <Menu className={styles.Menu} memuBody={styles.memuBody} listClassName={styles.MenuList} 
+      <Menu className={styles.Menu} bodyClassName={styles.memuBody} listClassName={styles.MenuList} 
             bgOfCloseButton={'./img/close.png'} isOpen={isMenuOpen}
             items={[addButton, sortInterface]}
             clickHandler={setMenu}

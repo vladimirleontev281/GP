@@ -9,7 +9,6 @@ export const urlObj = {
 
 const backendEmulation = (url, options) => {
   let response = {ok: true, body: null};
-
   switch (url) {
     case SERVER + urlObj.getArticles:
       response.body = baseAPI.get(baseKeys.articles);
@@ -39,16 +38,17 @@ function GetNewArticlesItem(articles, changedItem) {
   let isNewInstance = !changedItem;
   let isNewItem = changedItem && !changedItem.id;
   let isItemToChange = !isNewInstance && !isNewItem;
+
   return {
     id: (isNewInstance || isNewItem) ? getLastID() + 1 : changedItem.id,
     date: (isNewInstance || isNewItem) ? +(new Date()) : getDateByID(changedItem.id),
-    original: (isItemToChange) ? changedItem.original || null : null,
-    name: (isItemToChange) ? changedItem.name || null : null,
-    preview: (isItemToChange) ? changedItem.preview || null : null,
-    newsLayout: (isItemToChange) ? changedItem.newsLayout || null : null,
+    original: (isItemToChange || isNewItem) ? changedItem.original || null : null,
+    name: (isItemToChange || isNewItem) ? changedItem.name || null : null,
+    preview: (isItemToChange || isNewItem) ? changedItem.preview || null : null,
+    newsLayout: (isItemToChange || isNewItem) ? changedItem.newsLayout || null : null,
     images: {
-      small: (isItemToChange) ? changedItem.images.small || null : null,
-      large: (isItemToChange) ? changedItem.images.large || null : null,
+      small: (isItemToChange || isNewItem) ? changedItem.images.small || null : null,
+      large: (isItemToChange || isNewItem) ? changedItem.images.large || null : null,
     }
   };
 

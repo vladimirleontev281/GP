@@ -2,28 +2,36 @@ import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 
-import Button from '../Button/Button';
 import Preloader from '../../Preloader/Preloader';
+import {TextField} from './fields';
+import {required, afterTrim} from '../../../validators';
+import ImageBlock from './ImageBlock/ImageBlock';
+import ButtonsBlock from './ButtonsBlock/ButtonsBlock';
 
 import styles from './styles.module.css';
 import animate from '../../animation/styles.module.css';
 
+
 const FormToChange = (props) => {
+  // input data
   const {
     className, newsItem, isLoading, 
     initForm, handlerToClose, handlerToDelete, handleSubmit,
   } = props;
 
+  // item
   const {
     id = null, original = null, name = null, preview = null, newsLayout = null
   } = newsItem ? newsItem : {};
 
+  // for init form
   const initFormData = {
     id, name, preview, original, newsLayout, 
     smallImage: newsItem ? newsItem.images.small : null,
     largeImage: newsItem ? newsItem.images.large : null,
   };
 
+  // styles
   const classes = [
     styles.FormToChange, className, animate.animate__animated, animate.animate__fadeIn
   ].join(' ');
@@ -33,49 +41,25 @@ const FormToChange = (props) => {
   return <form className={classes} onSubmit={handleSubmit} >
     {isLoading ? <Preloader absolute /> : null}
 
-    <div className={styles.imageBlock} >
-      <Field className={styles.infoInput} component={'input'} name={'id'} disabled/>
-      <div>
-        <span className={styles.fieldDescrip}>Path of small image of News</span>
-        <Field className={styles.input} component={'input'} name={'smallImage'}/>
-      </div>
-      <div>
-        <span className={styles.fieldDescrip}>Path of large image of News</span>
-        <Field className={styles.input} component={'input'} name={'largeImage'}/>
-      </div>
-    </div>
+    <Field className={styles.infoInput} component={'input'} name={'id'} disabled/>
+    <ImageBlock/>
     <div className={styles.detailsBlock} >
-      <div>
-        <span className={styles.fieldDescrip}>News headline</span>
-        <Field className={styles.input} component={'input'} name={'name'}/>
-      </div>
-      <div>
-        <span className={styles.fieldDescrip}>News preview</span>
-        <Field className={styles.input} component={'input'} name={'preview'}/>
-      </div>
-      <div>
-        <span className={styles.fieldDescrip}>Link to original</span>
-        <Field className={styles.input} component={'input'} name={'original'}/>
-      </div>
+      <Field  name={'name'} component={TextField} label={'News headline'} elem={{tagName: 'input'}}
+              validate={[required, afterTrim]}
+      />
+      <Field  name={'preview'} component={TextField} label={'News preview'} elem={{tagName: 'input'}}
+              validate={[required, afterTrim]}
+      />
+      <Field  name={'original'} component={TextField} label={'Link to original'} 
+              elem={{tagName: 'input'}} validate={[afterTrim]}
+      />
     </div>
     <div className={styles.layoutBlock} >
-      <span className={styles.fieldDescrip}>News layout</span>
-      <Field  className={styles.textarea} component={'textarea'} name={'newsLayout'} />
+      <Field  name={'newsLayout'} component={TextField} label={'News layout'} 
+              elem={{tagName: 'textarea'}} validate={[required, afterTrim]}
+      />
     </div>
-    <div className={styles.buttonsBlock} >
-      <Button className={styles.closeButton} clickHandler={handlerToClose}>
-        <span>Close without saving</span><span>Close</span>
-      </Button>
-      { 
-        id ?  <Button className={styles.deleteButton} clickHandler={() => handlerToDelete(id)}>
-                <span>Delete this news</span><span>Delete</span>
-              </Button>
-        : null
-      }
-      <Button className={styles.submitButton} isSubmit>
-        {newsItem ? 'change' : 'create'}
-      </Button>
-    </div>
+    <ButtonsBlock id={id} handlerToClose={handlerToClose} handlerToDelete={handlerToDelete}/>
   </form>;
 };
 

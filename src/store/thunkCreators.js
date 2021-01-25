@@ -1,7 +1,7 @@
-import { initialize as initializeReduxForm } from 'redux-form';
+import { initialize as initializeReduxForm, SubmissionError } from 'redux-form';
 import {getItemToSend} from '../utils';
 import {
-  actionCreators as globalActionCreators, NEWSFEED, TO_CHANGE, referenceObjForSort
+  actionCreators as globalActionCreators, NEWSFEED, referenceObjForSort
 } from './reducers/globalReducer';
 import {actionCreators as articlesActionCreators} from './reducers/articlesReducer';
 import api from '../api/api';
@@ -26,8 +26,36 @@ const thunkCreators = {
   },
   setNewsItem: formData => dispatch => {
     dispatch(globalActionCreators.toggleLoading(true));
-    api.setArticle(getItemToSend(formData))
-    .then(response => setChangesAndToggleToMain(response.body, dispatch, formData.id ? false : true));
+    const checkingURLs = [];
+    if (formData.smallImage) checkingURLs.push({key: 'smallImage', data: formData.smallImage});
+    if (formData.largeImage) checkingURLs.push({key: 'largeImage', data: formData.largeImage});
+    if (formData.largeImage) checkingURLs.push({key: 'original', data: formData.original});
+    
+    if (checkingURLs.length) {
+      return Promise.all(checkingURLs.map(item => fetch(item.data, {method: 'HEAD'})))
+      .then(responses => {
+        let allURLsIsGood = true;
+        responses.forEach(item => {if(!item.ok) allURLsIsGood = false});
+        if (allURLsIsGood) {
+          setArticle(getItemToSend(formData))
+        } else {
+          const ERROR_TEXT = 'The resource you specified is not responding!';
+          const errors = {_error: 'Data loading error'};
+          checkingURLs.forEach(item => {errors[item.key] = ERROR_TEXT});
+          dispatch(globalActionCreators.toggleLoading(false));
+          throw new SubmissionError(errors);
+        }
+      });
+    } else {
+      setArticle(getItemToSend(formData))
+    }
+
+    function setArticle(item) {
+      api.setArticle(item)
+      .then(response => setChangesAndToggleToMain(
+        response.body, dispatch, formData.id ? false : true
+      ));
+    }
   },
   deleteNewsItem: id => dispatch => {
     dispatch(globalActionCreators.toggleLoading(true));
