@@ -30,7 +30,7 @@ const thunkCreators = {
     if (formData.smallImage) checkingURLs.push({key: 'smallImage', data: formData.smallImage});
     if (formData.largeImage) checkingURLs.push({key: 'largeImage', data: formData.largeImage});
     if (formData.largeImage) checkingURLs.push({key: 'original', data: formData.original});
-    
+
     if (checkingURLs.length) {
       return Promise.all(checkingURLs.map(item => fetch(item.data, {method: 'HEAD'})))
       .then(responses => {
@@ -41,7 +41,9 @@ const thunkCreators = {
         } else {
           const ERROR_TEXT = 'The resource you specified is not responding!';
           const errors = {_error: 'Data loading error'};
-          checkingURLs.forEach(item => {errors[item.key] = ERROR_TEXT});
+          checkingURLs.forEach((item, index) => {
+            if (!responses[index].ok) errors[item.key] = ERROR_TEXT
+          });
           dispatch(globalActionCreators.toggleLoading(false));
           throw new SubmissionError(errors);
         }
