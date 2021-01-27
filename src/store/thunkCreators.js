@@ -33,17 +33,19 @@ const thunkCreators = {
     }, [])
 
     if (fields.length) {
-      return Promise.all(fields.map(item => fetch(item.data, {method: 'HEAD', mode: 'no-cors'})))
+      return Promise.all(fields.map(item => {
+        return fetch(item.data, {method: 'HEAD', mode: 'no-cors'}).catch(r =>null);
+      }))
       .then(responses => {
         let allURLsIsGood = true;
-        responses.forEach(item => {if(item.status === 404) allURLsIsGood = false});
+        responses.forEach(item => {if(!item || item.status === 404) allURLsIsGood = false});
         if (allURLsIsGood) {
           setArticle(getItemToSend(formData));
         } else {
           const ERROR_TEXT = 'The resource you specified is not responding!';
           const errors = {_error: 'Data loading error'};
           fields.forEach((item, index) => {
-            if (responses[index].status === 404) errors[item.key] = ERROR_TEXT
+            if (!responses[index] || responses[index].status === 404) errors[item.key] = ERROR_TEXT
           });
           dispatch(globalActionCreators.toggleLoading(false));
           throw new SubmissionError(errors);
@@ -57,6 +59,9 @@ const thunkCreators = {
       .then(response => setChangesAndToggleToMain(
         response.body, dispatch, formData.id ? false : true
       ));
+    }
+    function getErrors(){
+
     }
   },
   deleteNewsItem: id => dispatch => {
