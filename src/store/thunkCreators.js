@@ -34,7 +34,7 @@ const thunkCreators = {
 
     if (fields.length) {
       return Promise.all(fields.map(item => {
-        return fetch(item.data, {method: 'HEAD', mode: 'no-cors'}).catch(r =>null);
+        return fetch(item.data, {method: 'HEAD', mode: 'no-cors'}).catch(r=>null);
       }))
       .then(responses => {
         let allURLsIsGood = true;
@@ -45,7 +45,7 @@ const thunkCreators = {
           const ERROR_TEXT = 'The resource you specified is not responding!';
           const errors = {_error: 'Data loading error'};
           fields.forEach((item, index) => {
-            if (!responses[index] || responses[index].status === 404) errors[item.key] = ERROR_TEXT
+            if (!responses[index] || responses[index].status === 404) errors[item.key] = ERROR_TEXT;
           });
           dispatch(globalActionCreators.toggleLoading(false));
           throw new SubmissionError(errors);
