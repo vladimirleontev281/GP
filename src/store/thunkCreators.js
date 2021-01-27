@@ -26,33 +26,31 @@ const thunkCreators = {
   },
   setNewsItem: formData => dispatch => {
     dispatch(globalActionCreators.toggleLoading(true));
-    const checkingURLs = [];
-    if (formData.smallImage) checkingURLs.push({key: 'smallImage', data: formData.smallImage});
-    if (formData.largeImage) checkingURLs.push({key: 'largeImage', data: formData.largeImage});
-    if (formData.largeImage) checkingURLs.push({key: 'original', data: formData.original});
+    const forChecking = ['smallImage', 'largeImage', 'original'];
+    const fields = forChecking.reduce((accumulator, currentItem) => {
+      if (formData[currentItem]) accumulator.push({key: currentItem, data: formData[currentItem]});
+      return accumulator;
+    }, [])
 
-    if (checkingURLs.length) {
-      return Promise.all(checkingURLs.map(item => fetch(item.data, {
-        method: 'HEAD', 
-        mode: 'no-cors',
-        cache: 'no-cache',
-        credentials: "same-origin",
-      })))
+    if (fields.length) {
+      return Promise.all(fields.map(item => fetch(item.data, {method: 'HEAD', mode: 'no-cors'})))
       .then(responses => {
         let allURLsIsGood = true;
-        responses.forEach(item => {if(!item.ok) allURLsIsGood = false});
-        if (!allURLsIsGood) {
+        responses.forEach(item => {if(item.status === 404) allURLsIsGood = false});
+        if (allURLsIsGood) {
+          setArticle(getItemToSend(formData));
+        } else {
           const ERROR_TEXT = 'The resource you specified is not responding!';
           const errors = {_error: 'Data loading error'};
-          checkingURLs.forEach((item, index) => {
-            if (!responses[index].ok) errors[item.key] = ERROR_TEXT
+          fields.forEach((item, index) => {
+            if (responses[index].status === 404) errors[item.key] = ERROR_TEXT
           });
           dispatch(globalActionCreators.toggleLoading(false));
           throw new SubmissionError(errors);
         }
       });
     }
-    setArticle(getItemToSend(formData))
+    setArticle(getItemToSend(formData));
 
     function setArticle(item) {
       api.setArticle(item)
