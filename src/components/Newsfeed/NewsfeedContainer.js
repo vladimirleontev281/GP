@@ -16,6 +16,7 @@ const mapStateToProps = state => {return {
   search: state.articles.search,
   sortVariant: state.global.sortVariant,
   isMenuOpen: state.global.isMenuOpen,
+  user: {name: 'Alistair', id: 3},
 }};
 
 const NewsfeedContainer = (props) => {

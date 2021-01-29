@@ -37,12 +37,14 @@
   background-color: #ffffff;
   font-size: 16px;
 }
-.Newsfeed .MenuList>li:first-of-type{
-  margin-bottom: 35px;
+.Newsfeed .MenuList>li{
+  padding: 10px 0;
   border-bottom: 1px solid #000000;
 }
+.Newsfeed .MenuList>li:last-of-type{
+  border-bottom: none;
+}
 .Newsfeed .addNewsButton{
-  margin-bottom: 8px;
   font-size: inherit;
 }
 .main{

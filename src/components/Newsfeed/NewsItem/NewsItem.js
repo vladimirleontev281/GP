@@ -5,7 +5,7 @@ import {getDateString} from '../../../utils';
 import styles from './styles.module.css';
 
 const NewsItem = (props) => {
-  const {className, imagePath, prewiev, id, activateModal, date, owner} = props;
+  const {className, imagePath, prewiev, id, activateModal, date, owner, activeUser} = props;
   return <li  className={`${className} ${styles.NewsItem}`}>
     <div className={styles.mainBlock}>
       <div className={styles.contentWraper}>
@@ -14,9 +14,12 @@ const NewsItem = (props) => {
         </div>
         <div className={styles.contentBlock}>
           <div className={styles.details} >
+            {
+            activeUser && activeUser === owner.id ?
             <button className={styles.changeButton} onClick={() => activateModal(id, TO_CHANGE)}>
               To edit a news item click here.
-            </button>
+            </button> : <span></span>
+            }
             <div className={styles.info}>
               <span>{owner.name} {owner.surname}</span>
               <span>{getDateString(date)}</span>
@@ -29,11 +32,14 @@ const NewsItem = (props) => {
     </div>
 
     <div className={styles.buttonBlock}>
+      {
+      activeUser && activeUser === owner.id ?
       <button className={`${styles.changeButton} ${styles.mobile}`} 
               onClick={() => activateModal(id, TO_CHANGE)}
       >
         Edit
-      </button>
+      </button> : <span></span>
+      }
       <button className={styles.toReadMoreButton} onClick={() => activateModal(id, TO_READ)}>
         ... Click here to read more
       </button>

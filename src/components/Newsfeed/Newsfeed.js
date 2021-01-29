@@ -11,26 +11,30 @@ import ModalToRead from './ModalToRead/ModalToRead';
 import FormToChange from './FormToChange/FormToChange';
 import Switcher from '../Switcher/Switcher';
 import Menu from './Menu/Menu';
+import UserSection from './UserSection/UserSection';
 
 const Newsfeed = (props) => {
   const {
-    isLoading, mode, articles, currentArticle, search, sortArray, defaultSort, isMenuOpen,
+    isLoading, mode, articles, currentArticle, user,
+    search, sortArray, defaultSort, isMenuOpen,
     activateModal, deactivateModal, initFormToChange, setMenu,
     setNewsItem, deleteNewsItem, setSearch, clearSearch, setSort,
   } = props;
   const newsArray = search ? search : articles;
 
+  const userBlock = <UserSection user={user}/>
   const addButton = <Button 
     className={styles.addNewsButton} 
     clickHandler={() => activateModal(null, TO_CHANGE)}
   >add news</Button>;
-
   const sortInterface = <Switcher 
     className={styles.Switcher} itemClassName={styles.SwitcherItem}
     descripClassName={styles.SwitcherDescrip}
     name={'Sort'} clickHandler={value => {setSort(value)}}
     items={sortArray} active={defaultSort}
   />
+  let menuArray = [userBlock, addButton, sortInterface];
+  if (!user) menuArray.splice(1, 1);
   
   return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
     <div className={styles.header} >
@@ -40,8 +44,7 @@ const Newsfeed = (props) => {
       />
       <Menu className={styles.Menu} bodyClassName={styles.memuBody} listClassName={styles.MenuList} 
             bgOfCloseButton={'./img/close.png'} isOpen={isMenuOpen}
-            items={[addButton, sortInterface]}
-            clickHandler={setMenu}
+            items={menuArray} clickHandler={setMenu}
       />
     </div>
 
@@ -52,6 +55,7 @@ const Newsfeed = (props) => {
           return <NewsItem  key={item.id} className={styles.NewsItem} prewiev={item.preview}
                             imagePath={getNewsImagePath(item)} id={item.id} date={item.date}
                             owner={item.owner} activateModal={activateModal}
+                            activeUser={user ? user.id : null}
           />
         })
       }
