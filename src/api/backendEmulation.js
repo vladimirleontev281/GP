@@ -8,13 +8,14 @@ export const urlObj = {
 }
 
 const backendEmulation = (url, options) => {
-  let response = {ok: true, body: null};
+  let response = {ok: true, body: null}, articles;
   switch (url) {
     case SERVER + urlObj.getArticles:
-      response.body = baseAPI.get(baseKeys.articles);
+      articles = baseAPI.get(baseKeys.articles);
+      response.body = addOwnersData(baseAPI.get(baseKeys.articles), baseAPI.get(baseKeys.users));
       break;
     case SERVER + urlObj.setArticle:
-      let articles = baseAPI.get(baseKeys.articles);
+      articles = baseAPI.get(baseKeys.articles);
       let newItem = new GetNewArticlesItem(articles, options.body);
       let newArticles = options.method === 'PUT' ?
         articles.map(item => (item.id === newItem.id) ? newItem : item)
@@ -32,7 +33,27 @@ const backendEmulation = (url, options) => {
 }
 export default backendEmulation;
 
+function getUser(users, id) {
+  return users.filter(item => item.id === id)[0];
+}
 
+function addOwnersData(articles, users) {
+  return articles.map(item => {
+    let owner = getUser(users, item.owner);
+    return {...item,
+      owner: {
+        id: owner.id,
+        name: owner.name,
+        surname: owner.surname,
+    }}
+  });
+}
+
+function getLastID(arr) {
+  if (!arr.length) return 0;
+  let sortArray = [...arr].sort((a, b) => {return a.id - b.id});
+  return sortArray[sortArray.length - 1].id;
+}
 
 function GetNewArticlesItem(articles, changedItem) {
   let isNewInstance = !changedItem;
@@ -41,6 +62,7 @@ function GetNewArticlesItem(articles, changedItem) {
 
   return {
     id: (isNewInstance || isNewItem) ? getLastID() + 1 : changedItem.id,
+    owner: (isItemToChange || isNewItem) ? changedItem.owner || null : null,
     date: (isNewInstance || isNewItem) ? +(new Date()) : getDateByID(changedItem.id),
     original: (isItemToChange || isNewItem) ? changedItem.original || null : null,
     name: (isItemToChange || isNewItem) ? changedItem.name || null : null,
@@ -52,12 +74,6 @@ function GetNewArticlesItem(articles, changedItem) {
     }
   };
 
-  function getLastID() {
-    if (!articles.length) return 0;
-    let sortArray = [...articles].sort((a, b) => {return a.id - b.id});
-    return sortArray[sortArray.length - 1].id;
-  }
-
   function getDateByID(id) {
     return articles.reduce((accumulator, currentItem) => {
       accumulator = currentItem.id === id ? currentItem.date : accumulator;
@@ -65,3 +81,4 @@ function GetNewArticlesItem(articles, changedItem) {
     }, null);
   }
 }
+
