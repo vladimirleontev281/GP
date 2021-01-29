@@ -5,7 +5,7 @@ import {getDateString} from '../../../utils';
 import styles from './styles.module.css';
 
 const NewsItem = (props) => {
-  const {className, imagePath, prewiev, id, activateModal, date} = props;
+  const {className, imagePath, prewiev, id, activateModal, date, owner} = props;
   return <li  className={`${className} ${styles.NewsItem}`}>
     <div className={styles.mainBlock}>
       <div className={styles.contentWraper}>
@@ -17,7 +17,11 @@ const NewsItem = (props) => {
             <button className={styles.changeButton} onClick={() => activateModal(id, TO_CHANGE)}>
               To edit a news item click here.
             </button>
-            <span className={styles.date}>{getDateString(date)}</span>
+            <div className={styles.info}>
+              <span>{owner.name} {owner.surname}</span>
+              <span>{getDateString(date)}</span>
+            </div>
+            
           </div>
           <p className={styles.prewiev}>{prewiev}</p>
         </div>
@@ -34,7 +38,10 @@ const NewsItem = (props) => {
         ... Click here to read more
       </button>
     </div>
-    <span className={styles.dateMobile}>{getDateString(date)}</span>
+    <div className={styles.infoMobile}>
+      <span>{owner.name} {owner.surname}</span>
+      <span>{getDateString(date)}</span>
+    </div>
   </li>
 };
 

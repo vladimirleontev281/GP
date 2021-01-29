@@ -51,7 +51,7 @@ const Newsfeed = (props) => {
         newsArray.map(item => {
           return <NewsItem  key={item.id} className={styles.NewsItem} prewiev={item.preview}
                             imagePath={getNewsImagePath(item)} id={item.id} date={item.date}
-                            activateModal={activateModal}
+                            owner={item.owner} activateModal={activateModal}
           />
         })
       }
