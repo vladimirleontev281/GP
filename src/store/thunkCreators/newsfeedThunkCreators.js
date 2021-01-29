@@ -1,10 +1,10 @@
 import { initialize as initializeReduxForm, SubmissionError } from 'redux-form';
-import {getItemToSend} from '../utils';
+import {getItemToSend} from '../../utils';
 import {
   actionCreators as globalActionCreators, NEWSFEED, referenceObjForSort
-} from './reducers/globalReducer';
-import {actionCreators as articlesActionCreators} from './reducers/articlesReducer';
-import api from '../api/api';
+} from '../reducers/globalReducer';
+import {actionCreators as articlesActionCreators} from '../reducers/articlesReducer';
+import api from '../../api/api';
 
 
 const thunkCreators = {
@@ -59,9 +59,6 @@ const thunkCreators = {
       .then(response => setChangesAndToggleToMain(
         response.body, dispatch, formData.id ? false : true
       ));
-    }
-    function getErrors(){
-
     }
   },
   deleteNewsItem: id => dispatch => {

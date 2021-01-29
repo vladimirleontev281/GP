@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 
 import Preloader from '../../Preloader/Preloader';
-import {TextField} from './fields';
+import {TextField} from '../../fieldsToForms';
 import {required, afterTrim} from '../../../validators';
 import ImageBlock from './ImageBlock/ImageBlock';
 import ButtonsBlock from './ButtonsBlock/ButtonsBlock';
@@ -45,17 +45,17 @@ const FormToChange = (props) => {
     <ImageBlock/>
     <div className={styles.detailsBlock} >
       <Field  name={'name'} component={TextField} label={'News headline'} elem={{tagName: 'input'}}
-              validate={[required, afterTrim]}
+              validate={[required, afterTrim]} styles={styles}
       />
       <Field  name={'preview'} component={TextField} label={'News preview'} elem={{tagName: 'input'}}
-              validate={[required, afterTrim]}
+              validate={[required, afterTrim]} styles={styles}
       />
       <Field  name={'original'} component={TextField} label={'Link to original'} 
-              elem={{tagName: 'input'}} validate={[afterTrim]}
+              elem={{tagName: 'input'}} validate={[afterTrim]} styles={styles}
       />
     </div>
     <div className={styles.layoutBlock} >
-      <Field  name={'newsLayout'} component={TextField} label={'News layout'} 
+      <Field  name={'newsLayout'} component={TextField} label={'News layout'} styles={styles}
               elem={{tagName: 'textarea'}} validate={[required, afterTrim]}
       />
     </div>

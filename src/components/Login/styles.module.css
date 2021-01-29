@@ -1,0 +1,72 @@
+.Login{
+  width: 100%;
+  height: auto;
+  max-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: linear-gradient(165deg, black 20%, #453030 40%, #702f2f 60%, rgba(255, 0, 0, 0.8) 100%);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+:root {
+  --animate-delay: 1s;
+}
+.logo{
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 60px;
+  text-transform: uppercase;
+  color: #ffffff;
+  --animate-delay: 0;
+  --animate-duration: 1s;
+}
+
+.loginBlock{
+  width: 500px;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  --animate-delay: 0.2s;
+}
+.header{
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 30px;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+.formBlock{
+  width: 100%;
+  height: auto;
+  /* border: 1px solid black; */
+}
+.field{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* form classes */
+.fieldDescrip{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #ffffff;
+}
+.input{
+  box-sizing: border-box;
+  outline: none;
+  width: 100%;
+  height: 40px;
+  padding: 4px;
+  border-radius: 5px;
+}
+.error{
+  box-shadow: 0 0 8px 2px rgb(233, 97, 97);
+}

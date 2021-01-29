@@ -5,7 +5,7 @@ import api from '../../api/api';
 import {
   sortKeys, referenceObjForSort, DEFAULT_SORT_DESCRIP
 } from '../../store/reducers/globalReducer';
-import thunkCreators from '../../store/thunkCreators';
+import thunkCreators from '../../store/thunkCreators/newsfeedThunkCreators';
 import Newsfeed from './Newsfeed';
 
 const mapStateToProps = state => {return {

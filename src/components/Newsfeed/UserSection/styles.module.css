@@ -18,7 +18,7 @@
   content: "?";
   font-size: inherit;
 }
-.UserSection>p>span:last-of-type{
+.UserSection>p>a{
   font-size: inherit;
   text-decoration: underline;
   color: rgb(65, 65, 196);
