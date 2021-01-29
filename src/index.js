@@ -8,12 +8,12 @@ import api from './api/api';
 
 const rootElement = document.getElementById('root');
 
-api.initBase().then(() => {
-  ReactDOM.render(
-    <React.StrictMode><Provider store={store}><App/></Provider></React.StrictMode>,
-    rootElement
-  );
-})
+api.initBase().then(DBWasInit => {
+  let output = DBWasInit ? 
+    <React.StrictMode><Provider store={store}><App/></Provider></React.StrictMode>
+  : <p>no base. Sorry</p>;
+  ReactDOM.render(output, rootElement);
+});
 
 // for tests
 window.getMyState = () => {
