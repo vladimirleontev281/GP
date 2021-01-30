@@ -8,7 +8,7 @@ export const urlObj = {
 }
 
 const backendEmulation = (url, options) => {
-  let response = {ok: true, body: null}, articles;
+  let response = {ok: true, body: null}, articles, newArticles;
   switch (url) {
     case SERVER + urlObj.getArticles:
       articles = baseAPI.get(baseKeys.articles);
@@ -17,15 +17,16 @@ const backendEmulation = (url, options) => {
     case SERVER + urlObj.setArticle:
       articles = baseAPI.get(baseKeys.articles);
       let newItem = new GetNewArticlesItem(articles, options.body);
-      let newArticles = options.method === 'PUT' ?
+      newArticles = options.method === 'PUT' ?
         articles.map(item => (item.id === newItem.id) ? newItem : item)
       : articles.concat(newItem);
-      response.body = newArticles;
       baseAPI.set(baseKeys.articles, newArticles);
+      response.body = addOwnersData(newArticles, baseAPI.get(baseKeys.users));
       break;
     case SERVER + urlObj.deleteArticle:
-      response.body = baseAPI.get(baseKeys.articles).filter(item => item.id !== options.body.id);
-      baseAPI.set(baseKeys.articles, response.body)
+      newArticles = baseAPI.get(baseKeys.articles).filter(item => item.id !== options.body.id);
+      baseAPI.set(baseKeys.articles, newArticles);
+      response.body = addOwnersData(newArticles, baseAPI.get(baseKeys.users));
       break;
     default: 
   }
@@ -61,7 +62,7 @@ function GetNewArticlesItem(articles, changedItem) {
   let isItemToChange = !isNewInstance && !isNewItem;
 
   return {
-    id: (isNewInstance || isNewItem) ? getLastID() + 1 : changedItem.id,
+    id: (isNewInstance || isNewItem) ? getLastID(articles) + 1 : changedItem.id,
     owner: (isItemToChange || isNewItem) ? changedItem.owner || null : null,
     date: (isNewInstance || isNewItem) ? +(new Date()) : getDateByID(changedItem.id),
     original: (isItemToChange || isNewItem) ? changedItem.original || null : null,

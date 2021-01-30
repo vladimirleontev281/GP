@@ -24,41 +24,43 @@ const thunkCreators = {
   initFormToChange: data => dispatch => {
     dispatch(initializeReduxForm('FormToChange', data));
   },
-  setNewsItem: formData => dispatch => {
+  setNewsItem: (formData, user) => dispatch => {
     dispatch(globalActionCreators.toggleLoading(true));
-    const forChecking = ['smallImage', 'largeImage', 'original'];
-    const fields = forChecking.reduce((accumulator, currentItem) => {
-      if (formData[currentItem]) accumulator.push({key: currentItem, data: formData[currentItem]});
+    const itemInfo = {...formData, owner: user.id};
+    const keysForChecking = ['smallImage', 'largeImage', 'original'];
+    // if the fields for links contain data then we form a verification array
+    const checkingFields = keysForChecking.reduce((accumulator, currentItem) => {
+      if (itemInfo[currentItem]) accumulator.push({key: currentItem, data: itemInfo[currentItem]});
       return accumulator;
     }, [])
 
-    if (fields.length) {
-      return Promise.all(fields.map(item => {
+    if (checkingFields.length) {
+      return Promise.all(checkingFields.map(item => {
         return fetch(item.data, {method: 'HEAD', mode: 'no-cors'}).catch(r=>null);
       }))
       .then(responses => {
-        let allURLsIsGood = true;
-        responses.forEach(item => {if(!item || item.status === 404) allURLsIsGood = false});
-        if (allURLsIsGood) {
-          setArticle(getItemToSend(formData));
-        } else {
-          const ERROR_TEXT = 'The resource you specified is not responding!';
-          const errors = {_error: 'Data loading error'};
-          fields.forEach((item, index) => {
-            if (!responses[index] || responses[index].status === 404) errors[item.key] = ERROR_TEXT;
-          });
-          dispatch(globalActionCreators.toggleLoading(false));
-          throw new SubmissionError(errors);
-        }
+        const fieldsWithErrors = responses.reduce((accumulator, item, index) => {
+          if(!item || item.status === 404) accumulator.push(checkingFields[index].key);
+          return accumulator;
+        }, []);
+        if (fieldsWithErrors.length) throwErrors(fieldsWithErrors);
+        setArticle(getItemToSend(itemInfo));
       });
     }
-    setArticle(getItemToSend(formData));
+    setArticle(getItemToSend(itemInfo));
 
     function setArticle(item) {
       api.setArticle(item)
       .then(response => setChangesAndToggleToMain(
-        response.body, dispatch, formData.id ? false : true
+        response.body, dispatch, item.id ? false : true
       ));
+    }
+    function throwErrors(fieldsWithErrors) {
+      const ERROR_TEXT = 'The resource you specified is not responding!';
+      const errors = {_error: 'Data loading error'};
+      fieldsWithErrors.forEach(item => {errors[item] = ERROR_TEXT});
+      dispatch(globalActionCreators.toggleLoading(false));
+      throw new SubmissionError(errors);
     }
   },
   deleteNewsItem: id => dispatch => {
@@ -88,6 +90,9 @@ const thunkCreators = {
   },
   setMenu: value => dispatch => {
     dispatch(globalActionCreators.setMenuOpen(value));
+  },
+  logout: () => dispatch => {
+    dispatch(globalActionCreators.setUser(null));
   },
 };
 export default thunkCreators;

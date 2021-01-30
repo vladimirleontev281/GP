@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 
-const UserSection = ({className, user, loginClickHandler, logoutClickHandler}) =>{
+const UserSection = ({className, user, logoutClickHandler}) =>{
   return <div className={`${styles.UserSection} ${className}`} >
     {user ? <span>Hi {user.name} :)</span> : null}
     <p>

@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import api from '../../api/api';
 import {
-  sortKeys, referenceObjForSort, DEFAULT_SORT_DESCRIP
+  sortKeys, referenceObjForSort, DEFAULT_SORT_NAME
 } from '../../store/reducers/globalReducer';
 import thunkCreators from '../../store/thunkCreators/newsfeedThunkCreators';
 import Newsfeed from './Newsfeed';
@@ -16,7 +16,7 @@ const mapStateToProps = state => {return {
   search: state.articles.search,
   sortVariant: state.global.sortVariant,
   isMenuOpen: state.global.isMenuOpen,
-  user: {name: 'Alistair', id: 3},
+  user: state.global.user,
 }};
 
 const NewsfeedContainer = (props) => {
@@ -28,8 +28,8 @@ const NewsfeedContainer = (props) => {
 
   const propsToSend = {...props, 
     articles: sortArticles(props.articles, props.sortVariant),
-    sortArray: Object.keys(referenceObjForSort),
-    defaultSort: DEFAULT_SORT_DESCRIP,
+    arrOfSortNames: Object.keys(referenceObjForSort),
+    defaultSortName: DEFAULT_SORT_NAME,
   };
   return <Newsfeed {...propsToSend}/>
 

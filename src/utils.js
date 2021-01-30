@@ -8,6 +8,7 @@ export const getNewsImagePath = (item, options) => {
 
 export const getItemToSend = (formData) => ({
   id: formData.id,
+  owner: formData.owner,
   original: formData.original,
   name: formData.name,
   preview: formData.preview,

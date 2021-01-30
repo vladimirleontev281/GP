@@ -16,24 +16,25 @@ import UserSection from './UserSection/UserSection';
 const Newsfeed = (props) => {
   const {
     isLoading, mode, articles, currentArticle, user,
-    search, sortArray, defaultSort, isMenuOpen,
+    search, arrOfSortNames, arrOfSortName, isMenuOpen,
     activateModal, deactivateModal, initFormToChange, setMenu,
-    setNewsItem, deleteNewsItem, setSearch, clearSearch, setSort,
+    setNewsItem, deleteNewsItem, setSearch, clearSearch, setSort, 
+    logout, 
   } = props;
   const newsArray = search ? search : articles;
 
-  const userBlock = <UserSection user={user}/>
+  const userBlock = <UserSection user={user} logoutClickHandler={logout}/>
   const addButton = <Button 
-    className={styles.addNewsButton} 
-    clickHandler={() => activateModal(null, TO_CHANGE)}
+    className={styles.addNewsButton} clickHandler={() => activateModal(null, TO_CHANGE)}
   >add news</Button>;
   const sortInterface = <Switcher 
     className={styles.Switcher} itemClassName={styles.SwitcherItem}
     descripClassName={styles.SwitcherDescrip}
     name={'Sort'} clickHandler={value => {setSort(value)}}
-    items={sortArray} active={defaultSort}
+    items={arrOfSortNames} active={arrOfSortName}
   />
-  let menuArray = [userBlock, addButton, sortInterface];
+
+  const menuArray = [userBlock, addButton, sortInterface];
   if (!user) menuArray.splice(1, 1);
   
   return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
@@ -43,42 +44,38 @@ const Newsfeed = (props) => {
               setSearch={setSearch} clearSearch={clearSearch}
       />
       <Menu className={styles.Menu} bodyClassName={styles.memuBody} listClassName={styles.MenuList} 
-            bgOfCloseButton={'./img/close.png'} isOpen={isMenuOpen}
-            items={menuArray} clickHandler={setMenu}
+            bgOfCloseButton={'./img/close.png'} isOpen={isMenuOpen} items={menuArray} 
+            clickHandler={setMenu}
       />
     </div>
 
     { mode === NEWSFEED ? 
       <ul className={styles.main} >
-      {
-        newsArray.map(item => {
-          return <NewsItem  key={item.id} className={styles.NewsItem} prewiev={item.preview}
-                            imagePath={getNewsImagePath(item)} id={item.id} date={item.date}
-                            owner={item.owner} activateModal={activateModal}
-                            activeUser={user ? user.id : null}
-          />
-        })
-      }
+        {newsArray.map(item => {
+        return <NewsItem  key={item.id} className={styles.NewsItem} prewiev={item.preview}
+                          imagePath={getNewsImagePath(item)} id={item.id} date={item.date}
+                          owner={item.owner} activateModal={activateModal}
+                          activeUser={user ? user.id : null}
+        />
+        })}
       </ul>
     : null
     }
     
-    {
-      mode === TO_READ ? 
-        <ModalToRead  className={styles.ModalToRead} newsItem={currentArticle} 
-                      handlerToClose={deactivateModal}
-        /> 
-        :  null
+    { mode === TO_READ ? 
+      <ModalToRead  className={styles.ModalToRead} newsItem={currentArticle} 
+                    handlerToClose={deactivateModal}
+      /> 
+    : null
     }
 
-    {
-      mode === TO_CHANGE ? 
-        <FormToChange newsItem={currentArticle} handlerToClose={deactivateModal}
-                      onSubmit={setNewsItem} initForm={initFormToChange}
-                      className={styles.FormToChange} isLoading={isLoading} 
-                      handlerToDelete={deleteNewsItem}
-        /> 
-      : null
+    {mode === TO_CHANGE ? 
+      <FormToChange newsItem={currentArticle} handlerToClose={deactivateModal}
+                    onSubmit={e => setNewsItem(e, user)} initForm={initFormToChange}
+                    className={styles.FormToChange} isLoading={isLoading} 
+                    handlerToDelete={deleteNewsItem}
+      /> 
+    : null
     }
 
     {isLoading && mode === NEWSFEED ? <Preloader className={styles.Preloader} absolute /> : null}

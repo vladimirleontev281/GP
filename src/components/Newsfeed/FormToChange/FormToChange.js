@@ -15,7 +15,7 @@ import animate from '../../animation/styles.module.css';
 const FormToChange = (props) => {
   // input data
   const {
-    className, newsItem, isLoading, 
+    className, newsItem, isLoading,
     initForm, handlerToClose, handlerToDelete, handleSubmit,
   } = props;
 

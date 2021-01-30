@@ -41,6 +41,7 @@ export default {
         break;
       default: return null;
     }
+    setBase(base);
   },
 }
 

@@ -5,7 +5,7 @@ import {getDateString} from '../../../utils';
 import styles from './styles.module.css';
 
 const NewsItem = (props) => {
-  const {className, imagePath, prewiev, id, activateModal, date, owner, activeUser} = props;
+  const {className, id, imagePath, prewiev, owner, date, activeUser, activateModal} = props;
   return <li  className={`${className} ${styles.NewsItem}`}>
     <div className={styles.mainBlock}>
       <div className={styles.contentWraper}>
