@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 
-import Button from '../Button/Button';
+import Button from '../../Button/Button';
 import styles from './styles.module.css';
 
 const Search = (props) => {

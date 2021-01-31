@@ -26,7 +26,8 @@ const FormToChange = (props) => {
 
   // for init form
   const initFormData = {
-    id, name, preview, original, newsLayout, 
+    id, name: name ? name : '', preview: preview ? preview : '', 
+    original: original ? original : '', newsLayout: newsLayout ? newsLayout : '', 
     smallImage: newsItem ? newsItem.images.small : null,
     largeImage: newsItem ? newsItem.images.large : null,
   };
@@ -45,18 +46,20 @@ const FormToChange = (props) => {
     <ImageBlock/>
     <div className={styles.detailsBlock} >
       <Field  name={'name'} component={TextField} label={'News headline'} elem={{tagName: 'input'}}
-              validate={[required, afterTrim]} styles={styles}
+              validate={[required, afterTrim]} className={styles.textField} styles={styles}
       />
       <Field  name={'preview'} component={TextField} label={'News preview'} elem={{tagName: 'input'}}
-              validate={[required, afterTrim]} styles={styles}
+              validate={[required, afterTrim]} className={styles.textField} styles={styles}
       />
       <Field  name={'original'} component={TextField} label={'Link to original'} 
-              elem={{tagName: 'input'}} validate={[afterTrim]} styles={styles}
+              elem={{tagName: 'input'}} validate={[afterTrim]} className={styles.textField} 
+              styles={styles}
       />
     </div>
     <div className={styles.layoutBlock} >
       <Field  name={'newsLayout'} component={TextField} label={'News layout'} styles={styles}
               elem={{tagName: 'textarea'}} validate={[required, afterTrim]}
+              className={styles.textField} 
       />
     </div>
     <ButtonsBlock id={id} handlerToClose={handlerToClose} handlerToDelete={handlerToDelete}/>

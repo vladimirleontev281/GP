@@ -10,7 +10,7 @@ const Menu = (props) =>{
   const activationClass = `${isOpen ? styles.open : ''}`;
 
   return <div className={`${commonClasses} ${activationClass}`} >
-    <button className={styles.openButton} 
+    <button className={`unselectable ${styles.openButton}`} 
             onClick={e => {if (isOpen) {e.preventDefault()} else {clickHandler(true)}}}
     >
       <div className={styles.decorLine} />

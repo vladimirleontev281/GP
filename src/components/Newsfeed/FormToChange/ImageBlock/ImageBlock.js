@@ -8,10 +8,12 @@ import styles from '../styles.module.css';
 const ImageBlock = props => {
   return <div className={styles.imageBlock} >
     <Field  name={'smallImage'} component={TextField} label={'Path of small image of News'} 
-            elem={{tagName: 'input'}} validate={[afterTrim]} styles={styles}
+            elem={{tagName: 'input'}} validate={[afterTrim]} className={styles.textField} 
+            styles={styles}
     />
     <Field  name={'largeImage'} component={TextField} label={'Path of large image of News'} 
-            elem={{tagName: 'input'}} validate={[afterTrim]} styles={styles}
+            elem={{tagName: 'input'}} validate={[afterTrim]} className={styles.textField} 
+            styles={styles}
     />
   </div>
 };

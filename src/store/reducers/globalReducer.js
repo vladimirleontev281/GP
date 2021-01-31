@@ -16,7 +16,7 @@ const init = {
   isLoading: true,
   sortVariant: sortKeys.dateDown,
   isMenuOpen: false,
-  user: {name: 'Alistair', surname: "Green", id: 3},
+  user: null,
 };
 
 const actionTypes = {

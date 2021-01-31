@@ -1,9 +1,10 @@
 import { initialize as initializeReduxForm, SubmissionError } from 'redux-form';
 import {getItemToSend} from '../../utils';
 import {
-  actionCreators as globalActionCreators, NEWSFEED, referenceObjForSort
+  actionCreators as globalActionCreators, NEWSFEED, referenceObjForSort, DEFAULT_SORT_NAME
 } from '../reducers/globalReducer';
 import {actionCreators as articlesActionCreators} from '../reducers/articlesReducer';
+import {actionCreator as setRedirect} from '../reducers/redirectReducer';
 import api from '../../api/api';
 
 
@@ -60,6 +61,7 @@ const thunkCreators = {
       const errors = {_error: 'Data loading error'};
       fieldsWithErrors.forEach(item => {errors[item] = ERROR_TEXT});
       dispatch(globalActionCreators.toggleLoading(false));
+      debugger;
       throw new SubmissionError(errors);
     }
   },
@@ -71,9 +73,9 @@ const thunkCreators = {
   setSearch: ({searchString, articles}) => dispatch => {
     dispatch(globalActionCreators.toggleLoading());
     const serchArray = (searchString) ? 
-      articles.filter(item => item.name && item.name.indexOf(searchString) !== -1 ||
-                              item.preview && item.preview.indexOf(searchString) !== -1 ||
-                              item.newsLayout && item.newsLayout.indexOf(searchString) !== -1
+      articles.filter(item => (item.name && item.name.indexOf(searchString) !== -1) ||
+                              (item.preview && item.preview.indexOf(searchString) !== -1) ||
+                              (item.newsLayout && item.newsLayout.indexOf(searchString) !== -1)
       )
     : null;
     dispatch(articlesActionCreators.setSearchArticles(serchArray));
@@ -91,8 +93,26 @@ const thunkCreators = {
   setMenu: value => dispatch => {
     dispatch(globalActionCreators.setMenuOpen(value));
   },
-  logout: () => dispatch => {
-    dispatch(globalActionCreators.setUser(null));
+  logout: (e, redirect) => dispatch => {
+    e.preventDefault();
+    dispatch(globalActionCreators.setMenuOpen(false));
+    dispatch(globalActionCreators.toggleLoading(true));
+    api.logout().then(r => {
+      dispatch(globalActionCreators.setUser(null));
+      if (redirect) {
+        dispatch(setRedirect(redirect));
+      } else {
+        dispatch(globalActionCreators.toggleLoading(false));
+      }
+    });
+  },
+  resetState: () => dispatch => {
+    dispatch(globalActionCreators.changeMode(NEWSFEED));
+    dispatch(articlesActionCreators.setCurrentArticle(null));
+    dispatch(initializeReduxForm('Search', {inputField: ''}));
+    dispatch(articlesActionCreators.setSearchArticles(null));
+    dispatch(globalActionCreators.setSort(referenceObjForSort[DEFAULT_SORT_NAME]));
+    dispatch(globalActionCreators.setMenuOpen(false));
   },
 };
 export default thunkCreators;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../Button/Button';
+import Button from '../../../Button/Button';
 
 import styles from '../styles.module.css';
 
@@ -15,9 +15,7 @@ const ButtonsBlock = ({id, handlerToClose, handlerToDelete, others, ...props}) =
             </Button>
       : null
     }
-    <Button className={styles.submitButton} isSubmit others={others}>
-      {id ? 'change' : 'create'}
-    </Button>
+    <Button className={styles.submitButton} isSubmit>{id ? 'change' : 'create'}</Button>
   </div>
 };
 

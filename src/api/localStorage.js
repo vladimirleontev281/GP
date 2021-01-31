@@ -1,5 +1,5 @@
 const BASE_KEY = 'NEWSFEED';
-const VERSION = '1.0.1';
+const VERSION = '1.0.2';
 export const KEYS = {
   articles: 'ARTICLES',
   users: 'USERS',

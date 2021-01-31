@@ -5,7 +5,7 @@ import {NEWSFEED, TO_READ, TO_CHANGE} from '../../store/reducers/globalReducer';
 import {getNewsImagePath} from '../../utils'
 import Preloader from '../Preloader/Preloader';
 import Search from './Search/Search';
-import Button from './Button/Button';
+import Button from '../Button/Button';
 import NewsItem from './NewsItem/NewsItem';
 import ModalToRead from './ModalToRead/ModalToRead';
 import FormToChange from './FormToChange/FormToChange';
@@ -16,14 +16,17 @@ import UserSection from './UserSection/UserSection';
 const Newsfeed = (props) => {
   const {
     isLoading, mode, articles, currentArticle, user,
-    search, arrOfSortNames, arrOfSortName, isMenuOpen,
+    search, arrOfSortNames, defaultSortName, isMenuOpen,
     activateModal, deactivateModal, initFormToChange, setMenu,
     setNewsItem, deleteNewsItem, setSearch, clearSearch, setSort, 
-    logout, 
+    logout, setRedirect,
   } = props;
   const newsArray = search ? search : articles;
 
-  const userBlock = <UserSection user={user} logoutClickHandler={logout}/>
+  const userBlock = <UserSection  
+    user={user} logoutClickHandler={logout} closeMenu={() => {setMenu(false)}}
+    setRedirect={setRedirect}
+  />
   const addButton = <Button 
     className={styles.addNewsButton} clickHandler={() => activateModal(null, TO_CHANGE)}
   >add news</Button>;
@@ -31,7 +34,7 @@ const Newsfeed = (props) => {
     className={styles.Switcher} itemClassName={styles.SwitcherItem}
     descripClassName={styles.SwitcherDescrip}
     name={'Sort'} clickHandler={value => {setSort(value)}}
-    items={arrOfSortNames} active={arrOfSortName}
+    items={arrOfSortNames} active={defaultSortName}
   />
 
   const menuArray = [userBlock, addButton, sortInterface];
@@ -39,7 +42,7 @@ const Newsfeed = (props) => {
   
   return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
     <div className={styles.header} >
-      <span className={styles.logo} >newsfeed</span>
+      <span className={`unselectable ${styles.logo}`} >newsfeed</span>
       <Search className={styles.Search} articles={articles} 
               setSearch={setSearch} clearSearch={clearSearch}
       />

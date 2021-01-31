@@ -1,7 +1,7 @@
 import initDefaultBase from './initDefaultBase';
 import backendEmulation, {urlObj as URLs, SERVER} from './backendEmulation';
 
-const REQUEST_DELAY = 2000;
+const REQUEST_DELAY = 1000;
 
 export default {
   initBase: () => initDefaultBase(),
@@ -13,6 +13,18 @@ export default {
   deleteArticle: id => makeRequest(
     SERVER + URLs.deleteArticle,
     {method: 'DELETE', body: {id}}
+  ),
+  checkUser: () => makeRequest(
+    SERVER + URLs.checkUserData,
+    {method: 'GET', credentials: 'include'}
+  ),
+  signIn: formData => makeRequest(
+    SERVER + URLs.signIn,
+    {method: 'POST', body: formData}
+  ),
+  logout: () => makeRequest(
+    SERVER + URLs.logout,
+    {method: 'GET', credentials: 'include'}
   ),
 };
 

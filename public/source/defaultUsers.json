@@ -4,27 +4,27 @@
     "name": "Catherine",
     "surname": "White",
     "mail": "Cat.White@gmail.com",
-    "pass": ""
+    "pass": "MTExMTE="
   },
   {
     "id": 2,
     "name": "Richard",
     "surname": "Black",
     "mail": "Ritchie.Black@gmail.com",
-    "pass": ""
+    "pass": "MjIyMjI="
   },
   {
     "id": 3,
     "name": "Alistair",
     "surname": "Green",
     "mail": "Alistair.Green@gmail.com",
-    "pass": ""
+    "pass": "MzMzMzM="
   },
   {
     "id": 4,
     "name": "Cynthia",
     "surname": "Gray",
     "mail": "Cynthia.Gray.com",
-    "pass": ""
+    "pass": "NDQ0NDQ="
   }
 ]

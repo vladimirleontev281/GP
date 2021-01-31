@@ -1,36 +1,38 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux';
+import { compose } from 'redux';
 
+import withRedirect from '../../hoc/withRedirect';
 import api from '../../api/api';
 import {
-  sortKeys, referenceObjForSort, DEFAULT_SORT_NAME
+  actionCreators as globalActionCreators, sortKeys, referenceObjForSort, DEFAULT_SORT_NAME
 } from '../../store/reducers/globalReducer';
+import {actionCreator as setRedirect} from '../../store/reducers/redirectReducer';
 import thunkCreators from '../../store/thunkCreators/newsfeedThunkCreators';
 import Newsfeed from './Newsfeed';
 
 const mapStateToProps = state => {return {
+  mainPath: '/',
   isLoading: state.global.isLoading,
   mode: state.global.mode,
   articles: state.articles.articles,
   currentArticle: state.articles.currentArticle,
   search: state.articles.search,
   sortVariant: state.global.sortVariant,
+  arrOfSortNames: Object.keys(referenceObjForSort),
+  defaultSortName: DEFAULT_SORT_NAME,
   isMenuOpen: state.global.isMenuOpen,
   user: state.global.user,
+  redirect: state.redirect,
 }};
 
-const NewsfeedContainer = (props) => {
-  useEffect(() => {
-    api.getArticles().then(response => {
-      if (response.ok && response.body) props.setBaseItems(response.body);
-    })
-  }, []);
+const NewsfeedContainer = ({setBaseItems, setUser, resetState, ...props}) => {
+  useEffect(() => {api.getArticles().then(response => {
+    if (response.ok && response.body) setBaseItems(response.body);
+  })}, []);
+  useEffect(() => {api.checkUser().then(response => setUser(response.body));}, []);
 
-  const propsToSend = {...props, 
-    articles: sortArticles(props.articles, props.sortVariant),
-    arrOfSortNames: Object.keys(referenceObjForSort),
-    defaultSortName: DEFAULT_SORT_NAME,
-  };
+  const propsToSend = {...props, articles: sortArticles(props.articles, props.sortVariant)};
   return <Newsfeed {...propsToSend}/>
 
   function sortArticles(articles, sortVariant) {
@@ -41,4 +43,11 @@ const NewsfeedContainer = (props) => {
     }
   }
 }
-export default connect(mapStateToProps, {...thunkCreators})(NewsfeedContainer);
+export default compose(
+  connect(mapStateToProps, {
+    setUser: globalActionCreators.setUser, 
+    setRedirect,
+    ...thunkCreators
+  }),
+  withRedirect
+)(NewsfeedContainer);
