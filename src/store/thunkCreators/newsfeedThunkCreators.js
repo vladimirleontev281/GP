@@ -22,9 +22,6 @@ const thunkCreators = {
     dispatch(globalActionCreators.changeMode(NEWSFEED));
     dispatch(articlesActionCreators.setCurrentArticle(null));
   },
-  initFormToChange: data => dispatch => {
-    dispatch(initializeReduxForm('FormToChange', data));
-  },
   setNewsItem: (formData, user) => dispatch => {
     dispatch(globalActionCreators.toggleLoading(true));
     const itemInfo = {...formData, owner: user.id};

@@ -1,4 +1,4 @@
-.Login{
+.Authentication{
   position: relative;
   width: 100%;
   height: auto;
@@ -26,7 +26,7 @@
   --animate-duration: 1s;
 }
 
-.loginBlock{
+.authBlock{
   width: 500px;
   height: auto;
   display: flex;
@@ -45,20 +45,23 @@
 .formBlock{
   width: 100%;
   height: auto;
-  /* border: 1px solid black; */
+  margin-bottom: 20px;
 }
 .textField{
   width: 100%;
   margin-bottom: 20px;
   font-size: 18px;
 }
-.optionsBlock{
+.optionsBlock, .buttonsBlock{
   width: 100%;
   height: auto;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+}
+.buttonsBlock{
+  justify-content: flex-end;
 }
 .checkboxContainer{
   width: 100%;
@@ -69,9 +72,12 @@
   align-items: center;
   font-size: 16px;
 }
-.submitButton{
+.submitButton, .backButton{
   width: 120px;
   background-color: rgb(255, 255, 255);
+}
+.backButton{
+  margin-right: 20px;
 }
 .footer{
   margin-bottom: 0;
@@ -132,7 +138,7 @@
 
 
 @media(max-width: 1280px) {
-  .Login{
+  .Authentication{
     border-left: none;
     border-right: none;
   }

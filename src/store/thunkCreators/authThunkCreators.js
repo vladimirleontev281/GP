@@ -4,10 +4,7 @@ import {actionCreator as setRedirect} from '../reducers/redirectReducer';
 import api from '../../api/api';
 
 const thunkCreators = {
-  initLoginForm: data => dispatch => {
-    dispatch(initializeReduxForm('LoginForm', data));
-  },
-  signIn: (formData) => dispatch => {
+  signIn: formData => dispatch => {
     dispatch(globalActionCreators.toggleLoading(true));
     return new Promise((resolve, reject) => {
       api.signIn(formData).then(response => {
@@ -22,6 +19,10 @@ const thunkCreators = {
         }
       })
     });
+  },
+  signUp: formData => dispatch => {
+    dispatch(globalActionCreators.toggleLoading(true));
+    console.log(formData);
   },
 };
 export default thunkCreators;

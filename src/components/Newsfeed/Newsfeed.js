@@ -17,7 +17,7 @@ const Newsfeed = (props) => {
   const {
     isLoading, mode, articles, currentArticle, user,
     search, arrOfSortNames, defaultSortName, isMenuOpen,
-    activateModal, deactivateModal, initFormToChange, setMenu,
+    activateModal, deactivateModal, initForm, setMenu,
     setNewsItem, deleteNewsItem, setSearch, clearSearch, setSort, 
     logout, setRedirect,
   } = props;
@@ -74,7 +74,7 @@ const Newsfeed = (props) => {
 
     {mode === TO_CHANGE ? 
       <FormToChange newsItem={currentArticle} handlerToClose={deactivateModal}
-                    onSubmit={e => setNewsItem(e, user)} initForm={initFormToChange}
+                    onSubmit={e => setNewsItem(e, user)} initForm={initForm}
                     className={styles.FormToChange} isLoading={isLoading} 
                     handlerToDelete={deleteNewsItem}
       /> 

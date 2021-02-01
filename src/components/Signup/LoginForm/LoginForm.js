@@ -1,9 +1,8 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { NavLink } from 'react-router-dom';
-import {TextField, CheckBox} from '../../fieldsToForms';
-import {required, afterTrim} from '../../../validators';
-import Button from '../../Button/Button';
+import {TextField, CheckBox} from '../../../src/components/fieldsToForms';
+import {required, afterTrim} from '../../../src/validators';
+import Button from '../../../src/components/Button/Button';
 import styles from '../styles.module.css';
 
 const LoginForm = ({handleSubmit, ...props}) => {
@@ -22,10 +21,6 @@ const LoginForm = ({handleSubmit, ...props}) => {
       />
       <Button className={styles.submitButton} isSubmit>sign in</Button>
     </div>
-    {/* <p className={styles.footer}>
-      <span>If you don't have an account, you can </span>
-      <NavLink to={'/signup'}>sign up here</NavLink>
-    </p> */}
   </form>
 }
 const ReduxLoginForm = reduxForm({form: 'LoginForm'})(LoginForm);

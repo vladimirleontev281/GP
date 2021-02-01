@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { compose } from 'redux';
 
@@ -9,10 +10,10 @@ import {
 } from '../../store/reducers/globalReducer';
 import {actionCreator as setRedirect} from '../../store/reducers/redirectReducer';
 import thunkCreators from '../../store/thunkCreators/newsfeedThunkCreators';
+import commonThunkCreators from '../../store/thunkCreators/commonThunkCreators';
 import Newsfeed from './Newsfeed';
 
 const mapStateToProps = state => {return {
-  mainPath: '/',
   isLoading: state.global.isLoading,
   mode: state.global.mode,
   articles: state.articles.articles,
@@ -47,7 +48,9 @@ export default compose(
   connect(mapStateToProps, {
     setUser: globalActionCreators.setUser, 
     setRedirect,
-    ...thunkCreators
+    ...thunkCreators,
+    ...commonThunkCreators,
   }),
+  withRouter,
   withRedirect
 )(NewsfeedContainer);

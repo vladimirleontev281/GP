@@ -37,7 +37,7 @@ const FormToChange = (props) => {
     styles.FormToChange, className, animate.animate__animated, animate.animate__fadeIn
   ].join(' ');
 
-  useEffect(() => {initForm(initFormData);}, []);
+  useEffect(() => {initForm('FormToChange', initFormData);}, []);
 
   return <form className={classes} onSubmit={handleSubmit} >
     {isLoading ? <Preloader absolute /> : null}
