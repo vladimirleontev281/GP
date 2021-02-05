@@ -49,10 +49,11 @@ export const getPathname = (postfix, path) => {
 export const getPostfix = routs => {
   const pathname = window.location.pathname;
   if (pathname === '/') return '';
-  const pathArr = pathname.split('/');
+  const pathArr = pathname.split('/').filter(item => item !== '');
   const routsNames = Object.keys(routs).map(item => routs[item].substr(1));
-  const postfix = pathArr.filter(item => !routsNames.includes(item));
-  return postfix.length > 1 ? postfix.join('/') : '';
+  const postfixArr = pathArr.filter(item => !routsNames.includes(item));
+  const postfix = postfixArr.length ? postfix.join('/') : '';
+  return postfix;
 };
 
 // export const getTimestampOfDate = (dateStrig, timeString) => {

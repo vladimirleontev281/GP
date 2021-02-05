@@ -11,6 +11,7 @@ const MY_ROUTS = {
 const POSTFIX = getPostfix(MY_ROUTS);
 
 const Root = props => {
+  debugger
   return <div className="App">
     {props.children}
   </div>
