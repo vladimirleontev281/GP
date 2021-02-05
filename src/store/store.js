@@ -4,10 +4,12 @@ import {reducer as formReducer} from 'redux-form';
 
 import globalReducer from './reducers/globalReducer';
 import articlesReducer from './reducers/articlesReducer';
+import redirectReducer from './reducers/redirectReducer';
 
 const reducers = combineReducers({
   articles: articlesReducer,
   global: globalReducer,
+  redirect: redirectReducer,
   form: formReducer,
 });
 

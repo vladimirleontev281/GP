@@ -1,0 +1,188 @@
+.Authentication{
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  background: linear-gradient(165deg, black 20%, #453030 40%, #702f2f 60%, rgba(255, 0, 0, 0.8) 100%);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+:root {
+  --animate-delay: 1s;
+}
+.logo{
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 60px;
+  text-transform: uppercase;
+  color: #ffffff;
+  --animate-delay: 0;
+  --animate-duration: 1s;
+}
+
+.authBlock{
+  width: 500px;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  --animate-delay: 0.2s;
+}
+.header{
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 30px;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+.formBlock{
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.textField{
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+.optionsBlock, .buttonsBlock{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.buttonsBlock{
+  justify-content: flex-end;
+}
+.checkboxContainer{
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 16px;
+}
+.submitButton, .backButton{
+  width: 120px;
+  background-color: rgb(255, 255, 255);
+}
+.backButton{
+  margin-right: 20px;
+}
+.footer{
+  margin-bottom: 0;
+  font-size: 17px;
+}
+.footer>span{
+  margin-right: 5px;
+  font-size: inherit;
+  color: #ffffff;
+}
+.footer>a{
+  font-size: inherit;
+  color: rgb(142, 142, 224);
+}
+.Preloader{
+  z-index: 150;
+}
+
+/* form classes */
+.textField .fieldDescrip{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  font-size: inherit;
+  color: #ffffff;
+}
+.checkboxContainer .fieldDescrip{
+  margin: 0;
+  font-size: inherit;
+  line-height: 100%;
+  color: #ffffff;
+  cursor: pointer;
+}
+.input{
+  box-sizing: border-box;
+  outline: none;
+  width: 100%;
+  height: 40px;
+  padding: 4px;
+  border-radius: 5px;
+}
+.checkbox{
+  width: 15px;
+  height: 15px;
+  margin: 0 15px 0 0;
+  cursor: pointer;
+}
+.label{
+  margin-right: 15px;
+}
+.error{
+  /* box-shadow: 0 0 8px 2px rgb(233, 97, 97); */
+  box-shadow: 0 0 8px 2px rgb(231, 224, 224);
+}
+
+
+
+@media(max-width: 1280px) {
+  .Authentication{
+    border-left: none;
+    border-right: none;
+  }
+}
+
+@media(max-width: 768px) {
+  .textField{
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  .textField .fieldDescrip{
+    margin-bottom: 7px;
+  }
+  .input{
+    height: 30px;
+  }
+  .closeButton, .deleteButton, .submitButton{
+    font-size: 11px;
+    width: 120px;
+  }
+}
+
+@media(max-width: 480px) {
+  .FormToChange{
+    border: none;
+  }
+  .textField{
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  .label{
+    margin-bottom: 3px;
+  }
+  .input{
+    height: 25px;
+  }
+  .closeButton, .deleteButton, .submitButton{
+    width: 80px;
+    height: 25px;
+  }
+  .deleteButton>span:first-of-type, .closeButton>span:first-of-type{
+    display: none;
+  }
+  .deleteButton>span:last-of-type, .closeButton>span:last-of-type{
+    display: inline;
+  }
+}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 
 import {getNewsImagePath} from '../../../utils';
-import Button from '../Button/Button';
+import Button from '../../Button/Button';
 
 import styles from './styles.module.css';
 import animate from '../../animation/styles.module.css';

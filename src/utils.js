@@ -8,6 +8,7 @@ export const getNewsImagePath = (item, options) => {
 
 export const getItemToSend = (formData) => ({
   id: formData.id,
+  owner: formData.owner,
   original: formData.original,
   name: formData.name,
   preview: formData.preview,
@@ -38,6 +39,21 @@ export const getDateString = (timestamp) => {
   let time = `${dateObj.hours}:${dateObj.minutes}`;
   return `${calendarDate}  ${time}`;
 }
+
+export const getPathname = (postfix, path) => {
+  return postfix ?
+    path ? path.split(postfix)[1] : window.location.pathname.split(postfix)[1]
+  : path ? path : window.location.pathname;
+}
+
+export const getPostfix = routs => {
+  const pathname = window.location.pathname;
+  if (pathname === '/') return '';
+  const pathArr = pathname.split('/');
+  const routsNames = Object.keys(routs).map(item => routs[item].substr(1));
+  const postfix = pathArr.filter(item => !routsNames.includes(item));
+  return postfix.length > 1 ? postfix.join('/') : '';
+};
 
 // export const getTimestampOfDate = (dateStrig, timeString) => {
 //   let date = dateStrig.split('.');

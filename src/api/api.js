@@ -1,28 +1,31 @@
-import baseAPI from './localStorage';
+import initDefaultBase from './initDefaultBase';
 import backendEmulation, {urlObj as URLs, SERVER} from './backendEmulation';
 
-const REQUEST_DELAY = 2000;
+const REQUEST_DELAY = 1000;
 
 export default {
-  initBase: () => {
-    return !baseAPI.isInit() ? 
-      fetch('./source/source.json')
-      .then(response => response.json())
-      .then(articles => {
-        baseAPI.create({articles});
-        return true;
-      })
-    : new Promise(resolve => {resolve(true)})
-  },
+  initBase: () => initDefaultBase(),
   getArticles: () => makeRequest(SERVER + URLs.getArticles),
-  setArticle: item => makeRequest(SERVER + URLs.setArticle, {
-      method: item.id ? 'PUT' : 'POST',
-      body: item
-  }),
-  deleteArticle: id => makeRequest(SERVER + URLs.deleteArticle, {
-      method: 'DELETE',
-      body: {id}
-  }),
+  setArticle: item => makeRequest(
+    SERVER + URLs.setArticle, 
+    {method: item.id ? 'PUT' : 'POST', body: item}
+  ),
+  deleteArticle: id => makeRequest(
+    SERVER + URLs.deleteArticle,
+    {method: 'DELETE', body: {id}}
+  ),
+  checkUser: () => makeRequest(
+    SERVER + URLs.checkUserData,
+    {method: 'GET', credentials: 'include'}
+  ),
+  signIn: formData => makeRequest(
+    SERVER + URLs.signIn,
+    {method: 'POST', body: formData}
+  ),
+  logout: () => makeRequest(
+    SERVER + URLs.logout,
+    {method: 'GET', credentials: 'include'}
+  ),
 };
 
 function makeRequest(url, options) {

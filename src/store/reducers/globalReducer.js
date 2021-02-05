@@ -9,19 +9,22 @@ export const referenceObjForSort = {
   'date up': sortKeys.dateUp,
   'date down': sortKeys.dateDown,
 };
+export const DEFAULT_SORT_NAME = 'date down';
+
 const init = {
   mode: NEWSFEED,
   isLoading: true,
   sortVariant: sortKeys.dateDown,
   isMenuOpen: false,
+  user: null,
 };
-export const DEFAULT_SORT_DESCRIP = 'date down';
 
 const actionTypes = {
   changeMode: 'CHANGE-MODE',
   toggleLoading: 'TOGGLE-LOADING',
   setSort: 'SET-SORT',
   setMenuOpen: 'SET-MENU-OPEN',
+  setUser: 'SET-USER',
 };
 
 export const actionCreators = {
@@ -29,6 +32,7 @@ export const actionCreators = {
   toggleLoading: value => {return {type: actionTypes.toggleLoading, value}},
   setSort: value => {return {type: actionTypes.setSort, value}},
   setMenuOpen: value => {return {type: actionTypes.setMenuOpen, value}},
+  setUser: value => {return {type: actionTypes.setUser, value}},
 };
 
 const globalReducer = (state = init, action) => {
@@ -41,6 +45,7 @@ const globalReducer = (state = init, action) => {
     case actionTypes.setMenuOpen: return {...state, 
       isMenuOpen: (action.value === undefined) ? !state.isMenuOpen : action.value
     };
+    case actionTypes.setUser: return {...state, user: action.value};
     default: return state;
   }
 };

@@ -1,7 +1,28 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NewsfeedContainer from './components/Newsfeed/NewsfeedContainer';
+import AuthContainer from './components/Authentication/AuthContainer';
+import { getPostfix } from "./utils";
 
-function App() {
-  return <div className="App"><NewsfeedContainer /></div>;
+const MY_ROUTS = {
+  login: '/login',
+  signup: '/signup'
+};
+const POSTFIX = getPostfix(MY_ROUTS);
+
+function App({postfix, ...props}) {
+  return <div className="App">
+    <Switch>
+      <Route  exact path={`${POSTFIX}/`} 
+              render={() => <NewsfeedContainer postfix={POSTFIX}/>}
+      />
+      <Route  path={`${POSTFIX}/login`} 
+              render={() => <AuthContainer postfix={POSTFIX}/>}
+      />
+      <Route  path={`${POSTFIX}/signup`} 
+              render={() => <AuthContainer postfix={POSTFIX}/>}
+      />
+    </Switch>
+  </div>;
 }
 export default App;

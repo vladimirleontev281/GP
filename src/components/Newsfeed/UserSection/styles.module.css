@@ -1,0 +1,26 @@
+.UserSection{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.UserSection>span{
+  font-size: inherit;
+}
+.UserSection>p{
+  font-size: inherit;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.UserSection>p::after{
+  content: "?";
+  font-size: inherit;
+}
+.UserSection>p>a{
+  font-size: inherit;
+  text-decoration: underline;
+  color: rgb(65, 65, 196);
+  cursor: pointer;
+}
