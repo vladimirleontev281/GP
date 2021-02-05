@@ -40,20 +40,20 @@ export const getDateString = (timestamp) => {
   return `${calendarDate}  ${time}`;
 }
 
-export const getPathname = (postfix, path) => {
-  return postfix ?
-    path ? path.split(postfix)[1] : window.location.pathname.split(postfix)[1]
+export const getPathname = (prefix, path) => {
+  return prefix ?
+    path ? path.split(prefix)[1] : window.location.pathname.split(prefix)[1]
   : path ? path : window.location.pathname;
 }
 
-export const getPostfix = routs => {
+export const getRoutePrefix = routs => {
   const pathname = window.location.pathname;
   if (pathname === '/') return '';
   const pathArr = pathname.split('/').filter(item => item !== '');
   const routsNames = Object.keys(routs).map(item => routs[item].substr(1));
-  const postfixArr = pathArr.filter(item => !routsNames.includes(item));
-  const postfix = postfixArr.length ? postfixArr.join('/') : '';
-  return postfix;
+  const prefixArr = pathArr.filter(item => !routsNames.includes(item));
+  const prefix = prefixArr.length ? '/' + prefixArr.join('/') : '';
+  return prefix;
 };
 
 // export const getTimestampOfDate = (dateStrig, timeString) => {

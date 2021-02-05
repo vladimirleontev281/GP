@@ -17,7 +17,7 @@ const mapStateToProps = state => {return {
 }};
 
 const AuthContainer = ({initForm, toggleLoading, ...props}) => {
-  const locationName = getPathname(props.postfix, props.location.pathname);
+  const locationName = getPathname(props.prefix, props.location.pathname);
   useEffect(() => {toggleLoading(false)}, []);
   useEffect(() => {
     if (locationName === '/login') {

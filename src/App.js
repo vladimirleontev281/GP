@@ -1,35 +1,29 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import NewsfeedContainer from './components/Newsfeed/NewsfeedContainer';
 import AuthContainer from './components/Authentication/AuthContainer';
-import { getPostfix } from "./utils";
+import { getRoutePrefix } from "./utils";
 
 const MY_ROUTS = {
   login: '/login',
   signup: '/signup'
 };
-const POSTFIX = getPostfix(MY_ROUTS);
+const PREFIX = getRoutePrefix(MY_ROUTS);
 
-const Root = props => {
-  debugger
+function App(props) {
+  // debugger
   return <div className="App">
-    {props.children}
-  </div>
-}
-
-function App({postfix, ...props}) {
-  return <Route path={`${POSTFIX}`} render={() => <Root {...props} />} >
     <Switch>
-      <Route  exact path={'/'} 
-              render={() => <NewsfeedContainer postfix={POSTFIX}/>}
+      <Route  exact path={`${PREFIX}/`} 
+              render={() => <NewsfeedContainer prefix={PREFIX} />}
       />
-      <Route  path={'/login'} 
-              render={() => <AuthContainer postfix={POSTFIX}/>}
+      <Route  path={`${PREFIX}/login`} 
+              render={() => <AuthContainer prefix={PREFIX} />}
       />
-      <Route  path={'/signup'} 
-              render={() => <AuthContainer postfix={POSTFIX}/>}
+      <Route  path={`${PREFIX}/signup`} 
+              render={() => <AuthContainer prefix={PREFIX} />}
       />
     </Switch>
-  </Route>
+  </div>
 }
 export default App;

@@ -8,7 +8,7 @@ import Button from '../../Button/Button';
 import styles from './styles.module.css';
 import animate from '../../animation/styles.module.css';
 
-const ModalToRead = ({className, newsItem, handlerToClose}) => {
+const ModalToRead = ({className, newsItem, handlerToClose, ...props}) => {
   const {name, newsLayout, original} = newsItem;
   const classes = [
     styles.ModalToRead, className, animate.animate__animated, animate.animate__zoomIn
@@ -28,7 +28,9 @@ const ModalToRead = ({className, newsItem, handlerToClose}) => {
       <div className={styles.centerDecorBox}>
         <div  className={styles.leftDecor}>vertical decorative element</div>
         <div className={styles.imageBox}>
-          <img className={styles.image} src={getNewsImagePath(newsItem, {size: 'large'})}/>
+          <img  className={styles.image} 
+                src={getNewsImagePath(newsItem, {size: 'large', prefix: props.prefix})}
+          />
         </div>
         <div  className={styles.rightDecor}>vertical decorative element</div>
       </div>
