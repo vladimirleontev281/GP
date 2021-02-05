@@ -46,15 +46,15 @@ export const getPathname = (prefix, path) => {
   : path ? path : window.location.pathname;
 }
 
-export const getRoutePrefix = routs => {
-  const pathname = window.location.pathname;
-  if (pathname === '/') return '';
-  const pathArr = pathname.split('/').filter(item => item !== '');
-  const routsNames = Object.keys(routs).map(item => routs[item].substr(1));
-  const prefixArr = pathArr.filter(item => !routsNames.includes(item));
-  const prefix = prefixArr.length ? '/' + prefixArr.join('/') : '';
-  return prefix;
-};
+// export const getRoutePrefix = routs => {
+//   const pathname = window.location.pathname;
+//   if (pathname === '/') return '';
+//   const pathArr = pathname.split('/').filter(item => item !== '');
+//   const routsNames = Object.keys(routs).map(item => routs[item].substr(1));
+//   const prefixArr = pathArr.filter(item => !routsNames.includes(item));
+//   const prefix = prefixArr.length ? '/' + prefixArr.join('/') : '';
+//   return prefix;
+// };
 
 // export const getTimestampOfDate = (dateStrig, timeString) => {
 //   let date = dateStrig.split('.');
