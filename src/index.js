@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
 import store from './store/store';
 import {Provider} from 'react-redux';
 import './index.css';
@@ -11,7 +10,7 @@ const rootElement = document.getElementById('root');
 
 api.initBase().then(DBWasInit => {
   let output = DBWasInit ? 
-    <React.StrictMode><Router><Provider store={store}><App /></Provider></Router></React.StrictMode>
+    <React.StrictMode><Provider store={store}><App /></Provider></React.StrictMode>
   : <p>no base. Sorry</p>;
   ReactDOM.render(output, rootElement);
 });
