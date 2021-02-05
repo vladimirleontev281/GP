@@ -17,7 +17,7 @@ const Root = props => {
 }
 
 function App({postfix, ...props}) {
-  return <Route path={`${POSTFIX}`} component={Root}>
+  return <Route path={`${POSTFIX}`} render={() => <Root {...props} />} >
     <Switch>
       <Route  exact path={'/'} 
               render={() => <NewsfeedContainer postfix={POSTFIX}/>}
