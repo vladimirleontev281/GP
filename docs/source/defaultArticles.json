@@ -1,6 +1,7 @@
 [
   {
     "id": 8,
+    "owner": 3,
     "date": 1590249540000,
     "original": "https://google.com",
     "name": "Lorem ipsum dolor sit amet consectetur adipiscing elit!",
@@ -13,6 +14,7 @@
   },
   {
     "id": 2,
+    "owner": 2,
     "date": 1579298820000,
     "original": "https://google.com",
     "name": "Velit morbi viverra tortor ex suscipit massa litora!",
@@ -25,6 +27,7 @@
   },
   {
     "id": 4,
+    "owner": 4,
     "date": 1583509620000,
     "original": "https://google.com",
     "name": "Est mi convallis diam maecenas adipiscing lacus nascetur aptent!",
@@ -37,6 +40,7 @@
   },
   {
     "id": 1,
+    "owner": 1,
     "date": 1578429000000,
     "original": "https://google.com",
     "name": "Class cursus bibendum platea!",
@@ -49,6 +53,7 @@
   },
   {
     "id": 5,
+    "owner": 1,
     "date": 1585602900000,
     "original": "https://google.com",
     "name": "Class cursus bibendum platea!",
@@ -61,6 +66,7 @@
   },
   {
     "id": 7,
+    "owner": 2,
     "date": 1586938080000,
     "original": "https://google.com",
     "name": "Velit morbi viverra tortor ex suscipit massa litora!",
@@ -73,6 +79,7 @@
   },
     {
     "id": 3,
+    "owner": 3,
     "date": 1581401880000,
     "original": "https://google.com",
     "name": "Lorem ipsum dolor sit amet consectetur adipiscing elit!",
@@ -85,6 +92,7 @@
   },
   {
     "id": 9,
+    "owner": 4,
     "date": 1591135200000,
     "original": "https://google.com",
     "name": "Est mi convallis diam maecenas adipiscing lacus nascetur aptent!",
@@ -97,6 +105,7 @@
   },
   {
     "id": 10,
+    "owner": 1,
     "date": 1593446580000,
     "original": "https://google.com",
     "name": "Class cursus bibendum platea!",
@@ -109,6 +118,7 @@
   },
   {
     "id": 11,
+    "owner": 2,
     "date": 1593446640000,
     "original": "https://google.com",
     "name": "Velit morbi viverra tortor ex suscipit massa litora!",
@@ -121,6 +131,7 @@
   },
   {
     "id": 12,
+    "owner": 3,
     "date": 1593783000000,
     "original": "https://google.com",
     "name": "Lorem ipsum dolor sit amet consectetur adipiscing elit!",
@@ -133,6 +144,7 @@
   },
   {
     "id": 13,
+    "owner": 4,
     "date": 1597398120000,
     "original": "https://google.com",
     "name": "Est mi convallis diam maecenas adipiscing lacus nascetur aptent!",
@@ -145,6 +157,7 @@
   },
   {
     "id": 14,
+    "owner": 1,
     "date": 1601130060000,
     "original": "https://google.com",
     "name": "Class cursus bibendum platea!",
@@ -157,6 +170,7 @@
   },
   {
     "id": 15,
+    "owner": 2,
     "date": 1601522100000,
     "original": "https://google.com",
     "name": "Velit morbi viverra tortor ex suscipit massa litora!",
@@ -169,6 +183,7 @@
   },
   {
     "id": 16,
+    "owner": 3,
     "date": 1602892920000,
     "original": "https://google.com",
     "name": "Lorem ipsum dolor sit amet consectetur adipiscing elit!",
@@ -181,6 +196,7 @@
   },
   {
     "id": 17,
+    "owner": 4,
     "date": 1604865240000,
     "original": "https://google.com",
     "name": "Est mi convallis diam maecenas adipiscing lacus nascetur aptent!",
@@ -193,6 +209,7 @@
   },
   {
     "id": 18,
+    "owner": 1,
     "date": 1608239280000,
     "original": "https://google.com",
     "name": "Class cursus bibendum platea!",
@@ -205,6 +222,7 @@
   },
   {
     "id": 19,
+    "owner": 2,
     "date": 1609451400000,
     "original": "https://google.com",
     "name": "Velit morbi viverra tortor ex suscipit massa litora!",
@@ -217,6 +235,7 @@
   },
   {
     "id": 20,
+    "owner": 3,
     "date": 1609452000000,
     "original": "https://google.com",
     "name": "Lorem ipsum dolor sit amet consectetur adipiscing elit!",
@@ -229,6 +248,7 @@
   },
   {
     "id": 22,
+    "owner": 4,
     "date": 1610119020000,
     "original": "https://google.com",
     "name": "Est mi convallis diam maecenas adipiscing lacus nascetur aptent!",

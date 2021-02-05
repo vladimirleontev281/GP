@@ -1,12 +1,11 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {TextField} from '../../fieldsToForms';
-import {required, afterTrim} from '../../../validators';
+import {required, afterTrim, email} from '../../../validators';
 import Button from '../../Button/Button';
 import styles from '../styles.module.css';
 
 const SignUpForm = ({handleSubmit, setRedirect, ...props}) => {
-  debugger
   return <form className={styles.formBlock} onSubmit={handleSubmit}>
     <Field  name={'name'} component={TextField} label={'Enter your name'} 
             elem={{tagName: 'input'}} validate={[required, afterTrim]} 
@@ -17,7 +16,7 @@ const SignUpForm = ({handleSubmit, setRedirect, ...props}) => {
             className={styles.textField} styles={styles}
     />
     <Field  name={'mail'} component={TextField} label={'Enter your email'} 
-            elem={{tagName: 'input'}} validate={[required, afterTrim]} 
+            elem={{tagName: 'input'}} validate={[required, afterTrim, email]} 
             className={styles.textField} styles={styles}
     />
     <Field  name={'pass'} component={TextField} label={'Enter your password'} 

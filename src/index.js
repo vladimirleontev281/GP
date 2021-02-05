@@ -11,10 +11,11 @@ const rootElement = document.getElementById('root');
 
 api.initBase().then(DBWasInit => {
   let output = DBWasInit ? 
-    <React.StrictMode><Router><Provider store={store}><App/></Provider></Router></React.StrictMode>
+    <React.StrictMode><Router><Provider store={store}><App /></Provider></Router></React.StrictMode>
   : <p>no base. Sorry</p>;
   ReactDOM.render(output, rootElement);
 });
+
 
 // for tests
 window.getMyState = () => {

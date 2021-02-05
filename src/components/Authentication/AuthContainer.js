@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import { compose } from 'redux';
 
+import { getPathname } from "../../utils";
 import {actionCreators as globalActionCreators} from '../../store/reducers/globalReducer';
 import {actionCreator as setRedirect} from '../../store/reducers/redirectReducer';
 import withRedirect from '../../hoc/withRedirect';
@@ -16,7 +17,7 @@ const mapStateToProps = state => {return {
 }};
 
 const AuthContainer = ({initForm, toggleLoading, ...props}) => {
-  const locationName = props.location.pathname;
+  const locationName = getPathname(props.postfix, props.location.pathname);
   useEffect(() => {toggleLoading(false)}, []);
   useEffect(() => {
     if (locationName === '/login') {
@@ -25,7 +26,7 @@ const AuthContainer = ({initForm, toggleLoading, ...props}) => {
       initForm('SignUpForm', {name: '', surname: '', mail: '', pass: '', confirm: ''});
     }
   }, [locationName]);
-  return <Auth {...props} />;
+  return <Auth locationName={locationName} {...props} />;
 }
 
 export default compose(

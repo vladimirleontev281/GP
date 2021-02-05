@@ -58,7 +58,6 @@ const thunkCreators = {
       const errors = {_error: 'Data loading error'};
       fieldsWithErrors.forEach(item => {errors[item] = ERROR_TEXT});
       dispatch(globalActionCreators.toggleLoading(false));
-      debugger;
       throw new SubmissionError(errors);
     }
   },

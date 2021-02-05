@@ -5,8 +5,7 @@ import styles from './styles.module.css';
 import animate from '../animation/styles.module.css';
 import SignUpForm from './SignUpForm/SignUpForm';
 
-const Auth = ({isLoading, signIn, signUp, setRedirect, ...props}) => {
-  const locationName = props.location.pathname;
+const Auth = ({isLoading, locationName, signIn, signUp, setRedirect, ...props}) => {
   const logoAnimation = `${animate.animate__fadeIn} ${animate.animate__slower}`;
   const logoClasses = `${styles.logo} ${animate.animate__animated} ${logoAnimation}`;
   const animationType = locationName === '/login' ? 
@@ -26,7 +25,7 @@ const Auth = ({isLoading, signIn, signUp, setRedirect, ...props}) => {
           <LoginForm onSubmit={signIn} />
           <p className={styles.footer}>
             <span>If you don't have an account, you can </span>
-            <a href={'/signup'} onClick={e=>{e.preventDefault(); setRedirect('/signup')}}>
+            <a href={'./signup'} onClick={e=>{e.preventDefault(); setRedirect('/signup')}}>
               sign up here
             </a>
           </p>
