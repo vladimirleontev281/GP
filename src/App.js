@@ -2,26 +2,25 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import NewsfeedContainer from './components/Newsfeed/NewsfeedContainer';
 import AuthContainer from './components/Authentication/AuthContainer';
-import { getRoutePrefix } from "./utils";
+// import { getRoutePrefix } from "./utils";
 
 const MY_ROUTS = {
   login: '/login',
   signup: '/signup'
 };
-const PREFIX = getRoutePrefix(MY_ROUTS);
+// const PREFIX = getRoutePrefix(MY_ROUTS);
 
 function App(props) {
-  // debugger
   return <div className="App">
     <Switch>
-      <Route  exact path={`${PREFIX}/`} 
-              render={() => <NewsfeedContainer prefix={PREFIX} />}
+      <Route  exact path={'/'} 
+              render={() => <NewsfeedContainer />}
       />
-      <Route  path={`${PREFIX}/login`} 
-              render={() => <AuthContainer prefix={PREFIX} />}
+      <Route  path={MY_ROUTS.login} 
+              render={() => <AuthContainer />}
       />
-      <Route  path={`${PREFIX}/signup`} 
-              render={() => <AuthContainer prefix={PREFIX} />}
+      <Route  path={MY_ROUTS.signup} 
+              render={() => <AuthContainer />}
       />
     </Switch>
   </div>

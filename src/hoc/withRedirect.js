@@ -7,7 +7,7 @@ const withAuthRedirect = InputComponent => props => {
   if (props.redirect) {
     //  withRouter from react-router-dom;
     if (pathname !== props.redirect) {
-      return <Redirect to={`${props.prefix}${props.redirect}`}/>
+      return <Redirect to={`${props.prefix ? props.prefix : ''}${props.redirect}`}/>
     } else {
       props.setRedirect(null);
     }
