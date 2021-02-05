@@ -13,13 +13,13 @@ const POSTFIX = getPostfix(MY_ROUTS);
 function App({postfix, ...props}) {
   return <div className="App">
     <Switch>
-      <Route  exact path={`${POSTFIX}/`} 
+      <Route  exact path={`${POSTFIX ? POSTFIX : '/'}`} 
               render={() => <NewsfeedContainer postfix={POSTFIX}/>}
       />
-      <Route  path={`${POSTFIX}/login`} 
+      <Route  path={`${POSTFIX ? POSTFIX + '/login' : '/login'}`} 
               render={() => <AuthContainer postfix={POSTFIX}/>}
       />
-      <Route  path={`${POSTFIX}/signup`} 
+      <Route  path={`${POSTFIX ? POSTFIX + '/login' : '/signup'}`} 
               render={() => <AuthContainer postfix={POSTFIX}/>}
       />
     </Switch>
