@@ -52,7 +52,7 @@ export const getPostfix = routs => {
   const pathArr = pathname.split('/').filter(item => item !== '');
   const routsNames = Object.keys(routs).map(item => routs[item].substr(1));
   const postfixArr = pathArr.filter(item => !routsNames.includes(item));
-  const postfix = postfixArr.length ? postfix.join('/') : '';
+  const postfix = postfixArr.length ? postfixArr.join('/') : '';
   return postfix;
 };
 
