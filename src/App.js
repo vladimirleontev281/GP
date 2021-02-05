@@ -10,19 +10,25 @@ const MY_ROUTS = {
 };
 const POSTFIX = getPostfix(MY_ROUTS);
 
-function App({postfix, ...props}) {
+const Root = props => {
   return <div className="App">
+    {props.children}
+  </div>
+}
+
+function App({postfix, ...props}) {
+  return <Route path={`${POSTFIX}`} component={Root}>
     <Switch>
-      <Route  exact path={`${POSTFIX ? POSTFIX : '/'}`} 
+      <Route  exact path={'/'} 
               render={() => <NewsfeedContainer postfix={POSTFIX}/>}
       />
-      <Route  path={`${POSTFIX ? POSTFIX + '/login' : '/login'}`} 
+      <Route  path={'/login'} 
               render={() => <AuthContainer postfix={POSTFIX}/>}
       />
-      <Route  path={`${POSTFIX ? POSTFIX + '/login' : '/signup'}`} 
+      <Route  path={'/signup'} 
               render={() => <AuthContainer postfix={POSTFIX}/>}
       />
     </Switch>
-  </div>;
+  </Route>
 }
 export default App;
