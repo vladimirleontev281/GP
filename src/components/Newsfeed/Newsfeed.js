@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './styles.module.css';
+import styles from './Newsfeed.module.css';
 import {NEWSFEED, TO_READ, TO_CHANGE} from '../../store/reducers/globalReducer';
 import {getNewsImagePath} from '../../utils'
 import Preloader from '../Preloader/Preloader';

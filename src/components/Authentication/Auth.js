@@ -1,8 +1,8 @@
 import React from 'react';
 import Preloader from '../Preloader/Preloader';
 import LoginForm from './LoginForm/LoginForm';
-import styles from './styles.module.css';
-import animate from '../animation/styles.module.css';
+import styles from './Authentication.module.css';
+import animate from '../animation/animation.module.css';
 import SignUpForm from './SignUpForm/SignUpForm';
 
 const Auth = ({isLoading, locationName, signIn, signUp, setRedirect, ...props}) => {

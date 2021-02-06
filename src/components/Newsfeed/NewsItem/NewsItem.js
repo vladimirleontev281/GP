@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {TO_READ, TO_CHANGE} from '../../../store/reducers/globalReducer';
 import {getDateString} from '../../../utils';
-import styles from './styles.module.css';
+import styles from './NewsItem.module.css';
 
 const NewsItem = (props) => {
   const {className, id, imagePath, prewiev, owner, date, activeUser, activateModal} = props;

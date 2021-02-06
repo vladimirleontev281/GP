@@ -5,8 +5,8 @@ import ReactHtmlParser from 'react-html-parser';
 import {getNewsImagePath} from '../../../utils';
 import Button from '../../Button/Button';
 
-import styles from './styles.module.css';
-import animate from '../../animation/styles.module.css';
+import styles from './ModalToRead.module.css';
+import animate from '../../animation/animation.module.css';
 
 const ModalToRead = ({className, newsItem, handlerToClose, ...props}) => {
   const {name, newsLayout, original} = newsItem;

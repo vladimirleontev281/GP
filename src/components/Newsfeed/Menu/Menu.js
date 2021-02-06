@@ -1,6 +1,6 @@
 import React, { useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
-import styles from './styles.module.css';
+import styles from './Menu.module.css';
 
 const Menu = (props) =>{
   const {
@@ -8,10 +8,10 @@ const Menu = (props) =>{
   } = props;
   const commonClasses = `${styles.Menu} ${className} `;
   const activationClass = `${isOpen ? styles.open : ''}`;
-  const menuBodyRef = useRef(null);
 
+  const menuRef = useRef(null);
   const onBlurHandler = e => {
-    if (!menuBodyRef.current.contains(e.target)) clickHandler(false);
+    if (!menuRef.current.contains(e.target)) clickHandler(false);
   };
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const Menu = (props) =>{
     }
   }, [isOpen])
 
-  return <div className={`${commonClasses} ${activationClass}`} ref={menuBodyRef}>
+  return <div className={`${commonClasses} ${activationClass}`} ref={menuRef}>
     <button className={`unselectable ${styles.openButton}`} 
             onClick={e => {if (isOpen) {e.preventDefault()} else {clickHandler(true)}}}
     >

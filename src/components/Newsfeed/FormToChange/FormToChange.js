@@ -8,8 +8,8 @@ import {required, afterTrim} from '../../../validators';
 import ImageBlock from './ImageBlock/ImageBlock';
 import ButtonsBlock from './ButtonsBlock/ButtonsBlock';
 
-import styles from './styles.module.css';
-import animate from '../../animation/styles.module.css';
+import styles from './FormToChange.module.css';
+import animate from '../../animation/animation.module.css';
 
 
 const FormToChange = (props) => {

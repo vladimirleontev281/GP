@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import {TextField, CheckBox} from '../../fieldsToForms';
 import {required, afterTrim, email} from '../../../validators';
 import Button from '../../Button/Button';
-import styles from '../styles.module.css';
+import styles from '../Authentication.module.css';
 
 const LoginForm = ({handleSubmit}) => {
   return <form className={styles.formBlock} onSubmit={handleSubmit}>

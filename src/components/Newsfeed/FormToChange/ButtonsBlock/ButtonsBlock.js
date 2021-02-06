@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '../../../Button/Button';
 
-import styles from '../styles.module.css';
+import styles from '../FormToChange.module.css';
 
 
 const ButtonsBlock = ({id, handlerToClose, handlerToDelete, others, ...props}) => {

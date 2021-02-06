@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import styles from './styles.module.css';
+import styles from './UserSection.module.css';
 
 const UserSection = ({className, user, logoutClickHandler, closeMenu, setRedirect}) =>{
   const redirectTo = (e, path) => {e.preventDefault(); closeMenu(); setRedirect(path)}

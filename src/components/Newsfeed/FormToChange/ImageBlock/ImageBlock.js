@@ -3,7 +3,7 @@ import { Field } from 'redux-form';
 import {TextField} from '../../../fieldsToForms';
 import {afterTrim} from '../../../../validators';
 
-import styles from '../styles.module.css';
+import styles from '../FormToChange.module.css';
 
 const ImageBlock = props => {
   return <div className={styles.imageBlock} >
