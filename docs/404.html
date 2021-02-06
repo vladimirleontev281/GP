@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript">
-    // (function(){
-    //   var myRoutes = ['login', 'signup'];
-    //   var locationArr = window.location.pathname.split('/');
-    //   var location = '/' + locationArr[locationArr.length - 1];
-    //   sessionStorage.setItem('unRedirect', location);
-    //   var goTo = '/' + getRoutePrefix;
-    //   window.location.href = goTo;
+    (function(){
+      var myRoutes = ['login', 'signup'];
+      var locationArr = window.location.pathname.split('/');
+      var location = '/' + locationArr[locationArr.length - 1];
+      sessionStorage.setItem('unRedirect', location);
+      var goTo = '/' + getRoutePrefix(myRoutes);
+      window.location.href = goTo;
 
-    //   function getRoutePrefix (routs) {
-    //     var pathname = window.location.pathname;
-    //     if (pathname === '/') return '';
-    //     var prefixArr = pathname.split('/').filter(item => item !== '').filter(item => !routs.includes(item));
-    //     return prefixArr.length ? prefixArr.join('/') : '';
-    //   }
-    // })()
+      function getRoutePrefix (routs) {
+        var pathname = window.location.pathname;
+        if (pathname === '/') return '';
+        var prefixArr = pathname.split('/').filter(item => item !== '').filter(item => !routs.includes(item));
+        return prefixArr.length ? prefixArr.join('/') : '';
+      }
+    })()
   </script>
 </head>
 <body>
