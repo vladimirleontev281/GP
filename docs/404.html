@@ -10,7 +10,7 @@
       var location = '/' + locationArr[locationArr.length - 1];
       sessionStorage.setItem('unRedirect', location);
       var goTo = '/' + getRoutePrefix;
-      window.location.href = goTo;
+      // window.location.href = goTo;
 
       function getRoutePrefix (routs) {
         var pathname = window.location.pathname;
