@@ -22,6 +22,10 @@ export default {
     SERVER + URLs.signIn,
     {method: 'POST', body: formData}
   ),
+  signUp: formData => makeRequest(
+    SERVER + URLs.signUp,
+    {method: 'POST', body: formData}
+  ),
   logout: () => makeRequest(
     SERVER + URLs.logout,
     {method: 'GET', credentials: 'include'}

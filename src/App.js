@@ -8,11 +8,10 @@ const MY_ROUTS = {
   login: '/login',
   signup: '/signup'
 };
-
 const PREFIX = getRoutePrefix(MY_ROUTS);
 
-function App(props) {
-  return <div className="App">
+const App = props => (
+  <div className="App">
     <Router basename = {`${PREFIX}`} >
       <Switch>
         <Route  exact path={'/'} 
@@ -27,5 +26,5 @@ function App(props) {
       </Switch>
     </Router>
   </div>
-}
+);
 export default App;

@@ -14,17 +14,18 @@ import Auth from './Auth';
 const mapStateToProps = state => {return {
   isLoading: state.global.isLoading,
   redirect: state.redirect,
+  loginForm: state.form.LoginForm,
+  signUpForm: state.form.SignUpForm,
 }};
 
 const AuthContainer = ({initForm, toggleLoading, ...props}) => {
   const locationName = getPathname(props.prefix, props.location.pathname);
   useEffect(() => {toggleLoading(false)}, []);
   useEffect(() => {
-    if (locationName === '/login') {
-      initForm('LoginForm', {mail: '', pass: '', remember: false});
-    } else {
-      initForm('SignUpForm', {name: '', surname: '', mail: '', pass: '', confirm: ''});
-    }
+    let initFormData = locationName === '/login' ? 
+      {form: 'LoginForm', fields: {mail: '', pass: '', remember: false}}
+    : {form: 'SignUpForm', fields: {name: '', surname: '', mail: '', pass: '', confirm: ''}};
+    initForm(initFormData.form, initFormData.fields);
   }, [locationName]);
   return <Auth locationName={locationName} {...props} />;
 }

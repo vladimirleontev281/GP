@@ -1,28 +1,77 @@
-import { initialize as initializeReduxForm, SubmissionError } from 'redux-form';
+import { clearSubmitErrors, SubmissionError } from 'redux-form';
 import {actionCreators as globalActionCreators} from '../reducers/globalReducer';
 import {actionCreator as setRedirect} from '../reducers/redirectReducer';
 import api from '../../api/api';
 
+const ERRORS_TEXT = {
+  'login-err': {
+    _error: 'Authentication error',
+    text: 'Invalid username or password',
+  },
+  'confirm-pass-err': {
+    _error: 'Password entry error',
+    text: 'The entered values in the "password" field and in the "confirm password" field do not match',
+  },
+};
+
 const thunkCreators = {
   signIn: formData => dispatch => {
-    dispatch(globalActionCreators.toggleLoading(true));
-    return new Promise((resolve, reject) => {
-      api.signIn(formData).then(response => {
-        if (!response.body.errors.length) {
-          dispatch(setRedirect('/'));
-          resolve(undefined);
-        } else {
-          const ERROR_TEXT = response.body.errors[0];
-          const errors = {_error: ERROR_TEXT, mail: ERROR_TEXT, pass: ERROR_TEXT};
-          dispatch(globalActionCreators.toggleLoading(false));
-          reject(new SubmissionError(errors));
-        }
-      })
-    });
+    startSubmitValidation(dispatch, 'LoginForm')
+    return api.signIn(formData)
+    .then(response => {
+      if (!response.body.errors.length) {
+        dispatch(setRedirect('/'));
+      } else {
+        throwError(dispatch, {type: 'login-err'});
+      }
+    })
   },
   signUp: formData => dispatch => {
-    dispatch(globalActionCreators.toggleLoading(true));
-    console.log(formData);
+    startSubmitValidation(dispatch, 'SignUpForm')
+    return new Promise(resolve => {
+      if (formData.pass !== formData.confirm) {
+        throwError(dispatch, {type: 'confirm-pass-err'})
+      } else {
+        resolve(api.signUp(formData))
+      }
+    })
+    .then(response => {
+      if (!response.body.errors.length) {
+        dispatch(setRedirect('/'));
+      } else {
+        throwError(dispatch, {type: 'signup-server-err', errors: response.body.errors})
+      }
+    });
   },
 };
 export default thunkCreators;
+
+function startSubmitValidation(dispatch, form) {
+  dispatch(clearSubmitErrors(form));
+  dispatch(globalActionCreators.toggleLoading(true));
+}
+
+function throwError(dispatch, options) {
+  dispatch(globalActionCreators.toggleLoading(false));
+  throw new SubmissionError(getErrors(options));
+}
+
+function getErrors(options) {
+  let errors = {...ERRORS_TEXT[options.type]};
+  switch (options.type) {
+    case 'login-err':
+      errors.mail = errors.pass = errors.text;
+      break;
+    case 'confirm-pass-err':
+      errors.pass = errors.confirm = errors.text;
+      break;
+    case 'signup-server-err':
+      options.errors.forEach(item => {
+        errors[item.key] = item.text;
+      });
+      break;
+    default: return null;
+  }
+  delete errors.text;
+  return errors;
+}

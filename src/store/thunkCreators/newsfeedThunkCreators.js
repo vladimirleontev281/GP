@@ -84,10 +84,8 @@ const thunkCreators = {
     dispatch(globalActionCreators.toggleLoading());
   },
   setSort: value => dispatch => {
+    dispatch(globalActionCreators.setMenuOpen(false));
     dispatch(globalActionCreators.setSort(referenceObjForSort[value]));
-  },
-  setMenu: value => dispatch => {
-    dispatch(globalActionCreators.setMenuOpen(value));
   },
   logout: (e, redirect) => dispatch => {
     e.preventDefault();

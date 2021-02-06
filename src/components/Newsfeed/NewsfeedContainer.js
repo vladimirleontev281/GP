@@ -47,6 +47,7 @@ const NewsfeedContainer = ({setBaseItems, setUser, resetState, ...props}) => {
 export default compose(
   connect(mapStateToProps, {
     setUser: globalActionCreators.setUser, 
+    setMenu: globalActionCreators.setMenuOpen,
     setRedirect,
     ...thunkCreators,
     ...commonThunkCreators,

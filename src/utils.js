@@ -19,10 +19,8 @@ export const getItemToSend = (formData) => ({
   }
 });
 
-
 export const getDateString = (timestamp) => {
   let date = new Date(+timestamp);
-
   let month = date.getMonth() + 1;
   let day = date.getDate();
   let hours = date.getHours();
@@ -34,7 +32,6 @@ export const getDateString = (timestamp) => {
     hours: hours < 10 ? `0${hours}` : `${hours}`,
     minutes: minutes < 10 ? `0${minutes}` : `${minutes}`,
   };
-
   let calendarDate = `${dateObj.day}.${dateObj.month}.${dateObj.year}`;
   let time = `${dateObj.hours}:${dateObj.minutes}`;
   return `${calendarDate}  ${time}`;
