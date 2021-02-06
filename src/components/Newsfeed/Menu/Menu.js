@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.css';
 
@@ -8,8 +8,21 @@ const Menu = (props) =>{
   } = props;
   const commonClasses = `${styles.Menu} ${className} `;
   const activationClass = `${isOpen ? styles.open : ''}`;
+  const menuBodyRef = useRef(null);
 
-  return <div className={`${commonClasses} ${activationClass}`} >
+  const onBlurHandler = e => {
+    if (!menuBodyRef.current.contains(e.target)) clickHandler(false);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('click', onBlurHandler);
+    } else {
+      document.removeEventListener('click', onBlurHandler)
+    }
+  }, [isOpen])
+
+  return <div className={`${commonClasses} ${activationClass}`} ref={menuBodyRef}>
     <button className={`unselectable ${styles.openButton}`} 
             onClick={e => {if (isOpen) {e.preventDefault()} else {clickHandler(true)}}}
     >
@@ -18,13 +31,13 @@ const Menu = (props) =>{
       <div className={styles.decorLine} />
     </button>
 
-    <div className={`${styles.memuBody} ${bodyClassName} `}>
-        <button className={styles.closeButton} onClick={() => {clickHandler(false)}}>
-          <img className={styles.background} src={bgOfCloseButton}/>
-        </button>
-        <ul className={`${styles.list} ${listClassName} `}>
-          {items.map((item, index) => <li key={index} className={styles.item}>{item}</li>)}
-        </ul>
+    <div  className={`${styles.memuBody} ${bodyClassName} `} >
+      <button className={styles.closeButton} onClick={() => {clickHandler(false)}}>
+        <img className={styles.background} src={bgOfCloseButton}/>
+      </button>
+      <ul className={`${styles.list} ${listClassName} `}>
+        {items.map((item, index) => <li key={index} className={styles.item}>{item}</li>)}
+      </ul>
     </div>
   </div>
 };

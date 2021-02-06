@@ -3,12 +3,15 @@ import { Redirect } from 'react-router-dom';
 import { getPathname } from "../utils";
 
 const withAuthRedirect = InputComponent => props => {
+
   const unconditionalRedirection = sessionStorage.getItem('unRedirect');
+  // handling redirects after 404
   if (unconditionalRedirection) {
     sessionStorage.removeItem('unRedirect');
     return <Redirect to={`${props.prefix ? props.prefix : ''}${unconditionalRedirection}`}/>
   }
 
+  // main logic
   const pathname = getPathname(props.prefix, props.location.pathname);
   if (props.redirect) {
     //  withRouter from react-router-dom;
