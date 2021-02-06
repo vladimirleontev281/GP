@@ -42,13 +42,13 @@ const Menu = (props) =>{
   </div>
 };
 
-Menu.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-  bodyClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-  listClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-  bgOfCloseButton: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
-  items:PropTypes.array, 
-  isOpen: PropTypes.bool, 
-  clickHandler: PropTypes.func,
-};
+// Menu.propTypes = {
+//   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+//   bodyClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+//   listClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+//   bgOfCloseButton: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
+//   items:PropTypes.array, 
+//   isOpen: PropTypes.bool, 
+//   clickHandler: PropTypes.func,
+// };
 export default Menu;

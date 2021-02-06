@@ -66,17 +66,20 @@ const thunkCreators = {
     api.deleteArticle(id)
     .then(response => setChangesAndToggleToMain(response.body, dispatch, true));
   },
-  setSearch: ({searchString, articles}) => dispatch => {
-    dispatch(globalActionCreators.toggleLoading());
-    const serchArray = (searchString) ? 
-      articles.filter(item => (item.name && item.name.indexOf(searchString) !== -1) ||
-                              (item.preview && item.preview.indexOf(searchString) !== -1) ||
-                              (item.newsLayout && item.newsLayout.indexOf(searchString) !== -1)
-      )
-    : null;
-    dispatch(articlesActionCreators.setSearchArticles(serchArray));
-    dispatch(globalActionCreators.toggleLoading());
-  },
+  // setSearch: ({searchString, searchBase}) => dispatch => {
+  //   dispatch(globalActionCreators.toggleLoading());
+  //   const serchArray = (searchString) ? 
+  //     searchBase.filter(item => (item.name && item.name.indexOf(searchString) !== -1) ||
+  //                               (item.preview && item.preview.indexOf(searchString) !== -1) ||
+  //                               (item.newsLayout && item.newsLayout.indexOf(searchString) !== -1)
+  //     )
+  //   : null;
+  //   dispatch(articlesActionCreators.setSearchArticles(serchArray));
+  //   dispatch(globalActionCreators.toggleLoading());
+  // },
+  // setFilter: ({searchString, searchBase, searchMethod}) => dispatch => {
+
+  // },
   clearSearch: () => dispatch => {
     dispatch(globalActionCreators.toggleLoading());
     dispatch(initializeReduxForm('Search', {inputField: ''}));

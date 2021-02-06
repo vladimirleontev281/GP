@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styles from './Switcher.module.css';
+import intStyles from './Switcher.module.css';
 
-function Switcher(props) {
-  const {
-    className, descripClassName, listClassName, itemClassName, 
-    name, items, active, clickHandler
-  } = props;
+function Switcher({extStyles, name, items, active, clickHandler, ...props}) {
   const uniqueItems = Array.from(new Set(items));
   const initStateValue = active && uniqueItems.includes(active) ? active : 
     (uniqueItems.length !== 0) ? uniqueItems[0] : null;
@@ -18,14 +14,16 @@ function Switcher(props) {
   };
 
   return (
-    <div className={`${styles.Switcher} ${className}`}>
-      <span className={`${styles.descrip} ${descripClassName}`}>{name}&nbsp;{':'}</span>
-      <ul className={`${styles.list} ${listClassName}`}>
+    <div className={`${intStyles.Switcher} ${extStyles.Switcher}`}>
+      <span className={`${intStyles.descrip} ${extStyles.SwitcherDescrip}`}>{name}&nbsp;{':'}</span>
+      <ul className={`${intStyles.list} ${extStyles.SwitcherList}`}>
       {
         uniqueItems.map(item => {
-          const active = (item === value) ? styles.active : '';
-          return <li key={item} className={`${styles.item} ${itemClassName} ${active}`}>
-            <button data-value={item} onClick={internalClickHandler}>{item}</button>
+          const active = (item === value) ? intStyles.active : '';
+          return <li key={item} className={`${intStyles.item} ${extStyles.SwitcherItem} ${active}`}>
+            <button className={'unselectable'} data-value={item} onClick={internalClickHandler}>
+              {item}
+            </button>
           </li>
         })
       }
@@ -34,13 +32,13 @@ function Switcher(props) {
   )
 }
 
-Switcher.propTypes = {
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
-  itemClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-  descripClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-  items: PropTypes.arrayOf(PropTypes.string), 
-  active: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-  clickHandler: PropTypes.func,
-};
+// Switcher.propTypes = {
+//   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
+//   itemClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+//   descripClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+//   name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+//   items: PropTypes.arrayOf(PropTypes.string), 
+//   active: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+//   clickHandler: PropTypes.func,
+// };
 export default Switcher;

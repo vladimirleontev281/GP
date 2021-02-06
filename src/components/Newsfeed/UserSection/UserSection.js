@@ -12,7 +12,7 @@ const UserSection = ({className, user, logoutClickHandler, closeMenu, setRedirec
       {user ? 
         <>
           <a onClick={logoutClickHandler}>logout</a>
-          <span> or to </span>
+          <span> or </span>
           <NavLink to={'./login'} onClick={e => {logoutClickHandler(e, '/login')}}>re-login</NavLink>
         </>
       : <NavLink to={'./login'} onClick={e => {redirectTo(e, '/login')}}>login</NavLink>

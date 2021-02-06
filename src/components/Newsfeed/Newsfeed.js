@@ -4,7 +4,7 @@ import styles from './Newsfeed.module.css';
 import {NEWSFEED, TO_READ, TO_CHANGE} from '../../store/reducers/globalReducer';
 import {getNewsImagePath} from '../../utils'
 import Preloader from '../Preloader/Preloader';
-import Search from './Search/Search';
+import Search from '../Search/Search';
 import Button from '../Button/Button';
 import NewsItem from './NewsItem/NewsItem';
 import ModalToRead from './ModalToRead/ModalToRead';
@@ -12,16 +12,15 @@ import FormToChange from './FormToChange/FormToChange';
 import Switcher from '../Switcher/Switcher';
 import Menu from './Menu/Menu';
 import UserSection from './UserSection/UserSection';
+import FilterContainer from './Filter/FilterContainer';
 
 const Newsfeed = (props) => {
   const {
-    isLoading, mode, articles, currentArticle, user,
-    search, arrOfSortNames, defaultSortName, isMenuOpen,
-    activateModal, deactivateModal, initForm, setMenu,
-    setNewsItem, deleteNewsItem, setSearch, clearSearch, setSort, 
-    logout, setRedirect,
+    isLoading, mode, articles, currentArticle, user, arrOfSortNames, defaultSortName, isMenuOpen,
+    activateModal, deactivateModal, setNewsItem, deleteNewsItem, initForm, setMenu,
+    setFilter, removeFilter, setSort, logout, setRedirect,
+    searchValue, setSearchValue, filterMethods,
   } = props;
-  const newsArray = search ? search : articles;
 
   const userBlock = <UserSection  
     user={user} logoutClickHandler={logout} closeMenu={() => {setMenu(false)}}
@@ -30,21 +29,25 @@ const Newsfeed = (props) => {
   const addButton = <Button 
     className={styles.addNewsButton} clickHandler={() => activateModal(null, TO_CHANGE)}
   >add news</Button>;
+
   const sortInterface = <Switcher 
-    className={styles.Switcher} itemClassName={styles.SwitcherItem}
-    descripClassName={styles.SwitcherDescrip}
-    name={'Sort'} clickHandler={value => {setSort(value)}}
-    items={arrOfSortNames} active={defaultSortName}
+    extStyles={styles} name={'Sort'} items={arrOfSortNames} active={defaultSortName} 
+    clickHandler={value => {setSort(value)}}  
   />
 
-  const menuArray = [userBlock, addButton, sortInterface];
+  const filter = <FilterContainer  
+    className={styles.Filter} setFilter={setFilter} removeFilter={removeFilter} 
+    filterMethods={filterMethods}
+  />
+
+  const menuArray = [userBlock, addButton, sortInterface, filter];
   if (!user) menuArray.splice(1, 1);
   
   return <div className={`${styles.Newsfeed} ${mode === 2 ? styles.modalMode : ''}`}>
     <div className={styles.header} >
       <span className={`unselectable ${styles.logo}`} >newsfeed</span>
-      <Search className={styles.Search} articles={articles} 
-              setSearch={setSearch} clearSearch={clearSearch}
+      <Search className={styles.Search} placeholder={'Enter filter value'} value={searchValue}
+              onChangeHandler={setSearchValue} clearForm={() => {setSearchValue('')}}
       />
       <Menu className={styles.Menu} bodyClassName={styles.memuBody} listClassName={styles.MenuList} 
             bgOfCloseButton={'./img/close.png'} isOpen={isMenuOpen} items={menuArray} 
@@ -54,7 +57,7 @@ const Newsfeed = (props) => {
 
     { mode === NEWSFEED ? 
       <ul className={styles.main} >
-        {newsArray.map(item => {
+        {articles.map(item => {
         return <NewsItem  key={item.id} className={styles.NewsItem} prewiev={item.preview}
                           imagePath={getNewsImagePath(item, {prefix: props.prefix})} 
                           id={item.id} date={item.date}
@@ -88,37 +91,36 @@ const Newsfeed = (props) => {
 
 
 
-const itemPropTypes = PropTypes.shape({
-  id: PropTypes.number,
-  date: PropTypes.number,
-  original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-  name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-  preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-  newsLayout: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-  images:PropTypes.shape({
-    small: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-    large: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-  }),
-});
+// const itemPropTypes = PropTypes.shape({
+//   id: PropTypes.number,
+//   date: PropTypes.number,
+//   original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+//   name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+//   preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+//   newsLayout: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+//   images:PropTypes.shape({
+//     small: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+//     large: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+//   }),
+// });
 
-Newsfeed.propTypes = {
-  isLoading: PropTypes.bool, 
-  mode: PropTypes.number, 
-  articles: PropTypes.arrayOf(itemPropTypes),
-  currentArticle: PropTypes.oneOfType([
-    itemPropTypes,
-    PropTypes.oneOf([null]).isRequired
-  ]),
-  search: PropTypes.oneOfType([
-    PropTypes.arrayOf(itemPropTypes).isRequired,
-    PropTypes.oneOf([null]).isRequired,
-  ]), 
-  activateModal: PropTypes.func,  
-  deactivateModal: PropTypes.func,  
-  initFormToChange: PropTypes.func,  
-  setNewsItem: PropTypes.func,  
-  deleteNewsItem: PropTypes.func,  
-  setSearch: PropTypes.func,  
-  clearSearch: PropTypes.func, 
-};
+// Newsfeed.propTypes = {
+//   isLoading: PropTypes.bool, 
+//   mode: PropTypes.number, 
+//   articles: PropTypes.arrayOf(itemPropTypes),
+//   currentArticle: PropTypes.oneOfType([
+//     itemPropTypes,
+//     PropTypes.oneOf([null]).isRequired
+//   ]),
+//   search: PropTypes.oneOfType([
+//     PropTypes.arrayOf(itemPropTypes).isRequired,
+//     PropTypes.oneOf([null]).isRequired,
+//   ]), 
+//   activateModal: PropTypes.func,  
+//   deactivateModal: PropTypes.func,  
+//   initFormToChange: PropTypes.func,  
+//   setNewsItem: PropTypes.func,  
+//   deleteNewsItem: PropTypes.func,  
+//   setSearch: PropTypes.func,  
+// };
 export default Newsfeed;

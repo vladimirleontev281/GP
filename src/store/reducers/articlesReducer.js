@@ -1,19 +1,21 @@
 const init = {
   articles: [],
   currentArticle: null,
-  search: null,
+  filters: [],
 };
 
 const actionTypes = {
   setArticles: 'SET-ARTICLES',
   setCurrentArticle: 'SET-CURRENT-ARTICLE',
-  setSearchArticles: 'SET-SEARCH-ARTICLES',
+  setFilter: 'SET-FILTER',
+  removeFilter: 'REMOVE-FILTER'
 };
 
 export const actionCreators = {
   setArticles: data => {return {type: actionTypes.setArticles, data}},
   setCurrentArticle: id => {return {type: actionTypes.setCurrentArticle, id}},
-  setSearchArticles: data => {return {type: actionTypes.setSearchArticles, data}}
+  setFilter: data => {return {type: actionTypes.setFilter, data}},
+  removeFilter: data => {return {type: actionTypes.removeFilter, data}},
 };
 
 const articlesReducer = (state = init, action) => {
@@ -22,13 +24,6 @@ const articlesReducer = (state = init, action) => {
       return {
         ...state,
         articles: action.data,
-        search: state.search ? 
-          state.search.reduce((accumulator, currentItem) => {
-            let articlesItem = action.data.filter(item => item.id === currentItem.id);
-            if (articlesItem.length) accumulator.push(articlesItem[0]);
-            return accumulator;
-          }, [])
-        : state.search,
       };
     case actionTypes.setCurrentArticle:
       return {
@@ -36,10 +31,23 @@ const articlesReducer = (state = init, action) => {
         currentArticle: (action.id === null) ? 
           null : state.articles.filter(item => item.id === action.id)[0]
       };
-    case actionTypes.setSearchArticles:
+    case actionTypes.setFilter:
+      let hasThisFilterType = state.filters.reduce((accumulator, item) =>{
+        if (item.type === action.data.type) accumulator = true;
+        return accumulator;
+      }, false);
       return {
         ...state,
-        search: action.data,
+        filters: !hasThisFilterType ? 
+          [action.data]
+        : state.filters.map(item => item.type === action.data.type ? 
+            {type: item.type, method: action.data.method, value: action.data.value} : item
+          ),
+      };
+    case actionTypes.removeFilter:
+      return {
+        ...state,
+        filters: state.filters.filter(item => item.type !== action.data.type),
       };
     default:
       return state;
