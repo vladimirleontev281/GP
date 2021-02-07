@@ -62,7 +62,6 @@ const NewsfeedContainer = ({setUser, ...props}) => {
   }
 
   function setFilterItem(arr, filter) {
-    debugger;
     switch (filter.method) {
       case 'autor name':
         return arr.filter(item => {

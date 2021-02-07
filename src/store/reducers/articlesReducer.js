@@ -19,6 +19,7 @@ export const actionCreators = {
 };
 
 const articlesReducer = (state = init, action) => {
+  debugger
   switch (action.type) {
     case actionTypes.setArticles:
       return {
@@ -39,7 +40,7 @@ const articlesReducer = (state = init, action) => {
       return {
         ...state,
         filters: !hasThisFilterType ? 
-          [action.data]
+          state.filters.concat([action.data])
         : state.filters.map(item => item.type === action.data.type ? 
             {type: item.type, method: action.data.method, value: action.data.value} : item
           ),

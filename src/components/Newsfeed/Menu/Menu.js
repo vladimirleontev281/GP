@@ -20,6 +20,7 @@ const Menu = (props) =>{
     } else {
       document.removeEventListener('click', onBlurHandler)
     }
+    return () => {document.removeEventListener('click', onBlurHandler)}
   }, [isOpen])
 
   return <div className={`${commonClasses} ${activationClass}`} ref={menuRef}>
