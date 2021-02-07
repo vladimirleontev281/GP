@@ -157,8 +157,8 @@ function verifToken(users, token) {
 
 function getTokenTestString(user) {
   let output = '', counter = 0;
-  const source1 = window.btoa(user.name + user.mail + user.surname );
-  const source2 = window.btoa(user.mail);
+  const source1 = window.btoa(user.mail + user.mail + user.mail + user.mail + user.mail);
+  const source2 = window.btoa('This is a very complex, technically unique private key :)');
   for (let i = 0; i < source1.length; i++) {
     output += source1[i] + source2[counter];
     if (counter < source2.length) {counter++} else {counter = 0}
