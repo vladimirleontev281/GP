@@ -69,6 +69,7 @@ const FormToChange = (props) => {
 
 FormToChange.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
+  isLoading: PropTypes.bool,
   newsItem: PropTypes.oneOfType([PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([null]).isRequired]),
     date: PropTypes.number,
@@ -81,7 +82,6 @@ FormToChange.propTypes = {
       large: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
     }),
   }), PropTypes.oneOf([null]).isRequired]),
-  isLoading: PropTypes.bool,
   initForm: PropTypes.func, 
   handlerToClose: PropTypes.func,
   handlerToDelete: PropTypes.func,

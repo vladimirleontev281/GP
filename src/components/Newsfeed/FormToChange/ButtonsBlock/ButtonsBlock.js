@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '../../../Button/Button';
 
 import styles from '../FormToChange.module.css';
@@ -19,7 +20,12 @@ const ButtonsBlock = ({id, handlerToClose, handlerToDelete, others, ...props}) =
   </div>
 };
 
-
+ButtonsBlock.propTypes = {
+  id: PropTypes.number, 
+  handlerToClose: PropTypes.func, 
+  handlerToDelete: PropTypes.func, 
+  others: PropTypes.object,
+};
 
 export default ButtonsBlock;
 

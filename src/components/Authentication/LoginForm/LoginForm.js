@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import {TextField, CheckBox} from '../../fieldsToForms';
 import {required, afterTrim, email} from '../../../validators';
@@ -23,5 +24,9 @@ const LoginForm = ({handleSubmit}) => {
     </div>
   </form>
 }
+
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func,
+};
 const ReduxLoginForm = reduxForm({form: 'LoginForm'})(LoginForm);
 export default ReduxLoginForm;

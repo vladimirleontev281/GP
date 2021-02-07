@@ -23,4 +23,13 @@ const Filter = (
   </div>
 };
 
+Search.Filter = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
+  setFilterValue: PropTypes.func, 
+  setFilterMethod: PropTypes.func, 
+  value: PropTypes.string, 
+  method: PropTypes.string, 
+  filterMethods: PropTypes.arrayOf(PropTypes.string),
+};
+
 export default Filter;

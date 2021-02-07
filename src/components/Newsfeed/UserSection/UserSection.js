@@ -22,6 +22,14 @@ const UserSection = ({className, user, logoutClickHandler, closeMenu, setRedirec
 };
 
 UserSection.propTypes = {
-
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    surname: PropTypes.string
+  }), 
+  logoutClickHandler: PropTypes.func, 
+  closeMenu: PropTypes.func,
+  setRedirect: PropTypes.func,
 };
 export default UserSection;

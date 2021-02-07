@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Preloader from '../Preloader/Preloader';
 import LoginForm from './LoginForm/LoginForm';
 import styles from './Authentication.module.css';
@@ -36,4 +37,13 @@ const Auth = ({isLoading, locationName, signIn, signUp, setRedirect, ...props}) 
     {isLoading ? <Preloader className={styles.Preloader} absolute /> : null}
   </div>
 }
+
+Auth.propTypes = {
+
+  isLoading: PropTypes.bool, 
+  locationName: PropTypes.string, 
+  signIn: PropTypes.func, 
+  signUp: PropTypes.func, 
+  setRedirect: PropTypes.func,
+};
 export default Auth;

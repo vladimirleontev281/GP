@@ -20,23 +20,13 @@ const Search = ({className, extStyles, placeholder, value, onChangeHandler, clea
 };
 
 
-// Search.propTypes = {
-//   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-//   searchBase: PropTypes.arrayOf(PropTypes.shape({
-//     id: PropTypes.number,
-//     date: PropTypes.number,
-//     original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//     name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//     preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//     newsLayout: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//     images:PropTypes.shape({
-//       small: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//       large: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//     }),
-//   })), 
-//   handleSubmit: PropTypes.func,
-//   setSearch: PropTypes.func, 
-//   clearSearch: PropTypes.func,
-// };
+Search.propTypes = {
+  className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
+  extStyles: PropTypes.object, 
+  placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  value: PropTypes.string, 
+  onChangeHandler: PropTypes.func, 
+  clearForm: PropTypes.func,
+};
 
 export default Search;

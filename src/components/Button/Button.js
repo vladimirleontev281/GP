@@ -21,5 +21,6 @@ Button.propTypes = {
   buttonText: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
   clickHandler: PropTypes.func, 
   isSubmit: PropTypes.bool,
+  others: PropTypes.object,
 };
 export default Button;

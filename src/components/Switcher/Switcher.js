@@ -32,13 +32,11 @@ function Switcher({extStyles, name, items, active, clickHandler, ...props}) {
   )
 }
 
-// Switcher.propTypes = {
-//   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]), 
-//   itemClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-//   descripClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-//   name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-//   items: PropTypes.arrayOf(PropTypes.string), 
-//   active: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
-//   clickHandler: PropTypes.func,
-// };
+Switcher.propTypes = {
+  extStyles: PropTypes.object, 
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  items: PropTypes.array, 
+  active: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  clickHandler: PropTypes.func,
+};
 export default Switcher;

@@ -53,10 +53,16 @@ const NewsItem = (props) => {
 
 NewsItem.propTypes = {
   className: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([undefined]).isRequired]),
+  id: PropTypes.number, 
   imagePath: PropTypes.string, 
   prewiev: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]), 
-  id: PropTypes.number, 
+  owner: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    surname: PropTypes.string
+  }),
   date: PropTypes.number,
+  activeUser: PropTypes.number,
   activateModal: PropTypes.func,
 };
 export default NewsItem;

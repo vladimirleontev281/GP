@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import {TextField} from '../../fieldsToForms';
 import {required, afterTrim, email} from '../../../validators';
@@ -35,5 +36,11 @@ const SignUpForm = ({handleSubmit, setRedirect, ...props}) => {
     </div>
   </form>
 }
+
+SignUpForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  setRedirect: PropTypes.func,
+};
+
 const ReduxSignUpForm = reduxForm({form: 'SignUpForm'})(SignUpForm);
 export default ReduxSignUpForm;

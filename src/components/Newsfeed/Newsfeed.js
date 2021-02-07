@@ -89,38 +89,51 @@ const Newsfeed = (props) => {
   </div>;
 };
 
+const userPropTypes = PropTypes.shape({
+  id: PropTypes.number,
+  name: PropTypes.string,
+  surname: PropTypes.string
+});
 
+const itemPropTypes = PropTypes.shape({
+  id: PropTypes.number,
+  owner: userPropTypes,
+  date: PropTypes.number,
+  original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+  preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+  newsLayout: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+  images:PropTypes.shape({
+    small: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+    large: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
+  }),
+});
 
-// const itemPropTypes = PropTypes.shape({
-//   id: PropTypes.number,
-//   date: PropTypes.number,
-//   original: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//   name: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//   preview: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//   newsLayout: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//   images:PropTypes.shape({
-//     small: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//     large: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null]).isRequired]),
-//   }),
-// });
-
-// Newsfeed.propTypes = {
-//   isLoading: PropTypes.bool, 
-//   mode: PropTypes.number, 
-//   articles: PropTypes.arrayOf(itemPropTypes),
-//   currentArticle: PropTypes.oneOfType([
-//     itemPropTypes,
-//     PropTypes.oneOf([null]).isRequired
-//   ]),
-//   search: PropTypes.oneOfType([
-//     PropTypes.arrayOf(itemPropTypes).isRequired,
-//     PropTypes.oneOf([null]).isRequired,
-//   ]), 
-//   activateModal: PropTypes.func,  
-//   deactivateModal: PropTypes.func,  
-//   initFormToChange: PropTypes.func,  
-//   setNewsItem: PropTypes.func,  
-//   deleteNewsItem: PropTypes.func,  
-//   setSearch: PropTypes.func,  
-// };
+Newsfeed.propTypes = {
+  isLoading: PropTypes.bool, 
+  mode: PropTypes.number, 
+  articles: PropTypes.arrayOf(itemPropTypes),
+  currentArticle: PropTypes.oneOfType([
+    itemPropTypes,
+    PropTypes.oneOf([null]).isRequired
+  ]),
+  user: userPropTypes,
+  arrOfSortNames: PropTypes.arrayOf(PropTypes.string),
+  defaultSortName: PropTypes.string, 
+  isMenuOpen: PropTypes.bool,
+  activateModal: PropTypes.func, 
+  deactivateModal: PropTypes.func, 
+  setNewsItem: PropTypes.func, 
+  deleteNewsItem: PropTypes.func, 
+  initForm: PropTypes.func, 
+  setMenu: PropTypes.func,
+  setFilter: PropTypes.func, 
+  removeFilter: PropTypes.func, 
+  setSort: PropTypes.func, 
+  logout: PropTypes.func, 
+  setRedirect: PropTypes.func,
+  searchValue: PropTypes.string, 
+  setSearchValue: PropTypes.func, 
+  filterMethods: PropTypes.arrayOf(PropTypes.string),
+};
 export default Newsfeed;
