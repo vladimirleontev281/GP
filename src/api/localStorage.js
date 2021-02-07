@@ -1,5 +1,5 @@
 const BASE_KEY = 'NEWSFEED';
-const VERSION = '1.0.4';
+const VERSION = '1.0.5';
 export const TOKEN_KEY = 'newsfeed-u';
 export const KEYS = {
   articles: 'ARTICLES',
