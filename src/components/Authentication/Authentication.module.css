@@ -145,6 +145,15 @@
 }
 
 @media(max-width: 768px) {
+  .authBlock{
+    width: 400px;
+  }
+  .logo{
+    font-size: 40px;
+  }
+  .header{
+    font-size: 24px;
+  }
   .textField{
     font-size: 16px;
     margin-bottom: 20px;
@@ -155,15 +164,30 @@
   .input{
     height: 30px;
   }
-  .closeButton, .deleteButton, .submitButton{
-    font-size: 11px;
+  .backButton{
+    margin-right: 20px;
+  }
+  .submitButton, .backButton{
     width: 120px;
+    height: 30px;
+    font-size: 11px;
+  }
+  .footer{
+    font-size: 15px;
   }
 }
 
 @media(max-width: 480px) {
-  .FormToChange{
-    border: none;
+  .authBlock{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 50px;
+  }
+  .logo{
+    font-size: 30px;
+  }
+  .header{
+    font-size: 20px;
   }
   .textField{
     font-size: 14px;
@@ -175,7 +199,7 @@
   .input{
     height: 25px;
   }
-  .closeButton, .deleteButton, .submitButton{
+  .submitButton, .backButton{
     width: 80px;
     height: 25px;
   }
@@ -184,5 +208,8 @@
   }
   .deleteButton>span:last-of-type, .closeButton>span:last-of-type{
     display: inline;
+  }
+  .footer{
+    font-size: 12px;
   }
 }
