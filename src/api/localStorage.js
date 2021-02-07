@@ -1,5 +1,6 @@
 const BASE_KEY = 'NEWSFEED';
 const VERSION = '1.0.4';
+export const TOKEN_KEY = 'newsfeed-u';
 export const KEYS = {
   articles: 'ARTICLES',
   users: 'USERS',
@@ -17,6 +18,7 @@ export default {
   create: ({users, articles, version}) => {
     if (users && articles && version) {
       setBase({users, articles, version});
+      document.cookie = `${encodeURIComponent(TOKEN_KEY)}=; max-age=-1`;
       return true;
     } else {return false;}
   },

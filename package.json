@@ -7,6 +7,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
+    "env-cmd": "^10.1.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -24,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "call %CD%\\bat\\prepare.bat",
+    "prepare_old": "rmdir /s/q %CD%\\docs && mkdir %CD%\\docs && npm run build && xcopy /e/c/y %CD%\\build %CD%\\docs && rmdir /s/q %CD%\\build && mkdir %CD%\\build && del %CD%\\.eslintcache"
   },
   "eslintConfig": {
     "extends": [

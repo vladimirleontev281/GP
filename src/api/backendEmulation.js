@@ -1,4 +1,4 @@
-import baseAPI, {KEYS as baseKeys} from './localStorage';
+import baseAPI, {KEYS as baseKeys, TOKEN_KEY} from './localStorage';
 
 export const SERVER = '/';
 export const urlObj = {
@@ -10,7 +10,7 @@ export const urlObj = {
   signUp: 'create-user',
   logout: 'logout',
 }
-const TOKEN_KEY = 'newsfeed-u';
+
 const MAX_SESSION_DUR = 86400;
 
 const backendEmulation = (url, options) => {
@@ -156,6 +156,7 @@ function verifToken(users, token) {
 }
 
 function getTokenTestString(user) {
+  if (!user) return null;
   let output = '', counter = 0;
   const source1 = window.btoa(
     encodeString(user.name) + encodeString(user.mail) + encodeString(user.surname)
