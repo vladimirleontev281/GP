@@ -6,3 +6,5 @@ export const afterTrim = value => !value ? undefined : value.trim() ?
   undefined : 'The data can\'t consist only of whitespace characters!';
 export const email = value => value.match(new RegExp(emailRegexpString_v1)) ? 
   undefined : 'Not a valid value!';
+export const englishLetters = value => /^[a-zA-Z]*$/.test(value) ? 
+  undefined : 'Sorry, but only Latin characters are allowed.';

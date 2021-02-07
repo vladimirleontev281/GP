@@ -19,7 +19,6 @@ export const actionCreators = {
 };
 
 const articlesReducer = (state = init, action) => {
-  debugger
   switch (action.type) {
     case actionTypes.setArticles:
       return {

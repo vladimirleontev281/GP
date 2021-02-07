@@ -38,13 +38,13 @@ const backendEmulation = (url, options) => {
       token = getCredByKey(credentials, TOKEN_KEY);
       users = baseAPI.get(baseKeys.users);
       response.body = verifToken(users, token) ? 
-        getAllowedUserData(getUser(users, decodeData(token).id)) : null;
+        getAllowedUserData(getUser(users, decodeObj(token).id)) : null;
       break;
     case SERVER + urlObj.signIn:
       users = baseAPI.get(baseKeys.users);
       response.body = {errors: []};
       let userID = verifUser(users, options.body);
-      if (userID) {
+      if (userID !== null) {
         setTokenInCredentials(getUser(users, userID), options.body.remember);
       } else {
         response.body.errors.push('Invalid username or password');
@@ -110,7 +110,7 @@ function User(users, data) {
     name: data.name,
     surname: data.surname,
     mail: data.mail,
-    pass: window.btoa(data.pass),
+    pass: encodeString(data.pass),
   }
 }
 
@@ -141,24 +141,28 @@ function addOwnersData(articles, users) {
 
 function verifUser(users, data) {
   let foundItems = users.filter(
-    item => item.mail === data.mail && item.pass === window.btoa(data.pass)
+    item => item.mail === data.mail && item.pass === encodeString(data.pass)
   )
-  return foundItems.length === 1 ? foundItems[0].id : 0;
+  return foundItems.length === 1 ? foundItems[0].id : null;
 }
 
 function getToken(user) {
-  return encodeData({id: user.id, test: getTokenTestString(user)});
+  return encodeObj({id: user.id, test: getTokenTestString(user)});
 }
 
 function verifToken(users, token) {
-  const obj = decodeData(token);
+  const obj = decodeObj(token);
   return obj && obj.test && obj.test === getTokenTestString(getUser(users, obj.id));
 }
 
 function getTokenTestString(user) {
   let output = '', counter = 0;
-  const source1 = window.btoa(user.mail + user.mail + user.mail + user.mail + user.mail);
-  const source2 = window.btoa('This is a very complex, technically unique private key :)');
+  const source1 = window.btoa(
+    encodeString(user.name) + encodeString(user.mail) + encodeString(user.surname)
+  );
+  const source2 = encodeString(
+    'This is a very complex, technically unique key :)'.replace(/\s/g, '')
+  );
   for (let i = 0; i < source1.length; i++) {
     output += source1[i] + source2[counter];
     if (counter < source2.length) {counter++} else {counter = 0}
@@ -191,11 +195,15 @@ function setTokenInCredentials(user, remember) {
   document.cookie = updatedCookie;
 }
 
-function decodeData(encodeString) {
-  try {return JSON.parse(window.atob(encodeString));}
-  catch {return null;}
+function encodeString(str) {
+  return window.btoa(str.split('').map(item => `${item.charCodeAt(0)}`).join(''));
 }
 
-function encodeData(data) {
+function encodeObj(data) {
   return window.btoa(JSON.stringify(data));
+}
+
+function decodeObj(encodeString) {
+  try {return JSON.parse(window.atob(encodeString));}
+  catch {return null;}
 }
